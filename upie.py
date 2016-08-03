@@ -27,7 +27,7 @@ from win32com.client import Dispatch
 from time import sleep
 import _winreg
 
-#python setupupie.py py2exe --includes calendar,email,locale
+#python C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\setupupie.py py2exe --includes calendar,email,locale
 
 def getProxy():
     try:
