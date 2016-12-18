@@ -75,11 +75,11 @@ else:
 ##            service = ["dummy"],
 ##	    modules = ["dummyser"],
 ##	    cmdline_style='pywin32',
-                service = [{'modules':["wofficeie"], 'cmdline':'pywin32'}],
+                service = [{'modules':["wofficeie"], 'cmdline':'pywin32',"uac_info":"requireAdministrator"}],
                 zipfile=None,
                 options = {
                                 "py2exe":{"packages":"encodings",
-                                        "includes":"win32com,win32service,win32serviceutil,win32event",
+                                        "includes":"win32com,win32service,win32serviceutil,win32event",                                       
                                         "ascii": 1,
                                         #"excludes":"_ssl,pyreadline,difflib,doctest,locale,optparse,pickle,calendar",
                                         #"dll_excludes": "msvcr71.dll",

