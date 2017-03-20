@@ -32,8 +32,8 @@ from subprocess import Popen
 #Win-Python-Backdoor
 
 
-#copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\wofficeie.py C:\Python27
-#python C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\setupserie.py py2exe
+#copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wofficeie.py" C:\Python27
+#python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie.py" py2exe
 def get_macaddress(host='localhost'):
     """ Returns the MAC address of a network host, requires >= WIN2K. """
     # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/347812
