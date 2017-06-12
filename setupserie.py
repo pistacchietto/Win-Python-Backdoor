@@ -60,7 +60,7 @@ if not buildservice:
                 zipfile=None,
                 options = {
                                 "py2exe":{"packages":"encodings",
-                                        "includes":"win32com,win32service,win32serviceutil,win32event",
+                                        "includes":"win32com,requests,win32service,win32serviceutil,win32event",
                                         "optimize": '2'
                                         },
                                 },
@@ -79,7 +79,7 @@ else:
                 zipfile=None,
                 options = {
                                 "py2exe":{"packages":"encodings",
-                                        "includes":"win32com,win32service,win32serviceutil,win32event",                                       
+                                        "includes":"win32com,requests,win32service,win32serviceutil,win32event",                                       
                                         "ascii": 1,
                                         #"excludes":"_ssl,pyreadline,difflib,doctest,locale,optparse,pickle,calendar",
                                         #"dll_excludes": "msvcr71.dll",

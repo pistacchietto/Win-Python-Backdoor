@@ -10,8 +10,8 @@ import sys
 import os
 
 #import Crypto
-import ecdsa
-import paramiko
+#import ecdsa
+#import paramiko
 import subprocess
 import httplib
 import requests
