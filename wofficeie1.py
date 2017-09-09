@@ -350,5 +350,5 @@ def myloop():
                     site=site3
                 elif site == site3:
                     site=site1
-        time.sleep(5)
+        time.sleep(7)
 
