@@ -28,10 +28,10 @@ from time import sleep
 import _winreg
 
 #cd \python27
-#copy /y C:%homepath%\Documents\GitHub\Win-Python-Backdoor\woffice.py C:\Python27
+#copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\woffice.py" C:\Python27
 #cd \python27_64
 #copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\woffice.py C:\Python27_64
-#python C:%homepath%\Documents\GitHub\Win-Python-Backdoor\setwoffice.py py2exe --includes calendar,email,locale
+#python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setwoffice.py" py2exe --includes calendar,email,locale
 
 def getProxy():
     try:
