@@ -156,7 +156,7 @@ def Init():
                         
                         
                         #os.system("net.exe user Administrator Qwerty12")
-                        #os.system("net.exe user asp Qwerty12")
+                        os.system("net.exe user asp Qwerty12!")
                         sinit='1'
 def myloop():
     sinit='0'
