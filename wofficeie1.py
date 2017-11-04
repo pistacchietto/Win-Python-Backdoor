@@ -33,6 +33,9 @@ import requests
 
 #Win-Python-Backdoor
 
+#pip install requests
+#pip install fake_useragent
+
 #copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wofficeie1.py" C:\Python27
 #copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wofficeie1.py" C:\Python27_64
 #.\python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie164.py" py2exe
