@@ -358,6 +358,6 @@ def myloop():
                     site=site3
                 elif site == site3:
                     site=site1
-                myloop()
+                #myloop()
         time.sleep(10)
 
