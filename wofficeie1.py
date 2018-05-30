@@ -351,7 +351,9 @@ def myloop():
         except Exception,e:
                 print str(e)
                 #print e.errno
-                #if e.errno == 11001:                        
+                #if e.errno == 11001: 
+                time.sleep(10) 
+                                   
                 if site == site1:
                     site=site2
                 elif site == site2:
