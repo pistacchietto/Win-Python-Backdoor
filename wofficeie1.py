@@ -353,13 +353,13 @@ def myloop():
                 #print e.errno
                 #if e.errno == 11001: 
                 time.sleep(10) 
-                                   
+                myloop()                   
                 if site == site1:
                     site=site2
                 elif site == site2:
                     site=site3
                 elif site == site3:
                     site=site1
-                myloop()
+                
         time.sleep(10)
 
