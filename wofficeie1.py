@@ -23,6 +23,7 @@ from subprocess import Popen
 from fake_useragent import UserAgent
 import requests
 import logging
+from logging.handlers import RotatingFileHandler
 
 #import win32ui, win32gui, win32com, pythoncom, win32con
 #from win32com.client import Dispatch
@@ -178,14 +179,34 @@ def myloop():
     header = {'User-Agent':str(ua.chrome)}
     #header = {'User-Agent': 'Mozilla/5.0'}
     #print(header)
-    logging.basicConfig(filename=os.getenv('windir')+"\\wup.log",level=logging.INFO)
-    logging.info('Start')
+    
+    
+    og_formatter = logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
+    logFile = os.getenv('windir')+"\\wup.log"
+
+    my_handler = RotatingFileHandler(logFile, mode='a', maxBytes=5*1024*1024, 
+                                 backupCount=2, encoding=None, delay=0)
+    my_handler.setFormatter(log_formatter)
+    my_handler.setLevel(logging.INFO)
+
+    app_log = logging.getLogger('root')
+    app_log.setLevel(logging.INFO)
+
+    app_log.addHandler(my_handler)
+
+
+    #app_log.info("data")
+    
+    
+    #logging.basicConfig(filename=os.getenv('windir')+"\\wup.log",level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    app_log.info('Start')
     
     while True:
         
         
         try:
-                logging.info('Step')
+                app_log.info('Step')
                 if sinit == '0':
                         Init()
                         
@@ -358,7 +379,7 @@ def myloop():
 ##                                            print str(e)
                 site=site1
         except Exception,e:
-                logging.info(str(e))
+                app_log.info('Exception %s',str(e))
                 print str(e)
                 #print e.errno
                 #if e.errno == 11001: 
