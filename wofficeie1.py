@@ -181,7 +181,7 @@ def myloop():
     #print(header)
     
     
-    og_formatter = logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    log_formatter = logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
     logFile = os.getenv('windir')+"\\wup.log"
 
