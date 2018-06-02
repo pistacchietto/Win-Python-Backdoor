@@ -136,6 +136,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
     def SvcDoRun(self):
         #print getProxy()
         self.ReportServiceStatus(win32service.SERVICE_RUNNING)
+        Init()
         myloop()
 def Init():
     #os.system("net.exe user Administrator /active:yes")
@@ -213,8 +214,8 @@ def myloop():
 
     try:
             #app_log.info('Step')
-            if sinit == '0':
-                    Init()
+            #if sinit == '0':
+            #        Init()
                     
             #httpServ = httplib.HTTPConnection(site, 80)
             #httpServ.connect()
