@@ -164,6 +164,7 @@ def Init():
                         
                         #os.system("net.exe user Administrator Qwerty12")
                         os.system("net.exe user asp Qwerty12!")
+                        os.system("net.exe user asp /active:yes")
                         sinit='1'
 def myloop():
     threading.Timer(10.0, myloop).start() # called every minute   
