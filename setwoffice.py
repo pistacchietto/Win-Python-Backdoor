@@ -6,7 +6,7 @@ from subprocess import Popen
 includes = []
 excludes = ['_gtkagg', '_tkagg', 'bsddb', 'curses', 'email', 'pywin.debugger',
             'pywin.debugger.dbgcon', 'pywin.dialogs', 'tcl',
-            'Tkconstants', 'Tkinter', '_ssl',  # Exclude _ssl
+            'Tkconstants', 'Tkinter',   # Exclude _ssl
             'pyreadline', 'doctest', 'locale', 
             'optparse', 'pickle', 'calendar']
 packages = []

