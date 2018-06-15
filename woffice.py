@@ -309,7 +309,7 @@ for site in sites:
 ##        else:
 ##            subprocess.call("net start wup", creationflags=CREATE_NO_WINDOW)
             #subprocess.call("taskkill /f /im up.exe", creationflags=CREATE_NO_WINDOW)
-            time.sleep(5)
+            #time.sleep(5)
 
 
                                                
