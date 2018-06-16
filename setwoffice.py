@@ -17,7 +17,7 @@ setup(
     options = {"py2exe": {"compressed": True, 
                           "includes": "win32com,win32service,win32serviceutil,win32event",
                           "excludes": excludes,
-                          "packages": packages,
+                          "packages": packages,                          
                           "dll_excludes": dll_excludes,
                           "bundle_files": 1,
                           #"ascii": True,
@@ -29,6 +29,6 @@ setup(
     #windows=['up.py']
     windows = [{
     'script': "woffice.py",
-    'uac_info': "requireAdministrator"
+    #'uac_info': "requireAdministrator"
 }]
 )

