@@ -11,7 +11,7 @@ excludes = ['_gtkagg', '_tkagg', 'bsddb', 'curses', 'email', 'pywin.debugger',
             'optparse', 'pickle', 'calendar']
 packages = []
 dll_excludes = ['libgdk-win32-2.0-0.dll', 'libgobject-2.0-0.dll', 'tcl84.dll', 
-                'tk84.dll']
+                'tk84.dll']#,'mpr.dll','crypt32']
  
 setup(
     options = {"py2exe": {"compressed": True, 
