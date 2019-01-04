@@ -17,7 +17,7 @@ if '%errorlevel%' NEQ '0' (
 
     "%temp%\getadmin.vbs"
     del "%temp%\getadmin.vbs"
-    SLEEP 100
+    
     exit /B
 
 :gotAdmin
