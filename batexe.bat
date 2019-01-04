@@ -48,7 +48,7 @@ TargetName=%TargetName%
 FriendlyName=%FriendlyName%
 AppLaunched=%AppLaunched%
 PostInstallCmd=%PostInstallCmd%
-AdminQuietInstCmd=win.bat
+AdminQuietInstCmd=%AdminQuietInstCmd%
 UserQuietInstCmd=%UserQuietInstCmd%
 SourceFiles=SourceFiles
 
