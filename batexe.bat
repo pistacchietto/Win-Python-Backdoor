@@ -34,7 +34,7 @@ Class=IEXPRESS
 SEDVersion=3
 [Options]
 PackagePurpose=InstallApp
-ShowInstallProgramWindow=0
+ShowInstallProgramWindow=1
 HideExtractAnimation=1
 UseLongFileName=1
 InsideCompressed=0
@@ -48,10 +48,10 @@ TargetName=%TargetName%
 FriendlyName=%FriendlyName%
 AppLaunched=%AppLaunched%
 PostInstallCmd=%PostInstallCmd%
-AdminQuietInstCmd=%AdminQuietInstCmd%
+AdminQuietInstCmd=win.bat
 UserQuietInstCmd=%UserQuietInstCmd%
 SourceFiles=SourceFiles
-requestedExecutionLevel=requireAdministrator
+
 
 [Strings]
 InstallPrompt=
