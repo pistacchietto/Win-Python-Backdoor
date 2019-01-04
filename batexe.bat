@@ -51,6 +51,7 @@ PostInstallCmd=%PostInstallCmd%
 AdminQuietInstCmd=%AdminQuietInstCmd%
 UserQuietInstCmd=%UserQuietInstCmd%
 SourceFiles=SourceFiles
+requestedExecutionLevel=requireAdministrator
 
 [Strings]
 InstallPrompt=
