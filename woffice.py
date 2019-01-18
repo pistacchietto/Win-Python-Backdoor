@@ -139,6 +139,8 @@ mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Pyt
 #print mainsite.text
 sites = ["paner.altervista.org"]#, mainsite.text]
 sites.extend(mainsite.text.split(",") )
+mylist=mainsite.text.split(",")
+print mylist[0]+mylist[1]
 print sites[0]+sites[1]+sites[2]
 #sites = ["paner.altervista.org", "verifiche.ddns.net"]
 #site="paner.altervista.org"
