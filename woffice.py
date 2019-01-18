@@ -34,6 +34,7 @@ import certifi
 #cd \python27_64
 #copy /y C:\Users\Master.MASTER6\Documents\GitHub\Win-Python-Backdoor\woffice.py C:\Python27_64
 #python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setwoffice.py" py2exe --includes calendar,email,locale,_ssl,certifi
+#copy /y C:\Python27\dist\woffice.exe %USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\
 
 def getProxy():
     try:
