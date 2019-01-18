@@ -1,1 +1,2 @@
-config02.addns.org,visionstore.info
+config02.addns.org
+visionstore.info
