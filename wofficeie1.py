@@ -216,7 +216,7 @@ def myloop():
 
     
     
-while True:
+#while True:
 
     
     for site in sites:
@@ -407,6 +407,6 @@ while True:
               elif site == site3:
                   site=site1
               
-time.sleep(10)
+#time.sleep(10)
 
 
