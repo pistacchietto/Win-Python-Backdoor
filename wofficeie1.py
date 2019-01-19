@@ -394,7 +394,7 @@ def myloop():
       ##                                            print str(e)
               site=site1
       except Exception,e:
-              app_log.info('Exception %s',str(e))
+              #app_log.info('Exception %s',str(e))
               print str(e)
               #print e.errno
               #if e.errno == 11001: 
