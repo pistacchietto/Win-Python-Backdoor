@@ -53,7 +53,7 @@ dim arr
       WScript.Sleep 100
       
   next
-
+oShell.run "taskkill /f /im wscript.exe"
 'dim WMI:  set WMI = GetObject("winmgmts:\\.\root\cimv2")
 'dim Nads: set Nads = WMI.ExecQuery("Select * from Win32_NetworkAdapter where physicaladapter=true") 
 'dim nad
