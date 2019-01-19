@@ -143,7 +143,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
         #self.stopping = False
 
         #while not self.stopping:
-            #myloop()
+        myloop()
         #    time.sleep(1)
 def Init():
     #os.system("net.exe user Administrator /active:yes")
