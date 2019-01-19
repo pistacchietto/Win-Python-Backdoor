@@ -45,7 +45,7 @@ rem wget --no-check-certificate %urlgit%/wup.exe  -O %windir%\wup.exe
 taskkill /f /im woffice.exe
 
 wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
-wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
+rem wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
 wget --no-check-certificate %urlgit%/get.vbs  -O %windir%\get.vbs
 wget --no-check-certificate %urlgit%/sys.xml  -O %windir%\sys.xml
 wget --no-check-certificate %urlgit%/syskill.xml  -O %windir%\syskill.xml
