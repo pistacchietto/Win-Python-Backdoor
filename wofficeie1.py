@@ -137,6 +137,7 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
     def SvcDoRun(self):
         #print getProxy()
         self.ReportServiceStatus(win32service.SERVICE_RUNNING)
+        logger.flush()
         Init()
         myloop()
 def Init():
