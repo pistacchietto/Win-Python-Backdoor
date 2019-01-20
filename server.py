@@ -2,7 +2,7 @@
 
 import socketserver
 
-PORT=4004
+PORT=4010
 #pluto
 class CmdHttpHandler(socketserver.BaseRequestHandler):
     def handle(self):
