@@ -3,7 +3,7 @@
 import socketserver
 
 PORT=80
-
+#pippo
 class CmdHttpHandler(socketserver.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(2**14).strip().decode("UTF-8")
