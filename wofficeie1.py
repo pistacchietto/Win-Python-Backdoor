@@ -149,7 +149,8 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                time.sleep(30)
             except Exception,e:
                print str(e) 
-               time.sleep(30)      
+               time.sleep(30)
+               myloop()      
        
 def Init():
     #os.system("net.exe user Administrator /active:yes")
