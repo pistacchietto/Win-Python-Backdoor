@@ -5,7 +5,7 @@ import win32event
 import servicemanager
 import threading
 import asyncore
-import time
+import sched,time
 import sys
 import os
 
@@ -143,13 +143,14 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
         #self.stopping = False
 
         #while not self.stopping:
+        
         while True:
             try:
                myloop() 
-               time.sleep(30)
+               time.sleep(60)
             except Exception,e:
                print str(e) 
-               time.sleep(30)
+               time.sleep(60)
                myloop()      
        
 def Init():
