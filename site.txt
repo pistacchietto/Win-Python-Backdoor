@@ -1,1 +1,1 @@
-config02.addns.org,visionstore.info
+config01.homepc.it,visionstore.info
