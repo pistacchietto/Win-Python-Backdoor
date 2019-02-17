@@ -56,7 +56,7 @@ dim arr
       
   next
 sub Download(myURL, myPath)
-dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
+dim xHttp: Set xHttp = createobject("Msxml2.ServerXMLHTTP")
 dim bStrm: Set bStrm = createobject("Adodb.Stream")
 xHttp.Open "GET", myURL, False
 xHttp.Send
