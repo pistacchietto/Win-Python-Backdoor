@@ -43,7 +43,7 @@ import requests
 #copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wofficeie1.py" C:\Python27_64
 #.\python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie164.py" py2exe
 #.\python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie1.py" py2exe
-#copy /y C:\python27\dist\wofficeie1.exe %USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wup1.exe
+#copy /y C:\python27\dist\wofficeie1.exe %USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wup.exe
 def get_macaddress(host='localhost'):
     """ Returns the MAC address of a network host, requires >= WIN2K. """
     # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/347812
