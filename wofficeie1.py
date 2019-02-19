@@ -192,14 +192,16 @@ def myloop():
     #sites = ["paner.altervista.org", "verifiche.ddns.net"]
     #ua = UserAgent()
     #header = {'User-Agent':str(ua.chrome)}
+    sites = ["paner.altervista.org"]#, mainsite.text]
     header = {'User-Agent': 'Mozilla/5.0'}
     try:
       mainsite = requests.get("https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF", headers=header)
+      sites.extend(mainsite.text.split(",") )
     except Exception,e:
       print str(e)
     #print mainsite.text
-    sites = ["paner.altervista.org"]#, mainsite.text]
-    sites.extend(mainsite.text.split(",") )
+    
+    
     #site="paner.altervista.org"
     site1="paner.altervista.org"
     site2="52.26.124.145"
