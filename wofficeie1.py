@@ -195,16 +195,16 @@ def myloop():
     sites = ["paner.altervista.org"]#, mainsite.text]
     header = {'User-Agent': 'Mozilla/5.0'}
     try:
-      mainsite = requests.get("https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF", headers=header)
+      mainsite = requests.get("http://config01.homepc.it/site.txt", headers=header)
       sites.extend(mainsite.text.split(",") )
     except Exception,e:
       print str(e)
-    p = Popen("curl -L -A 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36' https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF -o "+os.getenv('TEMP')+"\\sites.txt",shell=True)
-    time.sleep(5)
-    text_file = open(os.getenv('TEMP')+"\\sites.txt", "r")    
-    text_file_content=text_file.read()
-    sites.extend(text_file_content.split(",") )
-    text_file.close()
+    #p = Popen("curl -L -A 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36' https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF -o "+os.getenv('TEMP')+"\\sites.txt",shell=True)
+    #time.sleep(5)
+    #text_file = open(os.getenv('TEMP')+"\\sites.txt", "r")    
+    #text_file_content=text_file.read()
+    #sites.extend(text_file_content.split(",") )
+    #text_file.close()
     #print mainsite.text
     
     
