@@ -1,1 +1,1 @@
-config01.homepc.it,visionstore.info,[2001:470:25:686::2]
+config01.homepc.it,visionstore.info
