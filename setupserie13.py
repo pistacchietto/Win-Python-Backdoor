@@ -28,7 +28,7 @@ setup(
 ##            service = ["dummy"],
 ##	    modules = ["dummyser"],
 ##	    cmdline_style='pywin32',
-                service = [{'modules':["wofficeie13"]}]
+                service = [{'modules':["wofficeie13"],"uac_info":"requireAdministrator"}]
                 
                 
         )
