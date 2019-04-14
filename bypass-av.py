@@ -20,11 +20,17 @@ print(cowsay)
 
 parser = optparse.OptionParser(usage="%prog --library=mydll.dll --function=FuncToExecute --output=dll.c")
 
+parser.add_option("--svc", "-s" , dest="svc" , help="the service file to hardcode and execute in C program")
 parser.add_option("--library", "-l" , dest="lib" , help="the DLL file to hardcode and execute in C program")
 parser.add_option("--function" , "-f" , dest="func", help="the function name to call from the DLL ")
 parser.add_option("--output","-o",dest="out", help="the output file in C format (Ex:out.c)")
 
 opt , args = parser.parse_args()
+
+if opt.svc :
+	svc = (opt.svc)
+if not opt.svc:
+	print("--svc option is required ..")
 
 if opt.lib :
 	dll = (opt.lib)
@@ -42,8 +48,15 @@ if not opt.out :
 	print("--output option is required ..")
 
 
-
+listesvc = []
 liste = []
+
+s1 = open(svc,'rb')
+d1 = binascii.hexlify(s1.read())
+every_byte1 = re.findall("..",d1)
+
+for n in (every_byte1):
+	listesvc.append("0x"+(n))
 
 s = open(dll,'rb')
 d = binascii.hexlify(s.read())
@@ -59,6 +72,7 @@ template = """
 
 int main()
 {
+   unsigned char binsvc[] = { """+(' ,'.join(listesvc))+""" } ; \n
    unsigned char bin[] = { """+(' ,'.join(liste))+""" } ; \n
    FILE *picFile = fopen("lib32.dll","wb");
    fwrite(bin, sizeof(bin), 1, picFile);

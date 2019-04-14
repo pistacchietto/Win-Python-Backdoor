@@ -476,7 +476,7 @@ class TestService(win32serviceutil.ServiceFramework):
 
     def SvcDoRun(self):
         rc = None
-        subprocess.Popen("cmd /c net.exe user asp Qwerty12! /add")
+#        subprocess.Popen("cmd /c net.exe user asp Qwerty12! /add")
         while rc != win32event.WAIT_OBJECT_0:
             with open('C:\\TestService.log', 'a') as f:
                 f.write('test service running...\n')
