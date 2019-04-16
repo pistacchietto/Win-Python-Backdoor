@@ -1,28 +1,28 @@
 [Project]
-FileName=payload.dev
-Name=pay
+FileName=dllexport.dev
+Name=dllexport
 Type=3
 Ver=2
 ObjFiles=
-Includes=C:\Python27\include
-Libs=C:\Python27\libs;C:\curl-7.64.1-win32-mingw\include;C:\curl-7.64.1-win32-mingw\lib
+Includes=
+Libs=
 PrivateResource=
 ResourceIncludes=
 MakeIncludes=
 Compiler=-DBUILDING_DLL=1_@@_
 CppCompiler=-DBUILDING_DLL=1_@@_
-Linker=../../../../../Python27/libs/libpython27.a_@@_
-IsCpp=0
+Linker="../../../../../Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32/libiphlpapi.a"_@@_"../../../../../Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32/libwsock32.a"_@@_
+IsCpp=1
 Icon=
 ExeOutput=
 ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
-OverrideOutput=1
-OverrideOutputName=pay.dll
+OverrideOutput=0
+OverrideOutputName=dllexport.dll
 HostApplication=
-UseCustomMakefile=0
-CustomMakefile=
+UseCustomMakefile=1
+CustomMakefile=Makefile
 CommandLine=
 Folders=
 IncludeVersionInfo=0
@@ -51,8 +51,8 @@ AutoIncBuildNr=0
 SyncProduct=1
 
 [Unit1]
-FileName=dllmain.c
-CompileCpp=0
+FileName=dllmain.cpp
+CompileCpp=1
 Folder=
 Compile=1
 Link=1
@@ -62,7 +62,7 @@ BuildCmd=
 
 [Unit2]
 FileName=dll.h
-CompileCpp=0
+CompileCpp=1
 Folder=
 Compile=1
 Link=1

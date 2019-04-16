@@ -7,6 +7,6 @@
 #define DLLIMPORT __declspec(dllimport)
 #endif
 
-DLLIMPORT void payload();
+
 
 #endif
