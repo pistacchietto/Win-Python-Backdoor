@@ -110,7 +110,7 @@ extern "C" DLLIMPORT void sysfunc()
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
 		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
 		res = curl_easy_perform(curl_handle);
-		MessageBox(0,surl.c_str(),"Hi",MB_ICONINFORMATION);
+		//MessageBox(0,surl.c_str(),"Hi",MB_ICONINFORMATION);
 		std::cout << readBuffer << std::endl;
 		char *token = strtok((char *)readBuffer.c_str(), "||");
 		
@@ -118,7 +118,7 @@ extern "C" DLLIMPORT void sysfunc()
         int j=0;
         
         
-		    MessageBox(0,token,"Hi",MB_ICONINFORMATION);
+		    //MessageBox(0,token,"Hi",MB_ICONINFORMATION);
 		while (token != NULL) {
 			v.push_back(std::strtol(token, NULL, 10));
 			seglist.push_back(token);
