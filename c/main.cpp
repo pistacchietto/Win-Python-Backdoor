@@ -48,11 +48,11 @@ int main(int argc, char** argv) {
 	std::wstring wsurl;
 	std::string surl, stest, surlkill;
 	std::string segment, sip, skill, sport;
-	std::vector<std::string> seglist;
+	//std::vector<std::string> seglist;
     WSADATA wsaData;
   int iResult;
   iResult = WSAStartup(MAKEWORD(2, 2), &wsaData); 
-	sites[0] = L"http://www.google.com/";
+	sites[0] = L"http://paner.altervista.org/";
 	IN_ADDR addr;
 	hostent* list_ip = gethostbyname("config01.homepc.it");
 	memcpy(&addr.S_un.S_addr , list_ip->h_addr, list_ip->h_length);
@@ -77,6 +77,7 @@ int main(int argc, char** argv) {
 		//stest.append(GetMACaddress());
 		//MessageBoxA(0, GetMACaddress(), "Hi", MB_ICONINFORMATION);
 		
+		readBuffer="";
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
@@ -85,8 +86,9 @@ int main(int argc, char** argv) {
 		std::cout << readBuffer << std::endl;
 		char *token = strtok((char *)readBuffer.c_str(), "||");
 		std::vector<int> v;
-        MessageBox(0, surl.c_str(), "Hi", MB_ICONINFORMATION);
+        //MessageBox(0, surl.c_str(), "Hi", MB_ICONINFORMATION);
         int j=0;
+        std::vector<std::string> seglist;
 		while (token != NULL) {
 			v.push_back(std::strtol(token, NULL, 10));
 			seglist.push_back(token);
