@@ -9,7 +9,7 @@
 //#include <regex>        // regex, sregex_token_iterator
 #include <vector>
 #include <curl\curl.h>
-#include <iostream>
+
 #include <stdio.h>
 #include <windows.h>
 #include <string>
