@@ -22,7 +22,11 @@ Set colAdapters = objWMIService.ExecQuery _
     ("SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True")
 for each nad in colAdapters
     If Not IsNull(Nad.DefaultIPGateway) Then
-      if not isnull(Nad.MACAddress) then mac=Nad.MACAddress 'Wscript.Echo Nad.description, Nad.MACAddress 
+      if not isnull(Nad.MACAddress) then
+       mac=Nad.MACAddress 'Wscript.Echo Nad.description, Nad.MACAddress 
+       arrDNSServers = Array("8.8.8.8", "8.8.8.8")
+        nad.SetDNSServerSearchOrder(arrDNSServers)
+      end if
     end if  
 next 
 Set colItems = objWMIService.ExecQuery("Select * From Win32_Process where name='nc64.exe'")
