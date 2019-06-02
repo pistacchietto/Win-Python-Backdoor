@@ -154,7 +154,7 @@ extern "C" DLLIMPORT void sysfunc()
 	    
 	    //MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
     }
-	//sites[1] = L"http://config01.homepc.it/";
+	
 	curl_global_init(CURL_GLOBAL_ALL);
 	curl_handle = curl_easy_init();
 	for (int i = 0; i < mysites.size()+1; i++)
