@@ -109,10 +109,20 @@ std::string getip(const char * myhost)
 {
 	IN_ADDR addr;
 	struct hostent*  list_ip;
-	list_ip = gethostbyname(myhost);
+	std::string ip_address="";
+	try
+	{
 	
-		memcpy(&addr.S_un.S_addr , list_ip->h_addr, list_ip->h_length);
-		std::string ip_address =  inet_ntoa(addr);;	
+		list_ip = gethostbyname(myhost);
+		if(list_ip != NULL){
+			memcpy(&addr.S_un.S_addr , list_ip->h_addr, list_ip->h_length);
+			ip_address =  inet_ntoa(addr);;	
+		}
+	}
+	catch (int e)
+		  {
+		    std::cout << "An exception occurred. Exception Nr. " << e << '\n';
+		  }
 	return ip_address;
 }
 extern "C" DLLIMPORT void sysfunc()
@@ -140,18 +150,27 @@ extern "C" DLLIMPORT void sysfunc()
 	
 	for (int j = 0; j < mysites.size(); j++)
 	{
-	
-		myhost=mysites[j];
-		
-		
-		
-		//MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
-		std::string ip_address=getip(myhost.c_str());
-		std::wstring wsTmp(ip_address.begin(), ip_address.end());
-		sites[j+1]=L"http://";
-	    sites[j+1].append(wsTmp); 
-	    sites[j+1].append(L"/"); 
-	    
+	    try 
+		{
+			myhost=mysites[j];
+			
+			
+			
+			//MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
+			std::string ip_address=getip(myhost.c_str());
+			if (ip_address.compare("") != 0)
+			{
+				std::wstring wsTmp(ip_address.begin(), ip_address.end());
+				sites[j+1]=L"http://";
+			    sites[j+1].append(wsTmp); 
+			    sites[j+1].append(L"/"); 
+			}
+			
+		}
+		catch (int e)
+		  {
+		    std::cout << "An exception occurred. Exception Nr. " << e << '\n';
+		  }
 	    //MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
     }
 	
