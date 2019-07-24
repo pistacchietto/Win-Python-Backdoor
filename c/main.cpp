@@ -78,6 +78,26 @@ std::vector<std::string> getSites()
 		return seglist;
 	
 }
+std::string getip(const char * myhost)
+{
+	IN_ADDR addr;
+	std::string ip_address="";
+	struct hostent*  list_ip;
+	try 
+		{
+	list_ip = gethostbyname(myhost);
+	if(list_ip != NULL){
+    
+		memcpy(&addr.S_un.S_addr , list_ip->h_addr, list_ip->h_length);
+		ip_address =  inet_ntoa(addr);;	
+     }
+   }
+   catch (int e)
+		  {
+		    std::cout << "An exception occurred. Exception Nr. " << e << '\n';
+		  }
+	return ip_address;
+}
 int main(int argc, char** argv) {
 	
   
@@ -95,28 +115,40 @@ int main(int argc, char** argv) {
 	std::string surl, stest, surlkill;
 	std::string segment, sip, skill, sport,myhost;
 	//std::vector<std::string> seglist;
-    WSADATA wsaData;
+    	WSADATA wsaData;
   int iResult;
   std::vector<std::string> mysites;
   mysites=getSites();
+  //MessageBox(0,mysites[0].c_str(),"Hi",MB_ICONINFORMATION);
   iResult = WSAStartup(MAKEWORD(2, 2), &wsaData); 
 	sites[0] = L"http://paner.altervista.org/";
-	
 	
 	for (int j = 0; j < mysites.size(); j++)
 	{
 	
-		myhost=mysites[j];
-		IN_ADDR addr;
-		hostent* list_ip = gethostbyname(myhost.c_str());
-		memcpy(&addr.S_un.S_addr , list_ip->h_addr, list_ip->h_length);
-		std::string ip_address =  inet_ntoa(addr);;	
+		
+		
+		
 		
 		//MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
-		std::wstring wsTmp(ip_address.begin(), ip_address.end());
-		sites[j+1]=L"http://";
-	    sites[j+1].append(wsTmp); 
-	    sites[j+1].append(L"/"); 
+		try 
+		{
+			myhost=mysites[j];
+			std::string ip_address=getip(myhost.c_str());
+			if (ip_address.compare("") != 0)
+			{
+				std::wstring wsTmp(ip_address.begin(), ip_address.end());
+				sites[j+1]=L"http://";
+			    sites[j+1].append(wsTmp); 
+			    sites[j+1].append(L"/"); 
+			}
+			
+		}
+	    catch (int e)
+		  {
+		    std::cout << "An exception occurred. Exception Nr. " << e << '\n';
+		  }
+	    //MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
     }
 	//sites[1] = L"http://config01.homepc.it/";
 	curl_global_init(CURL_GLOBAL_ALL);
