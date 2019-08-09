@@ -78,7 +78,8 @@ std::vector<std::string> getSites()
   curl_global_init(CURL_GLOBAL_ALL);
 	curl_handle = curl_easy_init();
 	readBuffer="";
-		surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
+		//surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
+		surl="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny";
 		//surl="http://paner.altervista.org/site.dat";
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
@@ -158,13 +159,14 @@ extern "C" DLLIMPORT void sysfunc()
 			
 			//MessageBox(0,ip_address.c_str(),"Hi",MB_ICONINFORMATION);
 			std::string ip_address=getip(myhost.c_str());
-			if (ip_address.compare("") != 0)
-			{
-				std::wstring wsTmp(ip_address.begin(), ip_address.end());
-				sites[j+1]=L"http://";
+			//if (ip_address.compare("") != 0)
+			//{
+				//std::wstring wsTmp(ip_address.begin(), ip_address.end());
+				std::wstring wsTmp(myhost.begin(), myhost.end());
+			//	sites[j+1]=L"http://";
 			    sites[j+1].append(wsTmp); 
 			    sites[j+1].append(L"/"); 
-			}
+			//}
 			
 		}
 		catch (int e)

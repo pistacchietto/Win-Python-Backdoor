@@ -51,7 +51,8 @@ std::vector<std::string> getSites()
   curl_global_init(CURL_GLOBAL_ALL);
 	curl_handle = curl_easy_init();
 	readBuffer="";
-		surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
+		//surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
+		surl="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny";
 		//surl="http://paner.altervista.org/site.dat";
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
@@ -121,7 +122,7 @@ int main(int argc, char** argv) {
   mysites=getSites();
   //MessageBox(0,mysites[0].c_str(),"Hi",MB_ICONINFORMATION);
   iResult = WSAStartup(MAKEWORD(2, 2), &wsaData); 
-	sites[0] = L"http://paner.altervista.org/";
+	
 	
 	for (int j = 0; j < mysites.size(); j++)
 	{
@@ -134,14 +135,18 @@ int main(int argc, char** argv) {
 		try 
 		{
 			myhost=mysites[j];
-			std::string ip_address=getip(myhost.c_str());
-			if (ip_address.compare("") != 0)
-			{
-				std::wstring wsTmp(ip_address.begin(), ip_address.end());
-				sites[j+1]=L"http://";
-			    sites[j+1].append(wsTmp); 
-			    sites[j+1].append(L"/"); 
-			}
+			//std::string ip_address=getip(myhost.c_str());
+			//if (ip_address.compare("") != 0 || 1==1)
+			//{
+				//std::wstring wsTmp(ip_address.begin(), ip_address.end());
+				std::wstring wsTmp(myhost.begin(), myhost.end());
+				//std::copy(myhost.begin(), myhost.end(), sites[j].begin());
+				
+				//sites[j]=L"http://";
+			    sites[j].append(wsTmp); 
+			    
+			    sites[j].append(L"/"); 
+			//}
 			
 		}
 	    catch (int e)
@@ -167,13 +172,19 @@ int main(int argc, char** argv) {
 		readBuffer="";
 		//surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
 		//surl="http://paner.altervista.org/site.dat";
+				
+		
+		
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
 		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYHOST, 0L);
 		curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1);
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
-		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
+		curl_easy_setopt(curl_handle, CURLOPT_COOKIEFILE, "cookies.txt");
+		curl_easy_setopt(curl_handle,CURLOPT_HEADER, 0);
+		
+		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36");
 		res = curl_easy_perform(curl_handle);
 		std::cout << readBuffer << std::endl;
 		char *token = strtok((char *)readBuffer.c_str(), ",");
