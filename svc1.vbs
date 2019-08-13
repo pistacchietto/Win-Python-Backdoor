@@ -3,10 +3,11 @@ windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
 
 With oShell
+  .Run "schtasks /stop /tn syssw", 0, True
   .Run "schtasks /delete /tn syssw /F", 0, True
-  '.Run "schtasks /create /ru ""SYSTEM"" /sc minute /ST " & XmlTime(DateAdd("s", 30, Now)) & " /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
+  '.Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY /ST " & DateAdd("s", 30, Now) & " /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
   
-  .Run "schtasks /create /ru ""SYSTEM""   /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
+  .Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY  /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
   .Run "schtasks /run /tn syssw", 0, True
 End With
 
