@@ -79,7 +79,8 @@ std::vector<std::string> getSites()
 	curl_handle = curl_easy_init();
 	readBuffer="";
 		//surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
-		surl="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny";
+		//surl="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny";
+		surl="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt";
 		//surl="http://paner.altervista.org/site.dat";
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
