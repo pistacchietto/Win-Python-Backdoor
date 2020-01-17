@@ -88,7 +88,7 @@ std::vector<std::string> getSites()
 		curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1);
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
-		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
+		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
 		res = curl_easy_perform(curl_handle);
 		std::cout << readBuffer << std::endl;
 		char *token = strtok((char *)readBuffer.c_str(), ",");
