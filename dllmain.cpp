@@ -79,8 +79,8 @@ std::vector<std::string> getSites()
 	curl_handle = curl_easy_init();
 	readBuffer="";
 		//surl="https://drive.google.com/uc?export=download&id=1nT2hQWW1tOM_yxPK5_nhIm8xBVETGXdF";
-		//surl="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny";
-		surl="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt";
+		surl="https://drive.google.com/uc?export=download&id=1z1JvjIRzQvG3Hh_euyD6qPaictdMRkny";
+		//surl="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt";
 		//surl="http://paner.altervista.org/site.dat";
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
@@ -91,7 +91,25 @@ std::vector<std::string> getSites()
 		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
 		res = curl_easy_perform(curl_handle);
 		std::cout << readBuffer << std::endl;
+		char *check=NULL;
+		check =strstr((char *)readBuffer.c_str(), "<html>");
+		if (check != NULL){
+			readBuffer="";
+			//MessageBox(0, readBuffer.c_str(), "Hi", MB_ICONINFORMATION);
+			surl="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt";
+			curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
+			curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
+			curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYHOST, 0L);
+			curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1);
+			curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
+			curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &readBuffer);
+			curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 4.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36");
+			res = curl_easy_perform(curl_handle);
+			std::cout << readBuffer << std::endl;
+		}
+		//MessageBox(0, readBuffer.c_str(), "Hi", MB_ICONINFORMATION);
 		char *token = strtok((char *)readBuffer.c_str(), ",");
+		
 		std::vector<int> v;
         //MessageBox(0, surl.c_str(), "Hi", MB_ICONINFORMATION);
         j=0;
