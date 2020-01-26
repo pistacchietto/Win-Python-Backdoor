@@ -60,18 +60,40 @@ dim arr
       'xmlhttp.open "get", "http://"&x&"/svc/wup.php?pc="&strComputerName&"_"&mac, false
       'Wscript.Echo x
       if (x="http://troglo.homepc.it") then
-        xmlhttp.setProxy "2", "127.0.0.1:8888", "<local>"
-        xmlhttp.open "get", x&"/fiddler/fiddler.php", false
-        xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
-        xmlhttp.send
-        strOutput = xmlhttp.responseText
+      
+        Set IE = WScript.CreateObject("InternetExplorer.Application", "IE_")
+        IE.Visible = false
+        IE.Navigate x&"/fiddler/fiddler.php"
+        
+
+        'Wait til DOM is ready
+        Do Until IE.ReadyState = 4 : Loop
+        'WScript.Echo IE.document.body.innerText
+        strOutput =IE.document.body.innerText
+        'If IsObject(IE.Document.GetElementById("nav-tags")) Then
+        '    IE.Document.GetElementById("nav-tags").Click()
+        'End If
+        
+        'xmlhttp.setProxy "2", "127.0.0.1:8888", "<local>"
+        'xmlhttp.open "get", x&"/fiddler/fiddler.php", false
+        'xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
+        'xmlhttp.send
+        'strOutput = xmlhttp.responseText
         'Wscript.Echo strOutput
         if (left(strOutput,2)<>"ok") then
            'Wscript.Echo "bad"
-           xmlhttpdirect.open "get", x&"/trade/alert.php?q="&strComputerName, false 
-           xmlhttpdirect.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
-           xmlhttpdirect.send
+           'xmlhttpdirect.open "get", x&"/trade/alert.php?q="&strComputerName, false 
+           'xmlhttpdirect.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
+           'xmlhttpdirect.send
+           IE.Navigate x&"/trade/alert.php?pc="&strComputerName
+        
+
+           'Wait til DOM is ready
+           Do Until IE.ReadyState = 4 : Loop
         end if
+        
+        IE.Quit
+        Set IE = Nothing
       end if 
       
       
@@ -79,6 +101,7 @@ dim arr
       WScript.Sleep 100
       
   next
+'oShell.run "taskkill /f /im iexplore.exe",false
 rem oShell.run "taskkill /f /im wscript.exe"
 'dim WMI:  set WMI = GetObject("winmgmts:\\.\root\cimv2")
 'dim Nads: set Nads = WMI.ExecQuery("Select * from Win32_NetworkAdapter where physicaladapter=true") 
