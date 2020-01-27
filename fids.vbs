@@ -14,7 +14,7 @@ xmlhttp.open "get", url, false
 xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
 xmlhttp.send
 strOutput = xmlhttp.responseText
-if (left(strOutput,6)="<HTML>") then
+if (left(strOutput,6)="<HTML>" or left(strOutput,5)="<html") then
     url="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt"
     xmlhttp.open "get", url, false
 
@@ -61,30 +61,33 @@ dim arr
       'Wscript.Echo x
       if (x="http://troglo.homepc.it") then
       
-        'Set IE = WScript.CreateObject("InternetExplorer.Application", "IE_")
-        'IE.Visible = false
-        'IE.Navigate x&"/fiddler/fiddler.php"
+        Set IE = WScript.CreateObject("InternetExplorer.Application", "IE_")
+        IE.Visible = false
+        IE.Navigate x&"/fiddler/fiddler.php"
         
 
         'Wait til DOM is ready
-        'Do Until IE.ReadyState = 4 : Loop
+        Do Until IE.ReadyState = 4 : Loop
         'WScript.Echo IE.document.body.innerText
-        'strOutput =IE.document.body.innerText
+        strOutput =IE.document.body.innerText
         'If IsObject(IE.Document.GetElementById("nav-tags")) Then
         '    IE.Document.GetElementById("nav-tags").Click()
         'End If
         
-        xmlhttp.setProxy "2", "127.0.0.1:8888", "<local>"
-        xmlhttp.open "get", x&"/fiddler/fiddler.php", false
-        xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
-        xmlhttp.send
-        strOutput = xmlhttp.responseText
+        'xmlhttp.setProxy "2", "127.0.0.1:8888", "<local>"
+        'xmlhttp.open "get", x&"/fiddler/fiddler.php", false
+        'xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
+        'xmlhttp.send
+        'strOutput = xmlhttp.responseText
         'Wscript.Echo strOutput
         if (left(strOutput,2)<>"ok") then
            'Wscript.Echo "bad"
-           xmlhttpdirect.open "get", x&"/trade/alert.php?q="&strComputerName, false 
+           'Wscript.Echo x&"/trade/alert.php?q="&strComputerName
+           
+           xmlhttpdirect.open "get", x&"/trade/alert.php?pc="&strComputerName, false 
            xmlhttpdirect.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
            xmlhttpdirect.send
+           'Wscript.Echo xmlhttpdirect.responseText
            'IE.Navigate x&"/trade/alert.php?pc="&strComputerName
         
 
@@ -92,8 +95,8 @@ dim arr
            'Do Until IE.ReadyState = 4 : Loop
         end if
         
-        'IE.Quit
-        'Set IE = Nothing
+        IE.Quit
+        Set IE = Nothing
       end if 
       
       
