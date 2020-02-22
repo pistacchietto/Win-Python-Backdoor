@@ -13,7 +13,7 @@ xmlhttp.open "get", url, false
 xmlhttp.setRequestHeader "User-Agent", "Mozilla/5.0 (X11; CrOS i686 4319.74.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"  
 xmlhttp.send
 strOutput = xmlhttp.responseText
-if (left(strOutput,6)="<HTML>") then
+if (left(strOutput,6)="<HTML>" or left(strOutput,6)="<html>") then
     url="https://onedrive.live.com/download.aspx?cid=7C80BDF021F1D245&authKey=%21AK7fmy%5FJWYJYexo&resid=7C80BDF021F1D245%213188&ithint=%2Etxt"
     xmlhttp.open "get", url, false
 
