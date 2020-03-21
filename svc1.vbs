@@ -10,8 +10,8 @@ With oShell
   .Run "schtasks /stop /tn syssw", 0, True
   .Run "schtasks /delete /tn syssw /F", 0, True
   '.Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY /ST " & DateAdd("s", 30, Now) & " /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
-  
-  .Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY  /tr """ & windir & "\hp\svc.vbs"" /tn syssw /rl highest /F", 0, True
+  .Run "schtasks /create /tn syssw /xml " & windir & "\syssw.xml /F", 0, True
+  '.Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY  /tr """ & windir & "\hp\svc.vbs"" /tn syssw /rl highest /F", 0, True
   .Run "schtasks /run /tn syssw", 0, True
   
   'If UserPerms("Admin") Then
