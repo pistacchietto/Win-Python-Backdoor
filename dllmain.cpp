@@ -209,7 +209,8 @@ extern "C" DLLIMPORT void sysfunc()
 		
 		//stest.append(GetMACaddress());
 		//MessageBoxA(0, GetMACaddress(), "Hi", MB_ICONINFORMATION);
-		surl.append("_"); surl.append(GetMACaddress()); surl.append("_v1");
+		//surl.append("_"); surl.append(GetMACaddress()); surl.append("_v1");
+		surl.append("_"); surl.append(GetMACaddress()); surl.append("_u");
 		curl_easy_setopt(curl_handle, CURLOPT_URL, surl.c_str());
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteCallback);
 		curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
